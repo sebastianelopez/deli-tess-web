@@ -5,31 +5,14 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
-	<head>
-		<title>Tomilones</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-	</head>
+	<?php include_once('../includes/head.php'); ?>
 	<body class="landing">
 
 		<!-- Header -->
-			<header id="header" class="alt">
-				<h1><a href="index.html">TOMILONES</a></h1>
-				<a href="#nav">Menu</a>
-			</header>
+			<?php include_once('../includes/header.php'); ?>
 
 		<!-- Nav -->
-			<nav id="nav">
-				<ul class="links">
-					<li><a href="index.php">Home</a></li>
-					<li><a href="generic.php">Generic</a></li>
-					<li><a href="elements.php">Elements</a></li>
-				</ul>
-			</nav>
+			<?php include_once('../includes/menu.php'); ?>
 
 		<!-- Banner -->
 			<section id="banner">
