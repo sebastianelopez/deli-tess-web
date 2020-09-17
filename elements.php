@@ -5,31 +5,17 @@
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
-	<head>
-		<title>Elements - Retrospect by TEMPLATED</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-	</head>
+	<?php include_once('includes/head.php'); ?>
 	<body>
 
 		<!-- Header -->
-			<header id="header" class="skel-layers-fixed">
+		<header id="header" class="skel-layers-fixed">
 				<h1><a href="index.html">Retrospect</a></h1>
 				<a href="#nav">Menu</a>
-			</header>
+		</header>
 
 		<!-- Nav -->
-			<nav id="nav">
-				<ul class="links">
-					<li><a href="index.php">Home</a></li>
-					<li><a href="generic.php">Generic</a></li>
-					<li><a href="elements.php">Elements</a></li>
-				</ul>
-			</nav>
+		<?php include_once('includes/menu.php'); ?>
 
 		<!-- Main -->
 			<section id="main" class="wrapper">
@@ -390,29 +376,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			</section>
 
 		<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<li><a href="#" class="icon fa-facebook">
-							<span class="label">Facebook</span>
-						</a></li>
-						<li><a href="#" class="icon fa-twitter">
-							<span class="label">Twitter</span>
-						</a></li>
-						<li><a href="#" class="icon fa-instagram">
-							<span class="label">Instagram</span>
-						</a></li>
-						<li><a href="#" class="icon fa-linkedin">
-							<span class="label">LinkedIn</span>
-						</a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; Untitled.</li>
-						<li>Images: <a href="http://unsplash.com">Unsplash</a>.</li>
-						<li>Design: <a href="http://templated.co">TEMPLATED</a>.</li>
-					</ul>
-				</div>
-			</footer>
+		<?php include_once('includes/footer.php'); ?>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>

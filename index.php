@@ -4,8 +4,10 @@
 	<?php include_once('includes/head.php'); ?>
 	<body class="landing">
 		<!-- Header -->
-			<?php include_once('includes/header.php'); ?>
-
+		<header id="header" class="alt">
+			<h1><a href="../index.php">TOMILONES</a></h1>
+			<a href="#nav">Menu</a>
+    	</header> 
 		<!-- Nav -->
 			<?php include_once('includes/menu.php'); ?>
 
@@ -115,29 +117,7 @@
 			</section>
 
 		<!-- Footer -->
-			<footer id="footer">
-				<div class="inner">
-					<ul class="icons">
-						<li><a href="#" class="icon fa-facebook">
-							<span class="label">Facebook</span>
-						</a></li>
-						<li><a href="#" class="icon fa-twitter">
-							<span class="label">Twitter</span>
-						</a></li>
-						<li><a href="#" class="icon fa-instagram">
-							<span class="label">Instagram</span>
-						</a></li>
-						<li><a href="#" class="icon fa-linkedin">
-							<span class="label">LinkedIn</span>
-						</a></li>
-					</ul>
-					<ul class="copyright">
-						<li>&copy; Untitled.</li>
-						<li>Images: <a href="http://unsplash.com">Unsplash</a>.</li>
-						<li>Design: <a href="http://templated.co">TEMPLATED</a>.</li>
-					</ul>
-				</div>
-			</footer>
+			<?php include_once('includes/footer.php'); ?>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
