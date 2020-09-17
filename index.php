@@ -1,18 +1,13 @@
-<!DOCTYPE HTML>
-<!--
-	Retrospect by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
-	<?php include_once('../includes/head.php'); ?>
-	<body class="landing">
 
+<!DOCTYPE HTML>
+<html>
+	<?php include_once('includes/head.php'); ?>
+	<body class="landing">
 		<!-- Header -->
-			<?php include_once('../includes/header.php'); ?>
+			<?php include_once('includes/header.php'); ?>
 
 		<!-- Nav -->
-			<?php include_once('../includes/menu.php'); ?>
+			<?php include_once('includes/menu.php'); ?>
 
 		<!-- Banner -->
 			<section id="banner">
