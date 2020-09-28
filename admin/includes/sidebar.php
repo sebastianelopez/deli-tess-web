@@ -4,9 +4,9 @@
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
   <div class="sidebar-brand-icon rotate-n-15">
-    <i class="fas fa-laugh-wink"></i>
+    <i class="fas fa-shopping-cart"></i>
   </div>
-  <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+  <div class="sidebar-brand-text mx-3">Deli Tess Admin</div>
 </a>
 
 <!-- Divider -->
@@ -26,8 +26,10 @@
       <a class="collapse-item" href="forgot-password.php">Contraseña olvidada</a>
       <div class="collapse-divider"></div>
       <h6 class="collapse-header">Otras paginas</h6>
-      <a class="collapse-item" href="404.php">404 Page</a>
-      <a class="collapse-item" href="blank.php">Blank Page</a>
+      <a class="collapse-item" href="../index.php">Inicio</a>
+      <a class="collapse-item" href="../shop.php">Tienda</a>
+      <a class="collapse-item" href="../about.php">Sobre nosotros</a>
+      <a class="collapse-item" href="../contact.php">Contactenos</a>   
     </div>
   </div>
 </li>
@@ -39,7 +41,12 @@
     <i class="fas fa-fw fa-table"></i>
     <span>Tablas</span></a>
 </li>
-
+<!-- Nav Item - Tables -->
+<li class="nav-item">
+  <a class="nav-link" href="login.php">
+    <i class="fas fa-sign-out-alt"></i>
+    <span>Salir / Desloguear</span></a>
+</li>    
 <!-- Divider -->
 <hr class="sidebar-divider">
 
