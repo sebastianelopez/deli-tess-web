@@ -26,9 +26,7 @@
     
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/bluetheme.css">
-	<link rel="stylesheet" href="css/smart-forms.css">
+    <link rel="stylesheet" href="css/style.css">	
   </head>
   <body class="goto-here">
     <?php include_once('includes/barritadearriba.php');?>
