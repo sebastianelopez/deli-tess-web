@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/bluetheme.css">
+	<link rel="stylesheet" href="css/smart-forms.css">
   </head>
   <body class="goto-here">
     <?php include_once('includes/barritadearriba.php');?>
@@ -75,7 +77,7 @@
 					<div class="col-md-8">
 						<div class="row">
 							<div class="col-md-6 order-md-last align-items-stretch d-flex">
-								<div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url(images/empanadas1.png);">
+								<div class="category-wrap-2 ftco-animate img align-self-stretch d-flex" style="background-image: url(images/simbolo1.png);">
 									<div class="text text-center">
 										<h2>Productos</h2>
 										<p>Gran variedad</p>
@@ -360,6 +362,8 @@
 		
 
     <?php include_once('includes/nosotros.php'); ?>
+
+	
 
     <hr>
 

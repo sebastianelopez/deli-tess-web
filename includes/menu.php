@@ -11,7 +11,8 @@
               <li class="nav-item"><a href="shop.php" class="nav-link">Tienda</a></li>                 	             	
 	          <li class="nav-item"><a href="about.php" class="nav-link">Sobre nosotros</a></li>	          
 	          <li class="nav-item"><a href="contact.php" class="nav-link">Contactenos</a></li>
-	          <li class="nav-item cta cta-colored"><a href="cart.php" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+			  <li class="nav-item cta cta-colored"><a href="cart.php" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
+			  <li class="nav-item"><a href="admin/login.php" class="nav-link">Login</a></li>
 			  </div>
 	        </ul>
 	      </div>
