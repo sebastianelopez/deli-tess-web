@@ -665,26 +665,26 @@
 
 		fillDow: function(){
 			var dowCnt = this.o.weekStart,
-				php = '<tr>';
+				html = '<tr>';
 			if (this.o.calendarWeeks){
 				var cell = '<th class="cw">&nbsp;</th>';
-				php += cell;
+				html += cell;
 				this.picker.find('.datepicker-days thead tr:first-child').prepend(cell);
 			}
 			while (dowCnt < this.o.weekStart + 7){
-				php += '<th class="dow">'+dates[this.o.language].daysMin[(dowCnt++)%7]+'</th>';
+				html += '<th class="dow">'+dates[this.o.language].daysMin[(dowCnt++)%7]+'</th>';
 			}
-			php += '</tr>';
-			this.picker.find('.datepicker-days thead').append(php);
+			html += '</tr>';
+			this.picker.find('.datepicker-days thead').append(html);
 		},
 
 		fillMonths: function(){
-			var php = '',
+			var html = '',
 			i = 0;
 			while (i < 12){
-				php += '<span class="month">'+dates[this.o.language].monthsShort[i++]+'</span>';
+				html += '<span class="month">'+dates[this.o.language].monthsShort[i++]+'</span>';
 			}
-			this.picker.find('.datepicker-months td').php(php);
+			this.picker.find('.datepicker-months td').html(html);
 		},
 
 		setRange: function(range){
@@ -762,11 +762,11 @@
 			var nextMonth = new Date(prevMonth);
 			nextMonth.setUTCDate(nextMonth.getUTCDate() + 42);
 			nextMonth = nextMonth.valueOf();
-			var php = [];
+			var html = [];
 			var clsName;
 			while (prevMonth.valueOf() < nextMonth){
 				if (prevMonth.getUTCDay() === this.o.weekStart){
-					php.push('<tr>');
+					html.push('<tr>');
 					if (this.o.calendarWeeks){
 						// ISO 8601: First week contains first thursday.
 						// ISO also states week starts on Monday, but we can be more abstract here.
@@ -779,7 +779,7 @@
 							yth = new Date(Number(yth = UTCDate(th.getUTCFullYear(), 0, 1)) + (7 + 4 - yth.getUTCDay())%7*864e5),
 							// Calendar week: ms between thursdays, div ms per day, div 7 days
 							calWeek =  (th - yth) / 864e5 / 7 + 1;
-						php.push('<td class="cw">'+ calWeek +'</td>');
+						html.push('<td class="cw">'+ calWeek +'</td>');
 
 					}
 				}
@@ -803,13 +803,13 @@
 				}
 
 				clsName = $.unique(clsName);
-				php.push('<td class="'+clsName.join(' ')+'"' + (tooltip ? ' title="'+tooltip+'"' : '') + '>'+prevMonth.getUTCDate() + '</td>');
+				html.push('<td class="'+clsName.join(' ')+'"' + (tooltip ? ' title="'+tooltip+'"' : '') + '>'+prevMonth.getUTCDate() + '</td>');
 				if (prevMonth.getUTCDay() === this.o.weekEnd){
-					php.push('</tr>');
+					html.push('</tr>');
 				}
 				prevMonth.setUTCDate(prevMonth.getUTCDate()+1);
 			}
-			this.picker.find('.datepicker-days tbody').empty().append(php.join(''));
+			this.picker.find('.datepicker-days tbody').empty().append(html.join(''));
 
 			var months = this.picker.find('.datepicker-months')
 						.find('th:eq(1)')
@@ -832,7 +832,7 @@
 				months.slice(endMonth+1).addClass('disabled');
 			}
 
-			php = '';
+			html = '';
 			year = parseInt(year/10, 10) * 10;
 			var yearCont = this.picker.find('.datepicker-years')
 								.find('th:eq(1)')
@@ -854,10 +854,10 @@
 					classes.push('active');
 				if (year < startYear || year > endYear)
 					classes.push('disabled');
-				php += '<span class="' + classes.join(' ') + '">'+year+'</span>';
+				html += '<span class="' + classes.join(' ') + '">'+year+'</span>';
 				year += 1;
 			}
-			yearCont.php(php);
+			yearCont.html(html);
 		},
 
 		updateNavArrows: function(){
