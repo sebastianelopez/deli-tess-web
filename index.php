@@ -43,7 +43,7 @@
 	            <div class="col-md-12 ftco-animate text-center">
 	              <h1 class="mb-2">Te ofrecemos la comida mas rica &amp; de calidad</h1>
 	              <h2 class="subheading mb-4">Los mejores combos &amp; menús</h2>
-	              <p><a href="#" class="btn btn-primary">Ver detalles</a></p>
+	              <p><a href="#destacados" class="btn btn-primary">Ver detalles</a></p>
 	            </div>
 
 	          </div>
@@ -58,7 +58,7 @@
 	            <div class="col-sm-12 ftco-animate text-center">
 	              <h1 class="mb-2">No te pierdas nuestras ofertas &amp; rebajas.</h1>
 	              <h2 class="subheading mb-4">Lo mejor al mejor precio.</h2>
-	              <p><a href="#" class="btn btn-primary">Ver detalles</a></p>
+	              <p><a href="#destacados" class="btn btn-primary">Ver detalles</a></p>
 	            </div>
 
 	          </div>
@@ -114,12 +114,12 @@
 			</div>
 		</section>
 
-    <section class="ftco-section">
+    <section class="ftco-section" id="destacados">
     	<div class="container">
 				<div class="row justify-content-center mb-3 pb-3">
           <div class="col-md-12 heading-section text-center ftco-animate">
-          	<span class="subheading">Prductos destacados</span>
-            <h2 class="mb-4">Nuestros productos</h2>
+          	<span class="subheading">Nuestros productos</span>
+            <h2 class="mb-4" >Productos destacados</h2>
             <p>Estos son los productos mas comprados</p>
           </div>
         </div>   		
@@ -128,12 +128,12 @@
     		<div class="row">
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-1.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/pizzamorron.jpg"  alt="pizza-jamonymorrones">
     						<span class="status">30%</span>
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Bell Pepper</a></h3>
+    						<h3><a href="#">Pizza Jamón y Morrones</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
@@ -157,11 +157,11 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-2.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/cervezaquilmes.jpg" alt="cerveza-quilmes">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Strawberry</a></h3>
+    						<h3><a href="#">Cerveza Quilmes 473ML</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span>$120.00</span></p>
@@ -185,11 +185,11 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-3.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/ensalada-cesar.jpg" alt="ensalada-cesar">
 	    					<div class="overlay"></div>
 	    				</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Green Beans</a></h3>
+    						<h3><a href="#">Ensalada César</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span>$120.00</span></p>
@@ -213,11 +213,11 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-4.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/cocacola.jpg" alt="cocacola500ml">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Purple Cabbage</a></h3>
+    						<h3><a href="#">Coca-Cola 500ML</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span>$120.00</span></p>
@@ -243,12 +243,12 @@
 
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-5.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/hamburguesa-clasica.jpg" alt="hamburguesa-clasica">
     						<span class="status">30%</span>
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Tomatoe</a></h3>
+    						<h3><a href="#">Hamburguesa clásica</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span></p>
@@ -272,11 +272,11 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-6.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/villavicencio.jpg" alt="agua">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Brocolli</a></h3>
+    						<h3><a href="#">Agua Villavicencio 500ML</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span>$120.00</span></p>
@@ -300,11 +300,11 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-7.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/pizzamuzzarela.jpg" alt="pizza-muzarella">
 	    					<div class="overlay"></div>
 	    				</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Carrots</a></h3>
+    						<h3><a href="#">Pizza Muzzarella</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span>$120.00</span></p>
@@ -328,11 +328,11 @@
     			</div>
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="#" class="img-prod"><img class="img-fluid" src="images/product-8.jpg" alt="Colorlib Template">
+    					<a href="#" class="img-prod"><img class="img-fluid" src="images/ensalada-con-pepino.jpg" alt="Ensalada-de-pepino">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
-    						<h3><a href="#">Fruit Juice</a></h3>
+    						<h3><a href="#">Ensalada de pepino</a></h3>
     						<div class="d-flex">
     							<div class="pricing">
 		    						<p class="price"><span>$120.00</span></p>

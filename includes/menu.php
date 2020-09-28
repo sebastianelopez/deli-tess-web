@@ -10,7 +10,7 @@
 	          <li class="nav-item active"><a href="index.php" class="nav-link">Inicio</a></li>	          
               <li class="nav-item"><a href="shop.php" class="nav-link">Tienda</a></li>                 	             	
 	          <li class="nav-item"><a href="about.php" class="nav-link">Sobre nosotros</a></li>	          
-	          <li class="nav-item"><a href="contact.php" class="nav-link">Contactanos</a></li>
+	          <li class="nav-item"><a href="contact.php" class="nav-link">Contactenos</a></li>
 	          <li class="nav-item cta cta-colored"><a href="cart.php" class="nav-link"><span class="icon-shopping_cart"></span>[0]</a></li>
 			  </div>
 	        </ul>
