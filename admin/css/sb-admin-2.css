@@ -159,13 +159,13 @@ sup {
 }
 
 a {
-  color: #4e73df;
+  color: #e53d2a;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #224abe;
+  color: #b42212;
   text-decoration: underline;
 }
 
@@ -2330,7 +2330,7 @@ textarea.form-control {
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #858796;
+  color: white;
   text-align: center;
   vertical-align: middle;
   -webkit-user-select: none;
@@ -2377,14 +2377,14 @@ fieldset:disabled a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #4e73df;
-  border-color: #4e73df;
+  background-color: #e53d2a;
+  border-color: #e53d2a;
 }
 
 .btn-primary:hover {
   color: #fff;
-  background-color: #2e59d9;
-  border-color: #2653d4;
+  background-color: #e53d2a;
+  border-color: #e53d2a;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -6391,13 +6391,13 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #4e73df !important;
+  background-color: #e53d2a !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
 button.bg-primary:hover,
 button.bg-primary:focus {
-  background-color: #2653d4 !important;
+  background-color: #b42212 !important;
 }
 
 .bg-secondary {
@@ -6519,7 +6519,7 @@ button.bg-dark:focus {
 }
 
 .border-primary {
-  border-color: #4e73df !important;
+  border-color: #e53d2a !important;
 }
 
 .border-secondary {
@@ -10803,21 +10803,22 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("../img/delitess.jpg");
+  background: url("../img/delitess2.png");
   background-position: center;
   background-size: cover;
 }
 
 .bg-register-image {
-  background: url("../img/delitess.jpg");
+  background: url("../img/delitess2.png");
   background-position: center;
   background-size: cover;
 }
 
 .bg-password-image {
-  background: url('../img/delitess.jpg');
+  background: url('../img/delitess2.png');
   background-position: center;
   background-size: cover;
+  max-width: 100%;
 }
 
 form.user .custom-checkbox.small label {
