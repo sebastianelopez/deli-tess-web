@@ -26,19 +26,33 @@
 					<div class="col-md-10 mb-5 text-center">
 
 						<ul class="product-category">
+							<li> Filtro por categoria </li>
 							<li><a href="shop.php?cat=&"></span>Todos</a></li>
 							<?php
 
 							include('datosDelitess/categorias.php');
 							foreach ($categorias as $cat) {
 							?>
-								<li><a href="shop.php?cat=<?php echo $cat['id'] ?>"><?php echo $cat['nombre'] ?></a></li>
+								<li><a href="shop.php?cat=<?php echo $cat['id'] ?>&restaurantes=<?php echo isset($_GET['restaurantes'])?$_GET['restaurantes']:''?>"><?php echo $cat['nombre'] ?></a></li>
+							<?php } ?>
+						</ul>
+
+						<ul class="product-category">
+							<li> Filtro por restaurante </li>
+							<li><a href="shop.php?cat=&"></span>Todos</a></li>
+							<?php
+
+							include('datosDelitess/restaurantes.php');
+							foreach ($restaurantes as $res) {
+							?>
+								<li><a href="shop.php?res=<?php echo $res['id'] ?>&cat=<?php echo isset($_GET['cat'])?$_GET['cat']:''?>"><?php echo $res['nombre'] ?></a></li>
 							<?php } ?>
 						</ul>
 					</div>
 				</div>
 				<div class="row justify-content-center">
 				<?php include_once('datosDelitess/productos.php');
+				error_reporting(E_ALL ^ E_NOTICE);
 				foreach ($productos as $prod) {
 					if ($prod['activo'] == true) {
 						$imprimir = true;
@@ -48,10 +62,16 @@
 								$imprimir = false;
 							}
 						}
+						if (!empty($_GET['res'])) {
+							if ($prod['restaurantes'] != $_GET['res']) {
+								$imprimir = false;
+							}
+						}
 						if ($imprimir) {
 				?>
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="product">
+									
 									<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $prod['imagen'] ?>" alt="Colorlib Template">
 										<span class="status">30%</span>
 										<div class="overlay"></div>
