@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -20,6 +21,7 @@
 
 </head>
 
+
 <body class="bg-primary">
 
   <div class="container">
@@ -39,12 +41,12 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Bienvenido otra vez !</h1>
                   </div>
-                  <form class="user">
+                  <form action="index.php" method="post" class="user">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
+                      <input type="text" class="form-control form-control-user" name="user" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Contraseña">
+                      <input type="password" class="form-control form-control-user" name="pass" placeholder="Contraseña">
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small">
@@ -52,10 +54,8 @@
                         <label class="custom-control-label" for="customCheck">Recuerdame</label>
                       </div>
                     </div>
-                    <a href="index.php" class="btn bg-primary btn-user btn-block">
-                      Ingresar
-                    </a>                    
-                    
+                    <input type="submit" name="login" class="btn bg-primary btn-user btn-block">
+
                   </form>
                   <hr>
                   <div class="text-center">

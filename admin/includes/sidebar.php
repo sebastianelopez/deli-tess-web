@@ -37,13 +37,13 @@
 
 <!-- Nav Item - Tables -->
 <li class="nav-item">
-  <a class="nav-link" href="tables.php">
+  <a class="nav-link" href="productos.php">
     <i class="fas fa-fw fa-table"></i>
-    <span>Tablas</span></a>
+    <span>Productos</span></a>
 </li>
 <!-- Nav Item - Tables -->
 <li class="nav-item">
-  <a class="nav-link" href="login.php">
+  <a class="nav-link" href="index.php?logout">
     <i class="fas fa-sign-out-alt"></i>
     <span>Salir / Desloguear</span></a>
 </li>    
