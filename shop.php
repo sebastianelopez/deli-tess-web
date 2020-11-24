@@ -51,9 +51,11 @@
 					</div>
 				</div>
 				<div class="row justify-content-center">
-				<?php include_once('datosDelitess/productos.php');
-				error_reporting(E_ALL ^ E_NOTICE);
-				foreach ($productos as $prod) {
+				<?php 
+				 $datos = file_get_contents('admin/productos.json');
+				 $datosJson=json_decode($datos,true);
+				error_reporting(E_ALL ^ E_NOTICE); 
+				foreach ($datosJson as $prod) {
 					if ($prod['activo'] == true) {
 						$imprimir = true;
 						
@@ -72,15 +74,15 @@
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="product">
 									
-									<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $prod['imagen'] ?>" alt="Colorlib Template">
-										<span class="status">30%</span>
+									<a href="#" class="img-prod"><img class="img-fluid" src="admin/img/<?php echo $prod['imagen'] ?>" alt="imagen">
 										<div class="overlay"></div>
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">
 										<h3><a href="#"><?php echo $prod['nombre'] ?></a></h3>
 										<div class="d-flex">
+											<p class="text-left"><?php echo $prod['descripcion'] ?></p>
 											<div class="pricing">
-												<p class="price"><span class="mr-2 price-dc"><?php echo $prod['precio'] ?></span><span class="price-sale">$200.00</span></p>
+												<p class="price"><span class="price-sale"><?php echo $prod['precio'] ?></span></p>
 											</div>
 										</div>
 										<div class="bottom-area d-flex px-3">

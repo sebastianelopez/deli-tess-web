@@ -73,26 +73,10 @@
 
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <a class="m-0 font-weight-bold text-primary" href="#myModal" data-toggle="modal">+ Agregar</a>
-              <!-- Modal-->
-              <div class="modal fade" id="myModal" role="dialog">
-                        <!-- Modal content-->
-                                <div class="modal-dialog">
-                                  
-                                    <?php include_once('productos_add.php'); ?>
-                                                                                                            
-                                  </div>
-                                    <!-- Fin modal -->
+              <a class="m-0 font-weight-bold text-primary" href="productos_add.php">+ Agregar</a>
+              
             </div>
-            <!-- Modal2-->
-            <div class="modal fade" id="myModal2" role="dialog">
-                        <!-- Modal content-->
-                                <div class="modal-dialog">
-                                  
-                                    <?php include_once('productos_modify.php'); ?>
-                                                                                                            
-                                  </div>
-                                    <!-- Fin modal2 -->
+            
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -136,15 +120,7 @@
       <!-- End of Main Content -->
             
 
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Deli Tess 2020</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
+      
 
     </div>
     <!-- End of Content Wrapper -->
@@ -176,8 +152,20 @@
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
+
+</body>
+ <!-- Footer -->
+ <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Deli Tess 2020</span>
+          </div>
+        </div>
+  </footer>
+  <!-- End of Footer -->
+
+<!-- Bootstrap core JavaScript-->
+<script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
@@ -208,7 +196,4 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-
-</body>
-
 </html>
