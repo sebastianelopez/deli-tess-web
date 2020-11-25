@@ -93,7 +93,7 @@
                   </thead>
                   <tbody> 
                       <?php                   
-                        include('productos.json');
+                        
                         $datos = file_get_contents('productos.json');
                         $datosJson=json_decode($datos,true);
 

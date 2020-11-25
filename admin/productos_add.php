@@ -34,9 +34,7 @@
     <?php include_once('includes/sidebar.php'); 
     
     function pathUrl($dir = __DIR__){
-      
-      
-      
+
       $root = "";
       $dir = str_replace('\\', '/', realpath($dir));
     
@@ -132,16 +130,9 @@ $datosJson=json_decode($datos,true);
         }
       }
       
-      
-      
+
       //PARA LLAMR LA RUTA DE LA IMG
       
-      
-      
-      
-     
-      
-
         if(isset($_GET['edit'])){
             $id= $_GET['edit'];
         }else{
@@ -162,9 +153,10 @@ $datosJson=json_decode($datos,true);
     if(isset($_GET['edit'])){
         $dato=$datosJson[$_GET['edit']];
     }
-    
-        
+     
 ?>
+
+
 <div class="modal-content px-5 py-3">
             <div class="modal-header">                
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -195,7 +187,7 @@ $datosJson=json_decode($datos,true);
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
+  <!--
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -213,6 +205,8 @@ $datosJson=json_decode($datos,true);
       </div>
     </div>
   </div>
+
+  -->
 
 
 </body>
