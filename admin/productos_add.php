@@ -140,7 +140,7 @@ $datosJson=json_decode($datos,true);
             $id=date('Ymdhis');
         }        
         
-        $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre'],'descripcion'=>$_POST['descripcion'],'imagen'=>pathUrl(__DIR__. "/../") . "uploads/" . basename($_FILES["fileToUpload"]["name"]),'precio'=>$_POST['precio'],'activo'=>$_POST['activo']);
+        $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre'],'descripcion'=>$_POST['descripcion'],'imagen'=>$_POST['imagen'],'precio'=>$_POST['precio'],'activo'=>$_POST['activo'],'comentario'=>['id'=>$id,'nombreusuario'=>$_POST['nombreusuario'],'mensaje'=> $_POST['mensaje']]);
         $fp= fopen('productos.json','w');
         $datosString=json_encode($datosJson);     
         
@@ -156,12 +156,6 @@ $datosJson=json_decode($datos,true);
      
 ?>
 
-
-<div class="modal-content px-5 py-3">
-            <div class="modal-header">                
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
    
     <form action="productos_add.php" method="post" enctype="multipart/form-data">
         Nombre:<br><input class="my-2" type="text" name="nombre" value="<?php echo isset($dato)?$dato['nombre']:'' ?>"><br />
@@ -173,7 +167,7 @@ $datosJson=json_decode($datos,true);
 
        
     </form>
-</div>
+
 
 
     </div>
