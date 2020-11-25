@@ -31,7 +31,35 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <?php include_once('includes/sidebar.php'); ?>
+    <?php include_once('includes/sidebar.php'); 
+    
+    function pathUrl($dir = __DIR__){
+      
+      
+      
+      $root = "";
+      $dir = str_replace('\\', '/', realpath($dir));
+    
+      //HTTPS or HTTP
+      $root .= !empty($_SERVER['HTTPS']) ? 'https' : 'http';
+    
+      //HOST
+      $root .= '://' . $_SERVER['HTTP_HOST'];
+    
+      //ALIAS
+      if(!empty($_SERVER['CONTEXT_PREFIX'])) {
+          $root .= $_SERVER['CONTEXT_PREFIX'];
+          $root .= substr($dir, strlen($_SERVER[ 'CONTEXT_DOCUMENT_ROOT' ]));
+      } else {
+          $root .= substr($dir, strlen($_SERVER[ 'DOCUMENT_ROOT' ]));
+      }
+    
+      $root .= '/';
+    
+      return $root;
+    }
+    
+    ?>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -60,6 +88,60 @@ $datosJson=json_decode($datos,true);
 
     if(isset($_POST['add'])){
 
+      $target_dir = __DIR__ . "/../uploads/";
+      $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+      $uploadOk = 1;
+      $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+      
+      // Check if image file is a actual image or fake image
+      
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check !== false) {
+         // die ("File is an image - " . $check["mime"] . "");
+          $uploadOk = 1;
+        } else {
+          die ("File is not an image.");
+        }
+      
+      
+      // Check if file already exists
+      if (file_exists($target_file)) {
+        die ("Sorry, file already exists.");
+      }
+      
+      // Check file size
+      if ($_FILES["fileToUpload"]["size"] > 500000) {
+        die ("Sorry, your file is too large.");
+      }
+      
+      // Allow certain file formats
+      if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+      && $imageFileType != "gif" ) {
+        die ("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+      }
+      
+      // Check if $uploadOk is set to 0 by an error
+      if ($uploadOk == 0) {
+        die ("Sorry, your file was not uploaded");
+      // if everything is ok, try to upload file
+      } else {
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+          //die ("The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.");
+        } else {
+          die ("Sorry, there was an error uploading your file");
+        }
+      }
+      
+      
+      
+      //PARA LLAMR LA RUTA DE LA IMG
+      
+      
+      
+      
+     
+      
+
         if(isset($_GET['edit'])){
             $id= $_GET['edit'];
         }else{
@@ -67,7 +149,11 @@ $datosJson=json_decode($datos,true);
             $id=date('Ymdhis');
         }        
         
+<<<<<<< HEAD
         $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre'],'descripcion'=>$_POST['descripcion'],'imagen'=>$_POST['imagen'],'precio'=>$_POST['precio'],'activo'=>$_POST['activo'],'comentario'=>['id'=>$id,'nombreusuario'=>$_POST['nombreusuario'],'mensaje'=> $_POST['mensaje']]);
+=======
+        $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre'],'descripcion'=>$_POST['descripcion'],'imagen'=>pathUrl(__DIR__. "/../") . "uploads/" . basename($_FILES["fileToUpload"]["name"]),'precio'=>$_POST['precio'],'activo'=>$_POST['activo']);
+>>>>>>> 5891523eea484c330b10d071fe750e0e1ad0ce86
         $fp= fopen('productos.json','w');
         $datosString=json_encode($datosJson);     
         
@@ -75,8 +161,6 @@ $datosJson=json_decode($datos,true);
         fwrite($fp,$datosString);
         fclose($fp);
         redirect('productos.php');
-
-        
     }
 
     if(isset($_GET['edit'])){
@@ -86,18 +170,16 @@ $datosJson=json_decode($datos,true);
         
 ?>
 
-    <?php 
-        if(isset($_FILE['imagen'])){
-            move_uploaded_file($_FILES['imagen']['tmp_name'],'img'.$_FILES['imagen']['name']);
-        }
-    ?>        
-    <form action="" method="post" enctype="multipart/form-data">
+   
+    <form action="productos_add.php" method="post" enctype="multipart/form-data">
         Nombre:<br><input class="my-2" type="text" name="nombre" value="<?php echo isset($dato)?$dato['nombre']:'' ?>"><br />
         Descripcion:<br><input class="my-2" type="text" name="descripcion" value="<?php echo isset($dato)?$dato['descripcion']:'' ?>"><br />
-        Imagen:<br><input class="my-2" type="file" name="imagen"><br />
+        Imagen:<br><input class="my-2" type="file" name="fileToUpload" id="fileToUpload"><br />
         Precio:<br><input class="my-2" type="text" name="precio" value="<?php echo isset($dato)?$dato['precio']:'' ?>"><br />
         <br><input class="my-2 d-none" type="text" name="activo" value="true"><br />            
-                <input class="my-2"type="submit" name="add">        
+                <input class="my-2"type="submit" name="add">     
+
+       
     </form>
 
 

@@ -75,7 +75,7 @@
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="product">
 									
-									<a href="#" class="img-prod"><img class="img-fluid" src="admin/img/<?php echo $prod['imagen'] ?>" alt="imagen">
+									<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $prod['imagen'] ?>" alt="imagen">
 										<div class="overlay"></div>
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">
