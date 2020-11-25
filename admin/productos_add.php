@@ -100,35 +100,35 @@ $datosJson=json_decode($datos,true);
          // die ("File is an image - " . $check["mime"] . "");
           $uploadOk = 1;
         } else {
-          die ("File is not an image.");
+          die ("El archivo no es una imagen.");
         }
       
       
       // Check if file already exists
       if (file_exists($target_file)) {
-        die ("Sorry, file already exists.");
+        die ("Lo siento, es archivo ya fue cargado.");
       }
       
       // Check file size
       if ($_FILES["fileToUpload"]["size"] > 500000) {
-        die ("Sorry, your file is too large.");
+        die ("Lo siento, tu archivo es muy grande.");
       }
       
       // Allow certain file formats
       if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
       && $imageFileType != "gif" ) {
-        die ("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+        die ("Lo siento, solo se permiten archivos JPG, JPEG, PNG & GIF.");
       }
       
       // Check if $uploadOk is set to 0 by an error
       if ($uploadOk == 0) {
-        die ("Sorry, your file was not uploaded");
+        die ("Lo siento, tu archivo no fue cargado.");
       // if everything is ok, try to upload file
       } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
           //die ("The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.");
         } else {
-          die ("Sorry, there was an error uploading your file");
+          die ("Lo siento, hubo un error cargando tu archivo.");
         }
       }
       
@@ -149,11 +149,7 @@ $datosJson=json_decode($datos,true);
             $id=date('Ymdhis');
         }        
         
-<<<<<<< HEAD
-        $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre'],'descripcion'=>$_POST['descripcion'],'imagen'=>$_POST['imagen'],'precio'=>$_POST['precio'],'activo'=>$_POST['activo'],'comentario'=>['id'=>$id,'nombreusuario'=>$_POST['nombreusuario'],'mensaje'=> $_POST['mensaje']]);
-=======
-        $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre'],'descripcion'=>$_POST['descripcion'],'imagen'=>pathUrl(__DIR__. "/../") . "uploads/" . basename($_FILES["fileToUpload"]["name"]),'precio'=>$_POST['precio'],'activo'=>$_POST['activo']);
->>>>>>> 5891523eea484c330b10d071fe750e0e1ad0ce86
+        $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre'],'descripcion'=>$_POST['descripcion'],'imagen'=>pathUrl(__DIR__. "/../") . "uploads/" . basename($_FILES["fileToUpload"]["name"]),'precio'=>$_POST['precio'],'categoria'=>$_POST['categoria'],'restaurante'=>$_POST['restaurante'],'activo'=>$_POST['activo']);
         $fp= fopen('productos.json','w');
         $datosString=json_encode($datosJson);     
         
@@ -176,6 +172,17 @@ $datosJson=json_decode($datos,true);
         Descripcion:<br><input class="my-2" type="text" name="descripcion" value="<?php echo isset($dato)?$dato['descripcion']:'' ?>"><br />
         Imagen:<br><input class="my-2" type="file" name="fileToUpload" id="fileToUpload"><br />
         Precio:<br><input class="my-2" type="text" name="precio" value="<?php echo isset($dato)?$dato['precio']:'' ?>"><br />
+        Categoria:<select name="categoria">                        
+                            <option value="hamburguesas">hamburguesas</option>
+                            <option value="pizzas">pizzas</option>
+                            <option value="bebidas">bebidas</option>
+                            <option value="vegetales">vegetales</option>                               
+                  </select>
+        
+        Restaurante:<select name="restaurante">                        
+                            <option value="Menuditos de Ezelon">Menuditos de Ezelon</option>
+                            <option value="Pizzas Sebalon">Pizzas Sebalon</option>
+                    </select>
         <br><input class="my-2 d-none" type="text" name="activo" value="true"><br />            
                 <input class="my-2"type="submit" name="add">     
 

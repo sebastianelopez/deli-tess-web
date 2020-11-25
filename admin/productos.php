@@ -88,12 +88,14 @@
                       <th>Descripcion</th>
                       <th>Imagen</th>
                       <th>Precio</th>
+                      <th>Categoria</th>
+                      <th>Restaurante</th>
                       <th>Modificar / Borrar</th>                      
                     </tr>
                   </thead>
                   <tbody> 
                       <?php                   
-                        include('productos.json');
+                        
                         $datos = file_get_contents('productos.json');
                         $datosJson=json_decode($datos,true);
 
@@ -104,6 +106,8 @@
                               <td><?php echo $prod['descripcion'] ?>.</td>
                               <td><img class="img-fluid" src="<?php echo $prod['imagen'] ?>" alt=""></a></td>
                               <td><?php echo $prod['precio'] ?></td>
+                              <td><?php echo $prod['categoria'] ?></td>
+                              <td><?php echo $prod['restaurante'] ?></td>
                               <td><a class="m-0 font-weight-bold text-primary px-2"  href="productos_add.php?edit=<?php echo $prod['id'] ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="productos.php?del=<?php echo $prod['id'] ?>">Borrar</a></td>                      
                           <!-- productos_add.php?edit=<?php echo $prod['id'] ?> -->
                           </tr>   
