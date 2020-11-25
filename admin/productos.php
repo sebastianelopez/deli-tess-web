@@ -1,3 +1,24 @@
+<?php session_start();
+
+include('funcs.php');
+
+if (isset($_POST['login'])) {
+  if ($_POST['pass'] == 'davinci' && $_POST['user'] == 'admin') {
+    $_SESSION['usuario_logueado'] = true;
+  }
+}
+
+if (isset($_GET['logout'])) {
+  unset($_SESSION['usuario_logueado']);
+}
+
+if(!isset($_SESSION['usuario_logueado'])){
+  redirect('login.php');
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -155,12 +176,8 @@
         </div>
       </div>
     </div>
-  </div>
-
-
-</body>
- <!-- Footer -->
- <footer class="sticky-footer bg-white">
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Deli Tess 2020</span>
@@ -168,6 +185,12 @@
         </div>
   </footer>
   <!-- End of Footer -->
+  </div>
+
+
+
+</body>
+ 
 
 <!-- Bootstrap core JavaScript-->
 <script src="vendor/jquery/jquery.min.js"></script>

@@ -27,27 +27,40 @@
 
 						<ul class="product-category">
 							<li> Filtro por categoria </li>
-							<li><a href="shop.php?cat=&"></span>Todos</a></li>
+							<li><a href="shop.php?categoria=&"></span>Todos</a></li>
 							<?php
 
 							$datos = file_get_contents('admin/productos.json');
 							$datosJson=json_decode($datos,true);
-							foreach ($datosJson as $cat) {
+							$categorias=[];
+							$restaurante=[];
+							foreach ($datosJson as $producto) {
+								
+								if(!in_array($producto['categoria'],$categorias)){
+									$categorias[]=$producto['categoria'];
+								}
+								if(!in_array($producto['restaurante'],$restaurante)){
+									$restaurante[]=$producto['restaurante'];
+								}
+																
+							}
+							
+							foreach ($categorias as $cat) {
 							?>
-								<li><a href="shop.php?cat=<?php echo $cat['id'] ?>&restaurantes=<?php echo isset($_GET['restaurante'])?$_GET['restaurante']:''?>"><?php echo $cat['restaurante'] ?></a></li>
+								<li><a href="shop.php?categoria=<?php echo $cat ?>&restaurante=<?php echo isset($_GET['restaurante'])?$_GET['restaurante']:''?>"><?php echo $cat?></a></li>
 							<?php } ?>
 						</ul>
 
 						<ul class="product-category">
 							<li> Filtro por restaurante </li>
-							<li><a href="shop.php?cat=&"></span>Todos</a></li>
+							<li><a href="shop.php?categoria=&"></span>Todos</a></li>
 							<?php
 
 							$datos = file_get_contents('admin/productos.json');
 							$datosJson=json_decode($datos,true);
-							foreach ($datosJson as $res) {
+							foreach ($restaurante as $res) {
 							?>
-								<li><a href="shop.php?res=<?php echo $res['id'] ?>&cat=<?php echo isset($_GET['categoria'])?$_GET['categoria']:''?>"><?php echo $res['categoria'] ?></a></li>
+								<li><a href="shop.php?restaurante=<?php echo $res ?>&categoria=<?php echo isset($_GET['categoria'])?$_GET['categoria']:''?>"><?php echo $res ?></a></li>
 							<?php } ?>
 						</ul>
 					</div>

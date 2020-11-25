@@ -23,28 +23,26 @@
 		<section class="ftco-section">
 			<div class="container">				
 				<div class="row justify-content-center">			 
-									 <?php 										
+									 <?php
+									 	 										
 										//obtengo archivo
 										$datos = file_get_contents('admin/productos.json');
 										//lo convierto en array
-										$datosJson=json_decode($datos,true);										
-										foreach ($datosJson as $prod) {	
-											if ($prod['id'] == $_GET['detalle']) {
-												$imprimir = true;								
-											}
-											if ($imprimir) {
+										$productos=json_decode($datos,true);									
+										
+											
 										?>	
 											<div class="col-md-6 col-lg-3 ftco-animate">
 												<div class="product">									
-													<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $prod['imagen'] ?>" alt="imagen">
+													<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $productos[$_GET['detalle']]['imagen'] ?>" alt="imagen">
 														<div class="overlay"></div>
 													</a>
 													<div class="text py-3 pb-4 px-3 text-center">																	
-														<h3><a href="#"><?php echo $prod['nombre'] ?></a></h3>
+														<h3><a href="#"><?php echo $productos[$_GET['detalle']]['nombre'] ?></a></h3>
 														<div class="d-flex">
-															<p class="text-left"><?php echo $prod['descripcion'] ?></p>
+															<p class="text-left"><?php echo $productos[$_GET['detalle']]['descripcion'] ?></p>
 															<div class="pricing">
-																<p class="price"><span class="price-sale"><?php $prod['precio'] ?></span></p>
+																<p class="price"><span class="price-sale"><?php $productos[$_GET['detalle']]['precio'] ?></span></p>
 															</div>
 														</div>
 														<div class="bottom-area d-flex px-3">
@@ -52,11 +50,7 @@
 																<a href="shop.php" class="add-to-cart d-flex justify-content-center align-items-center text-center">Volver								
 																</a>												
 															</div>
-											<?php 
-													}
-												}									
 											
-											?> 
 										</div>
 									</div>
 								</div>
@@ -76,9 +70,8 @@
                                 if(isset($_POST['detalle'])){                        
                                          //agrego
 										 $id= $_GET['detalle'];
-										 $id2=date('Ymdhis');					                                  
-									
-									
+										 $id2=date('Ymdhis');				                                  
+																		
 									$datosJson[count($datosJson)]= array('idproducto'=>$id,'id'=>$id2,'nombre'=>$_POST['nombre'],'mensaje'=>$_POST['mensaje']);
 									
                                     $fp= fopen('com.json','w');
@@ -86,10 +79,7 @@
                                     
                                     //guardo
                                     fwrite($fp,$datosString);
-                                    fclose($fp);
-                                    
-									
-                                    
+                                    fclose($fp);                                    
                                 }
                          ?>	
 
