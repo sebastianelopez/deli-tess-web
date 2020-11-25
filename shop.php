@@ -51,6 +51,7 @@
 					</div>
 				</div>
 				<div class="row justify-content-center">
+				 
 				<?php 
 				 $datos = file_get_contents('admin/productos.json');
 				 $datosJson=json_decode($datos,true);
@@ -87,7 +88,7 @@
 										</div>
 										<div class="bottom-area d-flex px-3">
 											<div class="m-auto d-flex">
-												<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+												<a href="detalleproducto.php?detalle=<?php echo $prod['id'] ?>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 													<span><i class="ion-ios-menu"></i></span>
 												</a>
 												<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
