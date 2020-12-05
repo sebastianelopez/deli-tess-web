@@ -35,13 +35,25 @@
 </li>
 
 
-<!-- Nav Item - Tables -->
+<!-- Nav Item - Productos -->
 <li class="nav-item">
   <a class="nav-link" href="productos.php">
     <i class="fas fa-fw fa-table"></i>
     <span>Productos</span></a>
 </li>
-<!-- Nav Item - Tables -->
+<!-- Nav Item - Restaurantes -->
+<li class="nav-item">
+  <a class="nav-link" href="restaurantes.php">
+    <i class="fas fa-fw fa-table"></i>
+    <span>Restaurantes</span></a>
+</li>
+<!-- Nav Item - Categorias -->
+<li class="nav-item">
+  <a class="nav-link" href="categorias.php">
+    <i class="fas fa-fw fa-table"></i>
+    <span>Categorias</span></a>
+</li>
+<!-- Nav Item - Salir -->
 <li class="nav-item">
   <a class="nav-link" href="productos.php?logout">
     <i class="fas fa-sign-out-alt"></i>
