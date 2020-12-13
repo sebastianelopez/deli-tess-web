@@ -161,7 +161,7 @@ $datosJson3=json_decode($datos3,true);
 ?>
 
    
-    <form action="productos_add.php" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
         Nombre:<br><input class="my-2" type="text" name="nombre" value="<?php echo isset($dato)?$dato['nombre']:'' ?>"><br />
         Descripcion:<br><input class="my-2" type="text" name="descripcion" value="<?php echo isset($dato)?$dato['descripcion']:'' ?>"><br />
         Imagen:<br><input class="my-2" type="file" name="fileToUpload" id="fileToUpload"><br />

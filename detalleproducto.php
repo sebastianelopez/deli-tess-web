@@ -90,6 +90,7 @@
 											$datos = file_get_contents('com.json');
 											//lo convierto en array
 											$datosJson=json_decode($datos,true);
+											rsort($datosJson);
 											 
 											foreach($datosJson as $com){
 														if($com['idproducto']==$_GET['detalle']){			

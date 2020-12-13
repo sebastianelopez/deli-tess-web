@@ -65,9 +65,8 @@ $datosJson=json_decode($datos,true);
     if(isset($_POST['add'])){
       
         if(isset($_GET['edit'])){
-            $id= $_GET['edit'];
-        }else{
-            //agrego
+            $id= $_GET['edit'];            
+        }else{            
             $id=date('Ymdhis');
         }        
         
@@ -88,7 +87,7 @@ $datosJson=json_decode($datos,true);
 ?>
 
    
-    <form action="restaurantes_add.php" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
         Nombre:<br><input class="my-2" type="text" name="nombre" value="<?php echo isset($dato)?$dato['nombre']:'' ?>"><br />   
         <br><input class="my-2 d-none" type="text" name="activo" value="true"><br />            
                 <input class="my-2"type="submit" name="add">     
