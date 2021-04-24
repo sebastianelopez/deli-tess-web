@@ -30,7 +30,7 @@
 							<li><a href="shop.php?cat=&"></span>Todos</a></li>
 							<?php
 
-							include('datosDelitess/categorias.php');
+							include('datos_delitess/categorias.php');
 							foreach ($categorias as $cat) {
 							?>
 								<li><a href="shop.php?cat=<?php echo $cat['id'] ?>&restaurantes=<?php echo isset($_GET['restaurantes'])?$_GET['restaurantes']:''?>"><?php echo $cat['nombre'] ?></a></li>
@@ -42,7 +42,7 @@
 							<li><a href="shop.php?cat=&"></span>Todos</a></li>
 							<?php
 
-							include('datosDelitess/restaurantes.php');
+							include('datos_delitess/restaurantes.php');
 							foreach ($restaurantes as $res) {
 							?>
 								<li><a href="shop.php?res=<?php echo $res['id'] ?>&cat=<?php echo isset($_GET['cat'])?$_GET['cat']:''?>"><?php echo $res['nombre'] ?></a></li>
@@ -74,7 +74,7 @@
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="product">
 									
-									<a href="#" class="img-prod"><img class="img-fluid" src="admin/img/<?php echo $prod['imagen'] ?>" alt="imagen">
+									<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $prod['imagen'] ?>" alt="imagen">
 										<div class="overlay"></div>
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">

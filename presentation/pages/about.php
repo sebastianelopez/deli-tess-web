@@ -1,9 +1,9 @@
 <!DOCTYPE php>
 <html lang="en">
-<?php include_once('includes/head.php'); ?>  
+<?php include_once('../includes/head.php'); ?>  
   <body class="goto-here">
-  <?php include_once('includes/barritadearriba.php');?>
-    <?php include_once('includes/menu.php');?>
+  <?php include_once('../includes/barritadearriba.php');?>
+    <?php include_once('../includes/menu.php');?>
     <!-- END nav -->
 
     <div class="hero-wrap hero-bread" style="background-image: url('images/nosotrosbg1.jpg');">
@@ -27,7 +27,7 @@
 					</div>
 					<div class="col-md-7 py-5 wrap-about pb-md-5 ftco-animate">
 	          <div class="heading-section-bold mb-4 mt-md-5">
-	          	<div class="ml-md-0">
+	          	<div class="ml-md-0">Deli Tess
 		            <h2 class="mb-4">Bienvenidos a Deli Tess</h2>
 	            </div>
 	          </div>
