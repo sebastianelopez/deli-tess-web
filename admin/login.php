@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -41,7 +42,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Bienvenido otra vez !</h1>
                   </div>
-                  <form action="index.php" method="post" class="user">
+                  <form action="productos.php" method="post" class="user">
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" name="user" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
                     </div>

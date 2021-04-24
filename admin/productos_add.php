@@ -34,9 +34,6 @@
     <?php include_once('includes/sidebar.php'); 
     
     function pathUrl($dir = __DIR__){
-      
-      
-      
       $root = "";
       $dir = str_replace('\\', '/', realpath($dir));
     
@@ -83,8 +80,12 @@ include_once('funcs.php');
 
 //obtengo archivo
 $datos = file_get_contents('productos.json');
+$datos2 = file_get_contents('categorias.json');
+$datos3 = file_get_contents('restaurantes.json');
 //lo convierto en array
 $datosJson=json_decode($datos,true);
+$datosJson2=json_decode($datos2,true);
+$datosJson3=json_decode($datos3,true);
 
     if(isset($_POST['add'])){
 
@@ -100,48 +101,41 @@ $datosJson=json_decode($datos,true);
          // die ("File is an image - " . $check["mime"] . "");
           $uploadOk = 1;
         } else {
-          die ("File is not an image.");
+          die ("El archivo no es una imagen.");
         }
       
       
       // Check if file already exists
       if (file_exists($target_file)) {
-        die ("Sorry, file already exists.");
+        die ("Lo siento, es archivo ya fue cargado.");
       }
       
       // Check file size
       if ($_FILES["fileToUpload"]["size"] > 500000) {
-        die ("Sorry, your file is too large.");
+        die ("Lo siento, tu archivo es muy grande.");
       }
       
       // Allow certain file formats
       if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
       && $imageFileType != "gif" ) {
-        die ("Sorry, only JPG, JPEG, PNG & GIF files are allowed.");
+        die ("Lo siento, solo se permiten archivos JPG, JPEG, PNG & GIF.");
       }
       
       // Check if $uploadOk is set to 0 by an error
       if ($uploadOk == 0) {
-        die ("Sorry, your file was not uploaded");
+        die ("Lo siento, tu archivo no fue cargado.");
       // if everything is ok, try to upload file
       } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
           //die ("The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.");
         } else {
-          die ("Sorry, there was an error uploading your file");
+          die ("Lo siento, hubo un error cargando tu archivo.");
         }
       }
       
-      
-      
+
       //PARA LLAMR LA RUTA DE LA IMG
       
-      
-      
-      
-     
-      
-
         if(isset($_GET['edit'])){
             $id= $_GET['edit'];
         }else{
@@ -149,7 +143,7 @@ $datosJson=json_decode($datos,true);
             $id=date('Ymdhis');
         }        
         
-        $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre'],'descripcion'=>$_POST['descripcion'],'imagen'=>pathUrl(__DIR__. "/../") . "uploads/" . basename($_FILES["fileToUpload"]["name"]),'precio'=>$_POST['precio'],'activo'=>$_POST['activo']);
+        $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre'],'descripcion'=>$_POST['descripcion'],'imagen'=>pathUrl(__DIR__. "/../") . "uploads/" . basename($_FILES["fileToUpload"]["name"]),'precio'=>$_POST['precio'],'categoria'=>$_POST['categoria'],'restaurante'=>$_POST['restaurante'],'activo'=>$_POST['activo']);
         $fp= fopen('productos.json','w');
         $datosString=json_encode($datosJson);     
         
@@ -160,28 +154,42 @@ $datosJson=json_decode($datos,true);
     }
 
     if(isset($_GET['edit'])){
-        $dato=$datosJson[$_GET['edit']];
+        $dato=$datosJson[$_GET['edit']];        
     }
-    
-        
+     
 ?>
-<div class="modal-content px-5 py-3">
-            <div class="modal-header">                
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
 
    
-    <form action="productos_add.php" method="post" enctype="multipart/form-data">
+    <form action="" method="post" enctype="multipart/form-data">
         Nombre:<br><input class="my-2" type="text" name="nombre" value="<?php echo isset($dato)?$dato['nombre']:'' ?>"><br />
         Descripcion:<br><input class="my-2" type="text" name="descripcion" value="<?php echo isset($dato)?$dato['descripcion']:'' ?>"><br />
         Imagen:<br><input class="my-2" type="file" name="fileToUpload" id="fileToUpload"><br />
         Precio:<br><input class="my-2" type="text" name="precio" value="<?php echo isset($dato)?$dato['precio']:'' ?>"><br />
+        Categoria:<select name="categoria">
+                        <?php 
+                          foreach($datosJson2 as $cat){
+                        ?>                        
+                            <option value="<?php echo $cat['nombre'] ?>"><?php echo $cat['nombre'] ?></option>
+                         <?php 
+                          }
+                         ?>                               
+                  </select>
+        
+        Restaurante:<select name="restaurante">                        
+        <?php 
+                          foreach($datosJson3 as $rest){
+                        ?>                        
+                            <option value="<?php echo $rest['nombre'] ?>"><?php echo $rest['nombre'] ?></option>
+                         <?php 
+                          }
+                         ?> 
+                    </select>
         <br><input class="my-2 d-none" type="text" name="activo" value="true"><br />            
                 <input class="my-2"type="submit" name="add">     
 
        
     </form>
-</div>
+
 
 
     </div>
@@ -195,7 +203,7 @@ $datosJson=json_decode($datos,true);
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
+  <!--
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -213,6 +221,8 @@ $datosJson=json_decode($datos,true);
       </div>
     </div>
   </div>
+
+  -->
 
 
 </body>
