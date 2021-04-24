@@ -11,11 +11,13 @@ require_once('comments.php');
         protected $restaurant;
         protected $description;
         protected Comments $comments;
+
+        public function __construct(){
+            parent::__construct();
+            $this->$comments = new $Comments;
+        }
     }
 
-    public function __construct(){
-        parent::__construct();
-        $this->$comments = new $Comments;
-    }
+    
 
 ?>

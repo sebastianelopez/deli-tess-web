@@ -1,12 +1,12 @@
 <!DOCTYPE php>
 <html lang="en">
-<?php include_once('includes/head.php'); ?> 
+<?php include_once('../includes/head.php'); ?> 
   <body class="goto-here">
-   <?php include_once('includes/barritadearriba.php');?>
-    <?php include_once('includes/menu.php');?>
+   <?php include_once('../includes/barritadearriba.php');?>
+    <?php include_once('../includes/menu.php');?>
     <!-- END nav -->
 
-    <div class="hero-wrap hero-bread" style="background-image: url('images/bg_1.jpg');">
+    <div class="hero-wrap hero-bread" style="background-image: url('../images/bg_1.jpg');">
       <div class="container">
         <div class="row no-gutters slider-text align-items-center justify-content-center">
           <div class="col-md-9 ftco-animate text-center">
@@ -37,7 +37,7 @@
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
-						        <td class="image-prod"><div class="img" style="background-image:url(images/pizzamuzzarela.jpg);"></div></td>
+						        <td class="image-prod"><div class="img" style="background-image:url(../images/pizzamuzzarela.jpg);"></div></td>
 						        
 						        <td class="product-name">
 						        	<h3>Pizza Muzzarella</h3>
@@ -58,7 +58,7 @@
 						      <tr class="text-center">
 						        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
 						        
-						        <td class="image-prod"><div class="img" style="background-image:url(images/cervezaquilmes.jpg);"></div></td>
+						        <td class="image-prod"><div class="img" style="background-image:url(../images/cervezaquilmes.jpg);"></div></td>
 						        
 						        <td class="product-name">
 						        	<h3>Cerveza Quilmes 473 ml</h3>
@@ -111,7 +111,7 @@
 			</div>
 		</section>
 		
-    <?php include_once('includes/footer.php'); ?>
+    <?php include_once('../includes/footer.php'); ?>
     
   
 
@@ -119,22 +119,22 @@
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
-  <script src="js/scrollax.min.js"></script>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="../js/popper.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script src="../js/jquery.easing.1.3.js"></script>
+  <script src="../js/jquery.waypoints.min.js"></script>
+  <script src="../js/jquery.stellar.min.js"></script>
+  <script src="../js/owl.carousel.min.js"></script>
+  <script src="../js/jquery.magnific-popup.min.js"></script>
+  <script src="../js/aos.js"></script>
+  <script src="../js/jquery.animateNumber.min.js"></script>
+  <script src="../js/bootstrap-datepicker.js"></script>
+  <script src="../js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src="js/google-map.js"></script>
-  <script src="js/main.js"></script>
+  <script src="../js/google-map.js"></script>
+  <script src="../js/main.js"></script>
 
   <script>
 		$(document).ready(function(){
