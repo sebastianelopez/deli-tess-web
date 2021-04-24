@@ -1,21 +1,20 @@
 <?php 
 
-require_once('abstract_entity.php');
-require_once('comments.php');
+require_once('id_trait.php');
+require_once('comment_collection.php');
 
-
-    class Product extends AbstractEntity {
+    class Product  {
         protected $name;
         protected $price;
         protected $imageUrl;
         protected $restaurant;
         protected $description;
-        protected Comments $comments;
-    }
+        protected CommentCollection $comments;
 
-    public function __construct(){
-        parent::__construct();
-        $this->$comments = new $Comments;
-    }
+        use IdTrait;
 
+        public function __construct(CommentCollection $commentCollection ){
+            $this-> comments = $commentCollection;
+        }
+    }
 ?>

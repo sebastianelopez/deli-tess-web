@@ -1,9 +1,8 @@
 <?php
 
-    abstract class AbstractEntity {
+    trait IdTrait {
         protected $id;
-
-        public function __construct(){}
+        protected $updateDate;
 
         public function getId(){
             return $this->id;
