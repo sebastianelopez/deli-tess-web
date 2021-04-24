@@ -1,15 +1,15 @@
 <!DOCTYPE php>
 <html lang="en">
 
-<?php include_once('includes/head.php'); ?> 
+<?php include_once('../includes/head.php'); ?> 
 
 	<body class="goto-here">
-		<?php include_once('includes/barritadearriba.php'); ?>
-		<?php include_once('includes/menu.php'); ?>
+		<?php include_once('../includes/barritadearriba.php'); ?>
+		<?php include_once('../includes/menu.php'); ?>
 
 		<!-- END nav -->
 
-		<div class="hero-wrap hero-bread" style="background-image: url('images/bg_hamburguesa.jpg');">
+		<div class="hero-wrap hero-bread" style="background-image: url('../images/bg_hamburguesa.jpg');">
 			<div class="container">
 				<div class="row no-gutters slider-text align-items-center justify-content-center">
 					<div class="col-md-9 ftco-animate text-center">
@@ -27,45 +27,61 @@
 
 						<ul class="product-category">
 							<li> Filtro por categoria </li>
-							<li><a href="shop.php?cat=&"></span>Todos</a></li>
+							<li><a href="shop.php?categoria=&"></span>Todos</a></li>
 							<?php
 
-							include('datos_delitess/categorias.php');
+							$datos = file_get_contents('../../admin/productos.json');
+							$datosJson=json_decode($datos,true);
+							$categorias=[];
+							$restaurante=[];
+							foreach ($datosJson as $producto) {
+								
+								if(!in_array($producto['categoria'],$categorias)){
+									$categorias[]=$producto['categoria'];
+								}
+								if(!in_array($producto['restaurante'],$restaurante)){
+									$restaurante[]=$producto['restaurante'];
+								}
+																
+							}
+							
 							foreach ($categorias as $cat) {
 							?>
-								<li><a href="shop.php?cat=<?php echo $cat['id'] ?>&restaurantes=<?php echo isset($_GET['restaurantes'])?$_GET['restaurantes']:''?>"><?php echo $cat['nombre'] ?></a></li>
+								<li><a href="shop.php?categoria=<?php echo $cat ?>&restaurante=<?php echo isset($_GET['restaurante'])?$_GET['restaurante']:''?>"><?php echo $cat?></a></li>
 							<?php } ?>
 						</ul>
 
 						<ul class="product-category">
 							<li> Filtro por restaurante </li>
-							<li><a href="shop.php?cat=&"></span>Todos</a></li>
+							<li><a href="shop.php?categoria=&"></span>Todos</a></li>
 							<?php
 
-							include('datos_delitess/restaurantes.php');
-							foreach ($restaurantes as $res) {
+							$datos = file_get_contents('../../admin/productos.json');
+							$datosJson=json_decode($datos,true);
+							foreach ($restaurante as $res) {
 							?>
-								<li><a href="shop.php?res=<?php echo $res['id'] ?>&cat=<?php echo isset($_GET['cat'])?$_GET['cat']:''?>"><?php echo $res['nombre'] ?></a></li>
+								<li><a href="shop.php?restaurante=<?php echo $res ?>&categoria=<?php echo isset($_GET['categoria'])?$_GET['categoria']:''?>"><?php echo $res ?></a></li>
 							<?php } ?>
 						</ul>
 					</div>
 				</div>
 				<div class="row justify-content-center">
+				 
 				<?php 
-				 $datos = file_get_contents('admin/productos.json');
+				 $datos = file_get_contents('../../admin/productos.json');
 				 $datosJson=json_decode($datos,true);
 				error_reporting(E_ALL ^ E_NOTICE); 
 				foreach ($datosJson as $prod) {
 					if ($prod['activo'] == true) {
 						$imprimir = true;
 						
-						if (!empty($_GET['cat'])) {
-							if ($prod['categorias'] != $_GET['cat']) {
+						if (!empty($_GET['categoria'])) {
+							if ($prod['categoria'] != $_GET['categoria']) {
 								$imprimir = false;
 							}
 						}
-						if (!empty($_GET['res'])) {
-							if ($prod['restaurantes'] != $_GET['res']) {
+						if (!empty($_GET['restaurante'])) {
+							if ($prod['restaurante'] != $_GET['restaurante']) {
 								$imprimir = false;
 							}
 						}
@@ -87,7 +103,7 @@
 										</div>
 										<div class="bottom-area d-flex px-3">
 											<div class="m-auto d-flex">
-												<a href="#" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+												<a href="detalleproducto.php?detalle=<?php echo $prod['id'] ?>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 													<span><i class="ion-ios-menu"></i></span>
 												</a>
 												<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
@@ -107,7 +123,7 @@
 
 		</section>
 
-		<?php include_once('includes/footer.php'); ?>
+		<?php include_once('../includes/footer.php'); ?>
 
 
 
@@ -117,22 +133,22 @@
 				<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
 
 
-		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery-migrate-3.0.1.min.js"></script>
-		<script src="js/popper.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.easing.1.3.js"></script>
-		<script src="js/jquery.waypoints.min.js"></script>
-		<script src="js/jquery.stellar.min.js"></script>
-		<script src="js/owl.carousel.min.js"></script>
-		<script src="js/jquery.magnific-popup.min.js"></script>
-		<script src="js/aos.js"></script>
-		<script src="js/jquery.animateNumber.min.js"></script>
-		<script src="js/bootstrap-datepicker.js"></script>
-		<script src="js/scrollax.min.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery-migrate-3.0.1.min.js"></script>
+		<script src="../js/popper.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/jquery.easing.1.3.js"></script>
+		<script src="../js/jquery.waypoints.min.js"></script>
+		<script src="../js/jquery.stellar.min.js"></script>
+		<script src="../js/owl.carousel.min.js"></script>
+		<script src="../js/jquery.magnific-popup.min.js"></script>
+		<script src="../js/aos.js"></script>
+		<script src="../js/jquery.animateNumber.min.js"></script>
+		<script src="../js/bootstrap-datepicker.js"></script>
+		<script src="../js/scrollax.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-		<script src="js/google-map.js"></script>
-		<script src="js/main.js"></script>
+		<script src="../js/google-map.js"></script>
+		<script src="../js/main.js"></script>
 
 	</body>
 </html>

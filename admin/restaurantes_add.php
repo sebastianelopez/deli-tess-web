@@ -1,24 +1,3 @@
-<?php session_start();
-
-include('funcs.php');
-
-if (isset($_POST['login'])) {
-  if ($_POST['pass'] == 'davinci' && $_POST['user'] == 'admin') {
-    $_SESSION['usuario_logueado'] = true;
-  }
-}
-
-if (isset($_GET['logout'])) {
-  unset($_SESSION['usuario_logueado']);
-}
-
-if(!isset($_SESSION['usuario_logueado'])){
-  redirect('login.php');
-}
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,14 +25,17 @@ if(!isset($_SESSION['usuario_logueado'])){
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
-
 <body id="page-top">
 
   <!-- Page Wrapper -->
   <div id="wrapper">
 
     <!-- Sidebar -->
-    <?php include_once('includes/sidebar.php'); ?>
+    <?php include_once('includes/sidebar.php'); 
+    
+    
+    
+    ?>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -70,83 +52,50 @@ if(!isset($_SESSION['usuario_logueado'])){
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Productos</h1>
-          <p class="mb-4">Agregue, borre o modifique los productos publicados.</a>.</p>
+          <h1 class="h3 mb-2 text-gray-800">Restaurantes</h1>
+          
+<?php 
+include_once('funcs.php');
 
-        <?php include_once('funcs.php'); ?>
-          <!-- Productos -->
-        <?php 
-          if(isset($_GET['del'])){
-            //obtengo archivo
-            $datos = file_get_contents('productos.json');
-            //lo convierto en array
-            $datosJson=json_decode($datos,true);
-            //elimino
-            unset($datosJson[$_GET['del']]);
-            $fp= fopen('productos.json','w');
-            $datosString=json_encode($datosJson);
-            //guardo
-            fwrite($fp,$datosString);
-            fclose($fp);
-            redirect('productos.php');
-          }
-        ?>
+//obtengo archivo
+$datos = file_get_contents('restaurantes.json');
+//lo convierto en array
+$datosJson=json_decode($datos,true);
 
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <a class="m-0 font-weight-bold text-primary" href="productos_add.php">+ Agregar</a>
-              
-            </div>
-            
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Descripcion</th>
-                      <th>Imagen</th>
-                      <th>Precio</th>
-                      <th>Categoria</th>
-                      <th>Restaurante</th>
-                      <th>Modificar / Borrar</th>                      
-                    </tr>
-                  </thead>
-                  <tbody> 
-                      <?php                   
-                        
-                        $datos = file_get_contents('productos.json');
-                        $datosJson=json_decode($datos,true);
-
-                        foreach($datosJson as $prod){ ?>
-                            <tr>
-                              <td><?php echo $prod['id'] ?></td>
-                              <td><?php echo $prod['nombre'] ?></td>
-                              <td><?php echo $prod['descripcion'] ?>.</td>
-                              <td><img class="img-fluid" src="<?php echo $prod['imagen'] ?>" alt=""></a></td>
-                              <td><?php echo $prod['precio'] ?></td>
-                              <td><?php echo $prod['categoria'] ?></td>
-                              <td><?php echo $prod['restaurante'] ?></td>
-                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="productos_add.php?edit=<?php echo $prod['id'] ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="productos.php?del=<?php echo $prod['id'] ?>">Borrar</a></td>                      
-                          <!-- productos_add.php?edit=<?php echo $prod['id'] ?> -->
-                          </tr>   
-                      <?php } ?>  
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-        </div>
-        <!-- /.container-fluid -->
-
-      </div>
-      <!-- End of Main Content -->
-            
-
+    if(isset($_POST['add'])){
       
+        if(isset($_GET['edit'])){
+            $id= $_GET['edit'];            
+        }else{            
+            $id=date('Ymdhis');
+        }        
+        
+        $datosJson[$id]= array('id'=>$id,'nombre'=>$_POST['nombre']);
+        $fp= fopen('restaurantes.json','w');
+        $datosString=json_encode($datosJson);     
+        
+        //guardo
+        fwrite($fp,$datosString);
+        fclose($fp);
+        redirect('restaurantes.php');
+    }
+
+    if(isset($_GET['edit'])){
+        $dato=$datosJson[$_GET['edit']];
+    }
+     
+?>
+
+   
+    <form action="" method="post" enctype="multipart/form-data">
+        Nombre:<br><input class="my-2" type="text" name="nombre" value="<?php echo isset($dato)?$dato['nombre']:'' ?>"><br />   
+        <br><input class="my-2 d-none" type="text" name="activo" value="true"><br />            
+                <input class="my-2"type="submit" name="add">     
+
+       
+    </form>
+
+
 
     </div>
     <!-- End of Content Wrapper -->
@@ -159,7 +108,7 @@ if(!isset($_SESSION['usuario_logueado'])){
     <i class="fas fa-angle-up"></i>
   </a>
 
-  <!-- Logout Modal-->
+  <!--
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -176,24 +125,25 @@ if(!isset($_SESSION['usuario_logueado'])){
         </div>
       </div>
     </div>
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
+  </div>
+
+  -->
+
+
+</body>
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span>Copyright &copy; Deli Tess 2020</span>
           </div>
         </div>
-  </footer>
-  <!-- End of Footer -->
-  </div>
+      </footer>
+ <!-- End of Footer -->
 
-
-
-</body>
  
-
-<!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
@@ -224,4 +174,5 @@ if(!isset($_SESSION['usuario_logueado'])){
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
+
 </html>

@@ -70,31 +70,31 @@ if(!isset($_SESSION['usuario_logueado'])){
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Productos</h1>
-          <p class="mb-4">Agregue, borre o modifique los productos publicados.</a>.</p>
+          <h1 class="h3 mb-2 text-gray-800">Categorias</h1>
+          <p class="mb-4">Agregue, borre o modifique las categorias disponibles para los productos.</a>.</p>
 
         <?php include_once('funcs.php'); ?>
           <!-- Productos -->
         <?php 
           if(isset($_GET['del'])){
             //obtengo archivo
-            $datos = file_get_contents('productos.json');
+            $datos = file_get_contents('categorias.json');
             //lo convierto en array
             $datosJson=json_decode($datos,true);
             //elimino
             unset($datosJson[$_GET['del']]);
-            $fp= fopen('productos.json','w');
+            $fp= fopen('categorias.json','w');
             $datosString=json_encode($datosJson);
             //guardo
             fwrite($fp,$datosString);
             fclose($fp);
-            redirect('productos.php');
+            redirect('categorias.php');
           }
         ?>
 
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <a class="m-0 font-weight-bold text-primary" href="productos_add.php">+ Agregar</a>
+              <a class="m-0 font-weight-bold text-primary" href="categorias_add.php">+ Agregar</a>
               
             </div>
             
@@ -105,32 +105,22 @@ if(!isset($_SESSION['usuario_logueado'])){
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Descripcion</th>
-                      <th>Imagen</th>
-                      <th>Precio</th>
-                      <th>Categoria</th>
-                      <th>Restaurante</th>
+                      <th>Nombre</th>                      
                       <th>Modificar / Borrar</th>                      
                     </tr>
                   </thead>
                   <tbody> 
                       <?php                   
                         
-                        $datos = file_get_contents('productos.json');
+                        $datos = file_get_contents('categorias.json');
                         $datosJson=json_decode($datos,true);
 
-                        foreach($datosJson as $prod){ ?>
+                        foreach($datosJson as $cat){ ?>
                             <tr>
-                              <td><?php echo $prod['id'] ?></td>
-                              <td><?php echo $prod['nombre'] ?></td>
-                              <td><?php echo $prod['descripcion'] ?>.</td>
-                              <td><img class="img-fluid" src="<?php echo $prod['imagen'] ?>" alt=""></a></td>
-                              <td><?php echo $prod['precio'] ?></td>
-                              <td><?php echo $prod['categoria'] ?></td>
-                              <td><?php echo $prod['restaurante'] ?></td>
-                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="productos_add.php?edit=<?php echo $prod['id'] ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="productos.php?del=<?php echo $prod['id'] ?>">Borrar</a></td>                      
-                          <!-- productos_add.php?edit=<?php echo $prod['id'] ?> -->
+                              <td><?php echo $cat['id'] ?></td>
+                              <td><?php echo $cat['nombre'] ?></td>                              
+                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="categorias_add.php?edit=<?php echo $cat['id'] ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="categorias.php?del=<?php echo $cat['id'] ?>">Borrar</a></td>                      
+                          <!-- productos_add.php?edit=<?php echo $cat['id'] ?> -->
                           </tr>   
                       <?php } ?>  
                   </tbody>

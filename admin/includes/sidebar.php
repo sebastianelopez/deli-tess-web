@@ -2,7 +2,7 @@
   <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="productos.php">
   <div class="sidebar-brand-icon rotate-n-15">
     <i class="fas fa-shopping-cart"></i>
   </div>
@@ -35,15 +35,33 @@
 </li>
 
 
-<!-- Nav Item - Tables -->
+<!-- Nav Item - Productos -->
 <li class="nav-item">
   <a class="nav-link" href="productos.php">
     <i class="fas fa-fw fa-table"></i>
     <span>Productos</span></a>
 </li>
-<!-- Nav Item - Tables -->
+<!-- Nav Item - Restaurantes -->
 <li class="nav-item">
-  <a class="nav-link" href="index.php?logout">
+  <a class="nav-link" href="restaurantes.php">
+    <i class="fas fa-fw fa-table"></i>
+    <span>Restaurantes</span></a>
+</li>
+<!-- Nav Item - Categorias -->
+<li class="nav-item">
+  <a class="nav-link" href="categorias.php">
+    <i class="fas fa-fw fa-table"></i>
+    <span>Categorias</span></a>
+</li>
+<!-- Nav Item - Categorias -->
+<li class="nav-item">
+  <a class="nav-link" href="comentarios.php">
+    <i class="fas fa-fw fa-table"></i>
+    <span>Comentarios</span></a>
+</li>
+<!-- Nav Item - Salir -->
+<li class="nav-item">
+  <a class="nav-link" href="productos.php?logout">
     <i class="fas fa-sign-out-alt"></i>
     <span>Salir / Desloguear</span></a>
 </li>    
