@@ -4,6 +4,6 @@
     $dbPort = '3306';
     $dbUser = 'root';
     $dbPass = '';
-    $dbName = 'ecommerce';
+    $dbName = 'delitess';
 
 ?>
