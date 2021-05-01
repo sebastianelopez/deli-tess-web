@@ -20,14 +20,10 @@ class CommentDAO extends DAO{
     }
 
     public function getAll($where = array()){
-
         $sql = "SELECT id,creationDate,modificationDate,comment,rank,product  FROM $this->table";
         $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'CommentEntity')->fetchAll();
         return $resultado;
-
     }
-
-    
 }
 
 ?>

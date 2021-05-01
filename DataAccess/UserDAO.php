@@ -20,11 +20,9 @@ class UserDAO extends DAO{
     }
 
     public function getAll($where = array()){
-
         $sql = "SELECT id,fechaCreacion,fechaModificacion,nombre,email,permissionLevel FROM $this->table";
         $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'UserEntity')->fetchAll();
         return $resultado;
-
     }
 
     

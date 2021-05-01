@@ -12,10 +12,7 @@ class RestaurantEntity extends BaseEntity
         parent::__construct();
 
     }
-    /**
-     * Defino los Getters
-     * 
-     */
+
      
     public function getName()
     {
@@ -23,12 +20,8 @@ class RestaurantEntity extends BaseEntity
     }
     
    
-    /**
-     * Defino los Setters
-     * 
-     */
     
-    public function setNombre($name)
+    public function setName($name)
     {
         $this->name = $name;
     }

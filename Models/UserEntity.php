@@ -13,11 +13,7 @@ class UserEntity extends BaseEntity
     { 
         parent::__construct();
     }
-    /**
-     * Defino los Getters
-     * 
-     */
-   
+
     public function getName()
     {
         return $this->name;
@@ -31,11 +27,6 @@ class UserEntity extends BaseEntity
         return $this->permissionLevel;
     }
     
-    /**
-     * Defino los Setters
-     * 
-     */
-   
     public function setName($name)
     {
         $this->name = $name;

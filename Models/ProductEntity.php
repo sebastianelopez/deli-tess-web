@@ -1,17 +1,19 @@
 <?php
 
 require_once ('BaseEntity.php');
+require_once ('CategoryEntity.php');
+require_once ('RestaurantEntity.php');
 
 class ProductEntity extends BaseEntity
 {
     
     private $name;
     private $price;
-    private $imageUrl;
-    private $restaurant;
-    private $category;
-    private $description;
     private $comments;
+    private $imageUrl;
+    private $description;
+    private CategoryEntity $category;
+    private RestaurantEntity $restaurant;
     
 
     public function __construct()
@@ -20,10 +22,7 @@ class ProductEntity extends BaseEntity
 
         $this->comments = array();
     }
-    /**
-     * Defino los Getters
-     * 
-     */
+
      
     public function getName()
     {
@@ -54,10 +53,7 @@ class ProductEntity extends BaseEntity
         return $this->description;
     }
 
-    /**
-     * Defino los Setters
-     * 
-     */
+
     
     public function setName($name)
     {

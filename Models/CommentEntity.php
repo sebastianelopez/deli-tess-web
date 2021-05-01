@@ -5,28 +5,25 @@ require_once ('BaseEntity.php');
 class CommentEntity extends BaseEntity
 {
  
-    private $comment;
-    private $rank;
-    private $product;
     private $user;    
     private $email; 
+    private $comment;
+    private $scorage;
+    private $product;
 
     public function __construct()
     {
         parent::__construct(); 
     }
-    /**
-     * Defino los Getters
-     * 
-     */
+
      
     public function getComment()
     {
         return $this->comment;
     }
-    public function getRank()
+    public function getScorage()
     {
-        return $this->rank;
+        return $this->scorage;
     }
     public function getProduct()
     {
@@ -41,18 +38,15 @@ class CommentEntity extends BaseEntity
     {
         return $this->user;
     } 
-    /**
-     * Defino los Setters
-     * 
-     */
+
     
     public function setComment($comment)
     {
         $this->comment = $comment;
     }
-    public function setRank($rank)
+    public function setScorage($scorage)
     {
-        $this->rank = $rank;
+        $this->scorage = $scorage;
     }
     public function setPost($product)
     {

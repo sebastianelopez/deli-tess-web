@@ -20,14 +20,10 @@ class RestaurantDAO extends DAO{
     }
 
     public function getAll($where = array()){
-
         $sql = "SELECT id,creationDate,modificationDate,name FROM $this->table";
         $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'CategoryEntity')->fetchAll();
         return $resultado;
-
     }
-
-    
 }
 
 ?>

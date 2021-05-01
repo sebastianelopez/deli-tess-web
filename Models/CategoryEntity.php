@@ -13,10 +13,7 @@ class CategoryEntity extends BaseEntity
         parent::__construct();
 
     }
-    /**
-     * Defino los Getters
-     * 
-     */
+
      
     public function getName()
     {
@@ -24,11 +21,6 @@ class CategoryEntity extends BaseEntity
     }
     
       
-    /**
-     * Defino los Setters
-     * 
-     */
-    
     public function setName($name)
     {
         $this->name = $name;

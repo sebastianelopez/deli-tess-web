@@ -21,7 +21,6 @@ class ProductDAO extends DAO{
     public function getOne($id){
         $sql = "SELECT id,creationDate,modificationDate,name,price,imageUrl,description, category, restaurant FROM $this->table WHERE id = $id";
         $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetch();
-        
         $resultado->setRestaurant($this->RestaurantDAO->getOne($resultado->getName()));
         $resultado->setCategory($this->CategoryDao->getOne($resultado->getCategory()));
         
@@ -32,26 +31,13 @@ class ProductDAO extends DAO{
     public function getAll($where = array()){
 
         $sqlWhereStr = ' WHERE 1=1 ';
-
         if(!empty($where['autor'])){
             $sqlWhereStr.= ' AND autor = '.$where['autor'];
         }
         if(!empty($where['cat'])){
             $sqlWhereStr .= ' AND categoria = '.$where['cat'];
         }
- 
-/*
-        $sqlWhere = array();
 
-        if(!empty($where['autor'])){
-            $sqlWhere[] = ' AND autor = '.$where['autor'];
-        }
-        if(!empty($where['cat'])){
-            $sqlWhere[]= ' AND categoria = '.$where['cat'];
-        }
-        $sqlWhereStr = '';
-        if(!empty($sqlWhere)) $sqlWhereStr = ' WHERE 1=1 '.implode('',$sqlWhere);
-*/
         $sql = "SELECT  id,
                         fechaCreacion,
                         fechaModificacion,
