@@ -1,7 +1,8 @@
 <!DOCTYPE php>
 <html lang="en">
 
-<?php include_once('../includes/head.php'); ?> 
+<?php include_once('../includes/head.php');
+ ?> 
 
 	<body class="goto-here">
 		<?php include_once('../includes/barritadearriba.php'); ?>
@@ -28,7 +29,8 @@
 						<ul class="product-category">
 							<li> Filtro por categoria </li>
 							<li><a href="shop.php?categoria=&"></span>Todos</a></li>
-							<?php
+							<?php 
+							/*
 
 							$datos = file_get_contents('../../admin/productos.json');
 							$datosJson=json_decode($datos,true);
@@ -48,20 +50,23 @@
 							foreach ($categorias as $cat) {
 							?>
 								<li><a href="shop.php?categoria=<?php echo $cat ?>&restaurante=<?php echo isset($_GET['restaurante'])?$_GET['restaurante']:''?>"><?php echo $cat?></a></li>
-							<?php } ?>
+							<?php } */?>
+							
 						</ul>
 
 						<ul class="product-category">
 							<li> Filtro por restaurante </li>
 							<li><a href="shop.php?categoria=&"></span>Todos</a></li>
 							<?php
+							/*
 
 							$datos = file_get_contents('../../admin/productos.json');
 							$datosJson=json_decode($datos,true);
 							foreach ($restaurante as $res) {
 							?>
 								<li><a href="shop.php?restaurante=<?php echo $res ?>&categoria=<?php echo isset($_GET['categoria'])?$_GET['categoria']:''?>"><?php echo $res ?></a></li>
-							<?php } ?>
+								<?php } */
+								?>
 						</ul>
 					</div>
 				</div>

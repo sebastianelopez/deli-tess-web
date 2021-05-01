@@ -1,10 +1,9 @@
 <?php
 
 require_once('DAO.php');
-require_once('../Models/UserEntity.php');
+require_once(__DIR__.'/../Models/UserEntity.php');
 
 class UserDAO extends DAO{
-
 
     function __construct($con)
     {

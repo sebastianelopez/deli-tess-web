@@ -1,6 +1,6 @@
 <?php
 
-require_once('../DataAccess/UserDAO.php');
+require_once(__DIR__.'/../DataAccess/UserDAO.php');
 
 class UserBusiness{
 

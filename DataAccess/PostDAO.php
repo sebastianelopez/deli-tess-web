@@ -2,11 +2,10 @@
 
 require_once('DAO.php');
 require_once('CategoryDAO.php');
-require_once('RestaurantDAO.php');
 require_once('UserDAO.php');
-require_once(__DIR__.'/../Models/ProductEntity.php');
+require_once('../Modelos/PostEntity.php');
 
-class ProductDAO extends DAO{
+class PostDAO extends DAO{
 
     protected $UserDao;
     protected $CategoryDao;
@@ -14,26 +13,17 @@ class ProductDAO extends DAO{
     function __construct($con)
     {
         parent::__construct($con);
-        $this->table = 'product';
-        $this->RestaurantDao= new RestaurantDAO($con);
+        $this->table = 'post';
+        $this->UserDao = new UserDAO($con);
         $this->CategoryDao = new CategoryDAO($con);
     }
 
     public function getOne($id){
-        $sql = "SELECT id,
-        creationDate,
-        modificationDate,
-        name,
-        price,
-        imageUrl,
-        description, 
-        category, 
-        restaurant 
-        FROM $this->table 
-        WHERE id = $id";
-        $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetch();
-        $resultado->setRestaurant($this->RestaurantDAO->getOne($resultado->getName()));
-        $resultado->setCategory($this->CategoryDao->getOne($resultado->getCategory()));
+        $sql = "SELECT id,fechaCreacion,fechaModificacion,titulo,entrada,autor,categoria FROM $this->table WHERE id = $id";
+        $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'PostEntity')->fetch();
+        
+        $resultado->setAutor($this->UserDao->getOne($resultado->getAutor()));
+        $resultado->setCategoria($this->CategoryDao->getOne($resultado->getCategoria()));
         
         return $resultado;
 
@@ -42,13 +32,26 @@ class ProductDAO extends DAO{
     public function getAll($where = array()){
 
         $sqlWhereStr = ' WHERE 1=1 ';
+
         if(!empty($where['autor'])){
             $sqlWhereStr.= ' AND autor = '.$where['autor'];
         }
         if(!empty($where['cat'])){
             $sqlWhereStr .= ' AND categoria = '.$where['cat'];
         }
+ 
+/*
+        $sqlWhere = array();
 
+        if(!empty($where['autor'])){
+            $sqlWhere[] = ' AND autor = '.$where['autor'];
+        }
+        if(!empty($where['cat'])){
+            $sqlWhere[]= ' AND categoria = '.$where['cat'];
+        }
+        $sqlWhereStr = '';
+        if(!empty($sqlWhere)) $sqlWhereStr = ' WHERE 1=1 '.implode('',$sqlWhere);
+*/
         $sql = "SELECT  id,
                         fechaCreacion,
                         fechaModificacion,

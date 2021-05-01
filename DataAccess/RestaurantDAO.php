@@ -1,7 +1,7 @@
 <?php
 
 require_once('DAO.php');
-require_once('../Models/RestaurantEntity.php');
+require_once(__DIR__.'/../Models/RestaurantEntity.php');
 
 class RestaurantDAO extends DAO{
 

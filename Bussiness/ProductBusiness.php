@@ -1,25 +1,25 @@
 <?php
 
-require_once('../DataAccess/ProductDAO.php');
+require_once(__DIR__.'/../DataAccess/ProductDAO.php');
 
-class PostBusiness{
+class ProductBusiness{
 
     protected $ProductDao;
-
+    
     function __construct($con){
         $this->PostDao = new ProductDAO($con);
     }
 
-    public function getEntradas($data = array()){
-        $entradas = $this->ProductDao->getAll($data); 
+    public function getproductos($data = array()){
+        $productos = $this->ProductDao->getAll($data); 
 
-        return $entradas;
+        return $productos;
     }
 
-    public function getEntrada($id){
-        $entradas = $this->ProductDao->getOne($id); 
+    public function getProducto($id){
+        $producto = $this->ProductDao->getOne($id); 
 
-        return $entradas;
+        return $producto;
     }
 
 

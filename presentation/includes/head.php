@@ -1,5 +1,10 @@
 <head>
-  <?php include_once('../includes/titulo.php');?>
+  <?php 
+  include_once('../includes/titulo.php');
+  include_once('../../Bussiness/ProductBusiness.php');
+  include('../../Helpers/conecction.php');
+  
+  ?>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     

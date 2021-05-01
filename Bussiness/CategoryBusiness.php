@@ -1,6 +1,6 @@
 <?php
 
-require_once('../DataAccess/CategoryDAO.php');
+require_once(__DIR__.'/../DataAccess/CategoryDAO.php');
 
 class CategoryBusiness{
 

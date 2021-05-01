@@ -12,8 +12,8 @@ class ProductEntity extends BaseEntity
     private $comments;
     private $imageUrl;
     private $description;
-    private CategoryEntity $category;
-    private RestaurantEntity $restaurant;
+    private $category;
+    private $restaurant;
     
 
     public function __construct()

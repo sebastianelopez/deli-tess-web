@@ -1,7 +1,7 @@
 <?php
 
-require_once('DAO.php');
-require_once('../Models/CommentEntity.php');
+require_once('./DAO.php');
+require_once(__DIR__.'/../Models/CommentEntity.php');
 
 class CommentDAO extends DAO{
 
