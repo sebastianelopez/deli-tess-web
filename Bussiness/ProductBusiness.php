@@ -4,22 +4,22 @@ require_once(__DIR__.'/../DataAccess/ProductDAO.php');
 
 class ProductBusiness{
 
-    protected $ProductDao;
+    protected $ProductDAO;
     
     function __construct($con){
-        $this->PostDao = new ProductDAO($con);
+        $this->ProductDAO = new ProductDAO($con);
     }
 
-    public function getproductos($data = array()){
-        $productos = $this->ProductDao->getAll($data); 
+    public function getProducts($data = array()){
+        $products = $this->ProductDAO->getAll($data); 
 
-        return $productos;
+        return $products;
     }
 
-    public function getProducto($id){
-        $producto = $this->ProductDao->getOne($id); 
+    public function getProduct($id){
+        $product = $this->ProductDAO->getOne($id); 
 
-        return $producto;
+        return $product;
     }
 
 

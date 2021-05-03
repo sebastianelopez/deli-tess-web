@@ -13,15 +13,15 @@ class CategoryDAO extends DAO{
     }
 
     public function getOne($id){
-        $sql = "SELECT id,creationDate,modificationDate,name FROM $this->table WHERE id = $id";
-        $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'CategoryEntity')->fetch();
-        return $resultado;
+        $sql = "SELECT id, name FROM $this->table WHERE id = $id";
+        $result = $this->con->query($sql,PDO::FETCH_CLASS,'CategoryEntity')->fetch();
+        return $result;
     }
 
     public function getAll($where = array()){
-        $sql = "SELECT id,creationDate,modificationDate,name FROM $this->table";
-        $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'CategoryEntity')->fetchAll();
-        return $resultado;
+        $sql = "SELECT id, name FROM $this->table";
+        $result = $this->con->query($sql,PDO::FETCH_CLASS,'CategoryEntity')->fetchAll();
+        return $result;
     }
     
 }

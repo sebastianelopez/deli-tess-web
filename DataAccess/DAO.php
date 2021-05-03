@@ -16,13 +16,13 @@ abstract class DAO{
     
     public function save($data = array()){
 
-        $sql = "INSERT INTO users(name,email) VALUES ('".$data['name']."','".$data['email']."')";
+        $sql = "INSERT INTO user(id,name,email) VALUES ('".$data['name']."','".$data['email']."')";
         return $this->con->exec($sql);
 
     }
 
     public function modify($id, $data = array()){
-        $sql = "UPDATE users SET name = '".$data['name']."', email ='".$data['email']."', modificationDate = NOW() WHERE id = ".$id;
+        $sql = "UPDATE user SET name = '".$data['name']."', email ='".$data['email']."', modificationDate = NOW() WHERE id = ".$id;
         echo $sql;
         return $this->con->exec($sql);
 

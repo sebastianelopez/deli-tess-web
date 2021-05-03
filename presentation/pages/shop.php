@@ -1,7 +1,8 @@
 <!DOCTYPE php>
 <html lang="en">
 
-<?php include_once('../includes/head.php');
+<?php include_once('../includes/head.php');	  
+
  ?> 
 
 	<body class="goto-here">
@@ -30,6 +31,8 @@
 							<li> Filtro por categoria </li>
 							<li><a href="shop.php?categoria=&"></span>Todos</a></li>
 							<?php 
+
+								
 							/*
 
 							$datos = file_get_contents('../../admin/productos.json');
@@ -73,7 +76,8 @@
 				<div class="row justify-content-center">
 				 
 				<?php 
-				 $datos = file_get_contents('../../admin/productos.json');
+							
+				 /*$datos = file_get_contents('../../admin/productos.json');
 				 $datosJson=json_decode($datos,true);
 				error_reporting(E_ALL ^ E_NOTICE); 
 				foreach ($datosJson as $prod) {
@@ -90,20 +94,22 @@
 								$imprimir = false;
 							}
 						}
-						if ($imprimir) {
+						if ($imprimir) { */
+							$ProductB = new ProductBusiness($con);
+							foreach($ProductB->getProducts($_GET) as $product){
 				?>
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="product">
 									
-									<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $prod['imagen'] ?>" alt="imagen">
+									<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $product->getImageUrl() ?>" alt="imagen">
 										<div class="overlay"></div>
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">
-										<h3><a href="#"><?php echo $prod['nombre'] ?></a></h3>
+										<h3><a href="#"><?php echo $product-> getName() ?></a></h3>
 										<div class="d-flex">
-											<p class="text-left"><?php echo $prod['descripcion'] ?></p>
+											<p class="text-left"><?php echo $product-> getDescription() ?></p>
 											<div class="pricing">
-												<p class="price"><span class="price-sale"><?php echo $prod['precio'] ?></span></p>
+												<p class="price"><span class="price-sale"><?php echo $product-> getPrice() ?></span></p>
 											</div>
 										</div>
 										<div class="bottom-area d-flex px-3">
@@ -121,9 +127,11 @@
 							</div>
 
 
-				<?php }
+				<?php 
+							}
+				/*}
 					}
-				} ?>
+				}*/ ?>
 				</div>
 
 		</section>

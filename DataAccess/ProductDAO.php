@@ -8,64 +8,57 @@ require_once(__DIR__.'/../Models/ProductEntity.php');
 
 class ProductDAO extends DAO{
 
-    protected $UserDao;
-    protected $CategoryDao;
+    protected $CategoryDAO;
+    protected $RestaurantDAO;
 
     function __construct($con)
     {
         parent::__construct($con);
         $this->table = 'product';
-        $this->RestaurantDao= new RestaurantDAO($con);
-        $this->CategoryDao = new CategoryDAO($con);
+        $this->RestaurantDAO= new RestaurantDAO($con);
+        $this->CategoryDAO = new CategoryDAO($con);
     }
 
     public function getOne($id){
-        $sql = "SELECT id,
-        creationDate,
-        modificationDate,
-        name,
-        price,
-        imageUrl,
-        description, 
-        category, 
-        restaurant 
-        FROM $this->table 
-        WHERE id = $id";
-        $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetch();
-        $resultado->setRestaurant($this->RestaurantDAO->getOne($resultado->getName()));
-        $resultado->setCategory($this->CategoryDao->getOne($resultado->getCategory()));
+        $sql = "SELECT id, creationDate, modificationDate, name, price, imageUrl,description, idCategory, idRestaurant FROM $this->table WHERE id = $id";
+        $result = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetch();
         
-        return $resultado;
+        $result->setRestaurant($this->RestaurantDAO->getOne($result->getRestaurant()));
+        $result->setCategory($this->CategoryDAO->getOne($result->getCategory()));
+        
+        return $result;
 
     }
 
     public function getAll($where = array()){
 
         $sqlWhereStr = ' WHERE 1=1 ';
-        if(!empty($where['autor'])){
-            $sqlWhereStr.= ' AND autor = '.$where['autor'];
+        if(!empty($where['idRestaurant'])){
+            $sqlWhereStr.= ' AND idRestaurant = '.$where['idRestaurant'];
         }
-        if(!empty($where['cat'])){
-            $sqlWhereStr .= ' AND categoria = '.$where['cat'];
+        if(!empty($where['idCategory'])){
+            $sqlWhereStr .= ' AND idCategory = '.$where['idCategory'];
         }
 
         $sql = "SELECT  id,
-                        fechaCreacion,
-                        fechaModificacion,
-                        titulo,
-                        entrada,
-                        autor,
-                        categoria 
+                        creationDate,
+                        modificationDate,
+                        name,
+                        price,
+                        imageUrl,
+                        description,
+                        idCategory,
+                        idRestaurant 
                 FROM $this->table".$sqlWhereStr;
 
-        $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'PostEntity')->fetchAll();
+        $result = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetchAll();
 
-        foreach($resultado as $index=>$res){
-            $resultado[$index]->setAutor($this->UserDao->getOne($res->getAutor()));
-            $resultado[$index]->setCategoria($this->CategoryDao->getOne($res->getCategoria()));
+        foreach($result as $index=>$res){
+            $result[$index]->setRestaurant($this->RestaurantDAO->getOne($res->getRestaurant()));
+            $result[$index]->setCategory($this->CategoryDAO->getOne($res->getCategory()));
         }
 
-        return $resultado;
+        return $result;
 
     }
 

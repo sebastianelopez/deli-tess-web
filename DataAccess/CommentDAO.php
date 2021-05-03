@@ -14,15 +14,15 @@ class CommentDAO extends DAO{
 
     public function getOne($id){
         $sql = "SELECT id,creationDate,modificationDate,comment,rank,product FROM $this->table WHERE id = $id";
-        $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'CommentEntity')->fetch();
-        return $resultado;
+        $result = $this->con->query($sql,PDO::FETCH_CLASS,'CommentEntity')->fetch();
+        return $result;
 
     }
 
     public function getAll($where = array()){
         $sql = "SELECT id,creationDate,modificationDate,comment,rank,product  FROM $this->table";
-        $resultado = $this->con->query($sql,PDO::FETCH_CLASS,'CommentEntity')->fetchAll();
-        return $resultado;
+        $result = $this->con->query($sql,PDO::FETCH_CLASS,'CommentEntity')->fetchAll();
+        return $result;
     }
 }
 
