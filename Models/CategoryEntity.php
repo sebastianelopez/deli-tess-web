@@ -1,10 +1,10 @@
 <?php
 
-require_once ('BaseEntity.php');
+require_once (__DIR__.'/BaseEntity.php');
 
 class CategoryEntity extends BaseEntity
 {
- 
+    
     private $name;
     
 

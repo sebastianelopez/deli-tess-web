@@ -1,6 +1,6 @@
 <?php
 
-require_once('DAO.php');
+require_once(__DIR__.'/DAO.php');
 require_once(__DIR__.'/../Models/RestaurantEntity.php');
 
 class RestaurantDAO extends DAO{
@@ -15,6 +15,7 @@ class RestaurantDAO extends DAO{
     public function getOne($id){
         $sql = "SELECT id, name FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'RestaurantEntity')->fetch();
+        
         return $result;
 
     }

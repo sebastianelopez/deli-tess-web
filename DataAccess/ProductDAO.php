@@ -1,9 +1,9 @@
 <?php
 
-require_once('DAO.php');
-require_once('CategoryDAO.php');
-require_once('RestaurantDAO.php');
-require_once('UserDAO.php');
+require_once(__DIR__.'/DAO.php');
+require_once(__DIR__.'/CategoryDAO.php');
+require_once(__DIR__.'/RestaurantDAO.php');
+require_once(__DIR__.'/UserDAO.php');
 require_once(__DIR__.'/../Models/ProductEntity.php');
 
 class ProductDAO extends DAO{
@@ -20,7 +20,7 @@ class ProductDAO extends DAO{
     }
 
     public function getOne($id){
-        $sql = "SELECT id, creationDate, modificationDate, name, price, imageUrl,description, idCategory, idRestaurant FROM $this->table WHERE id = $id";
+        $sql = "SELECT id, name, price, imageUrl,description, idCategory, idRestaurant FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetch();
         
         $result->setRestaurant($this->RestaurantDAO->getOne($result->getRestaurant()));
@@ -40,17 +40,10 @@ class ProductDAO extends DAO{
             $sqlWhereStr .= ' AND idCategory = '.$where['idCategory'];
         }
 
-        $sql = "SELECT  id,
-                        creationDate,
-                        modificationDate,
-                        name,
-                        price,
-                        imageUrl,
-                        description,
-                        idCategory,
-                        idRestaurant 
+        $sql = "SELECT  
+                id, name, price, imageUrl, description, idCategory, idRestaurant
                 FROM $this->table".$sqlWhereStr;
-
+        
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetchAll();
 
         foreach($result as $index=>$res){

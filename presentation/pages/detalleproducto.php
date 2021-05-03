@@ -1,11 +1,11 @@
 <!DOCTYPE php>
 <html lang="en">
 
-<?php include_once('includes/head.php'); ?> 
+<?php include_once('../includes/head.php'); ?> 
 
 	<body class="goto-here">
-		<?php include_once('includes/barritadearriba.php'); ?>
-		<?php include_once('includes/menu.php'); ?>
+		<?php include_once('../includes/barritadearriba.php'); ?>
+		<?php include_once('../includes/menu.php'); ?>
 
 		<!-- END nav -->
 
@@ -24,25 +24,23 @@
 			<div class="container">				
 				<div class="row justify-content-center">			 
 									 <?php
-									 	 										
-										//obtengo archivo
-										$datos = file_get_contents('admin/productos.json');
-										//lo convierto en array
-										$productos=json_decode($datos,true);									
+									 	$ProductB = new ProductBusiness($con);
+
+										$product=$ProductB->getProduct($_GET['id']);										 									
 										
 											
 										?>	
 											<div class="col-md-6 col-lg-3 ftco-animate">
 												<div class="product">									
-													<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $productos[$_GET['detalle']]['imagen'] ?>" alt="imagen">
+													<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $product->getImageUrl() ?>" alt="imagen">
 														<div class="overlay"></div>
 													</a>
 													<div class="text py-3 pb-4 px-3 text-center">																	
-														<h3><a href="#"><?php echo $productos[$_GET['detalle']]['nombre'] ?></a></h3>
+														<h3><a href="#"><?php echo $product->getName() ?></a></h3>
 														<div class="d-flex">
-															<p class="text-left"><?php echo $productos[$_GET['detalle']]['descripcion'] ?></p>
+															<p class="text-left"><?php echo $product->getDescription() ?></p>
 															<div class="pricing">
-																<p class="price"><span class="price-sale"><?php $productos[$_GET['detalle']]['precio'] ?></span></p>
+																<p class="price"><span class="price-sale"><?php echo $product->getPrice() ?></span></p>
 															</div>
 														</div>
 														<div class="bottom-area d-flex px-3">
@@ -62,8 +60,10 @@
 			<div class="container">				
 				<div class="row justify-content-center"> 
 							<?php 
-                            include_once('funcs.php');
+                            include_once('./funcs.php');
 							
+
+							$CommentB = new CommentBusiness($con);
 							$datos = file_get_contents('com.json');
                             //lo convierto en array
                             $datosJson=json_decode($datos,true);                            

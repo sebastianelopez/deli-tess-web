@@ -1,6 +1,6 @@
 <?php
 
-require_once('DAO.php');
+require_once(__DIR__.'/DAO.php');
 require_once(__DIR__.'/../Models/CategoryEntity.php');
 
 class CategoryDAO extends DAO{

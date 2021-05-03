@@ -1,6 +1,6 @@
 <?php
 
-require_once ('BaseEntity.php');
+require_once (__DIR__.'/BaseEntity.php');
 
 class CommentEntity extends BaseEntity
 {
@@ -8,8 +8,9 @@ class CommentEntity extends BaseEntity
     private $user;    
     private $email; 
     private $comment;
-    private $scorage;
-    private $product;
+    private $creationDate;
+    private $rank;
+    private $Product_id;
 
     public function __construct()
     {
@@ -23,11 +24,11 @@ class CommentEntity extends BaseEntity
     }
     public function getScorage()
     {
-        return $this->scorage;
+        return $this->rank;
     }
     public function getProduct()
     {
-        return $this->product;
+        return $this->Product_id;
     }
     
     public function getEmail()
@@ -38,19 +39,23 @@ class CommentEntity extends BaseEntity
     {
         return $this->user;
     } 
+    public function getCreationDate()
+    {
+        return $this->creationDate;
+    }
 
     
     public function setComment($comment)
     {
         $this->comment = $comment;
     }
-    public function setScorage($scorage)
+    public function setScorage($rank)
     {
-        $this->scorage = $scorage;
+        $this->rank = $rank;
     }
-    public function setPost($product)
+    public function setPost($Product_id)
     {
-        $this->product = $product;
+        $this->Product_id = $Product_id;
     }
     
     public function setEmail($email)
@@ -60,5 +65,9 @@ class CommentEntity extends BaseEntity
     public function setUser($user)
     {
         $this->user = $user;
+    }
+    public function setCreationDate($creationDate)
+    {
+        $this->creationDate = $creationDate;
     }
 }

@@ -1,26 +1,26 @@
 <?php
 
-require_once ('BaseEntity.php');
-require_once ('CategoryEntity.php');
-require_once ('RestaurantEntity.php');
+require_once (__DIR__.'/BaseEntity.php');
+require_once (__DIR__.'/CategoryEntity.php');
+require_once (__DIR__.'/RestaurantEntity.php');
 
 class ProductEntity extends BaseEntity
 {
     
     private $name;
     private $price;
-    private $comments;
+    private $comment;
     private $imageUrl;
     private $description;
-    private $category;
-    private $restaurant;
+    private $idCategory;
+    private $idRestaurant;
     
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->comments = array();
+        $this->comment = array();
     }
 
      
@@ -38,15 +38,15 @@ class ProductEntity extends BaseEntity
     }
     public function getRestaurant()
     {
-        return $this->restaurant;
+        return $this->idRestaurant;
     }
     public function getCategory()
     {
-        return $this->category;
+        return $this->idCategory;
     }
     public function getComments()
     {
-        return $this->comments;
+        return $this->comment;
     }
     public function getDescription()
     {
@@ -67,17 +67,17 @@ class ProductEntity extends BaseEntity
     {
         $this->imageUrl = $imageUrl;
     }
-    public function setRestaurant($restaurant)
+    public function setRestaurant($idRestaurant)
     {
-        $this->restaurant = $restaurant;
+        $this->idRestaurant = $idRestaurant;
     }
-    public function setCategory($category)
+    public function setCategory($idCategory)
     {
-        $this->category = $category;
+        $this->idCategory = $idCategory;
     }
-    public function setComments($comments)
+    public function setComments($comment)
     {
-        $this->comments = $comments;
+        $this->comment = $comment;
     }
     public function setDescription($description)
     {

@@ -11,7 +11,8 @@ class ProductBusiness{
     }
 
     public function getProducts($data = array()){
-        $products = $this->ProductDAO->getAll($data); 
+        $products = $this->ProductDAO->getAll($data);       
+        
 
         return $products;
     }

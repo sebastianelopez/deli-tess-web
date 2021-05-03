@@ -1,8 +1,11 @@
 <head>
   <?php 
   include_once('../includes/titulo.php');
-  include_once('../../Bussiness/ProductBusiness.php');
-  include('../../Helpers/conecction.php');
+  require_once(__DIR__.'/../../Bussiness/ProductBusiness.php');
+  require_once(__DIR__.'/../../Bussiness/CategoryBusiness.php');
+  require_once(__DIR__.'/../../Bussiness/RestaurantBusiness.php');
+  require_once(__DIR__.'/../../Bussiness/UserBusiness.php');
+  require_once(__DIR__.'/../../Helpers/conecction.php');
   
   ?>
     <meta charset="utf-8">

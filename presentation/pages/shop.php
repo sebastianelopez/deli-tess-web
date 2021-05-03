@@ -32,6 +32,10 @@
 							<li><a href="shop.php?categoria=&"></span>Todos</a></li>
 							<?php 
 
+							$CategoryB = new CategoryBusiness($con);
+							$RestaurantB = new RestaurantBusiness($con);
+
+							//foreach($CategoryB as $Category){
 								
 							/*
 
@@ -49,11 +53,11 @@
 								}
 																
 							}
-							
-							foreach ($categorias as $cat) {
+							*/
+							foreach ($CategoryB->getCategories() as $category) {
 							?>
-								<li><a href="shop.php?categoria=<?php echo $cat ?>&restaurante=<?php echo isset($_GET['restaurante'])?$_GET['restaurante']:''?>"><?php echo $cat?></a></li>
-							<?php } */?>
+								<li><a href=""><?php echo $category->getName()?></a></li>
+							<?php } ?>
 							
 						</ul>
 
@@ -61,14 +65,13 @@
 							<li> Filtro por restaurante </li>
 							<li><a href="shop.php?categoria=&"></span>Todos</a></li>
 							<?php
-							/*
+							
 
-							$datos = file_get_contents('../../admin/productos.json');
-							$datosJson=json_decode($datos,true);
-							foreach ($restaurante as $res) {
+							
+							foreach ($RestaurantB->getRestaurants() as $restaurant) {
 							?>
-								<li><a href="shop.php?restaurante=<?php echo $res ?>&categoria=<?php echo isset($_GET['categoria'])?$_GET['categoria']:''?>"><?php echo $res ?></a></li>
-								<?php } */
+								<li><a href=""><?php echo $restaurant->getName() ?></a></li>
+								<?php } 
 								?>
 						</ul>
 					</div>
@@ -96,7 +99,8 @@
 						}
 						if ($imprimir) { */
 							$ProductB = new ProductBusiness($con);
-							foreach($ProductB->getProducts($_GET) as $product){
+							
+							foreach($ProductB->getProducts() as $product){
 				?>
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="product">
@@ -114,7 +118,7 @@
 										</div>
 										<div class="bottom-area d-flex px-3">
 											<div class="m-auto d-flex">
-												<a href="detalleproducto.php?detalle=<?php echo $prod['id'] ?>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+												<a href="detalleproducto.php?detalle=<?php echo $product->getId() ?>" class="add-to-cart d-flex justify-content-center align-items-center text-center">
 													<span><i class="ion-ios-menu"></i></span>
 												</a>
 												<a href="#" class="buy-now d-flex justify-content-center align-items-center mx-1">
