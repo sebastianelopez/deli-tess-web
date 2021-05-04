@@ -34,7 +34,6 @@
     <?php include_once('includes/sidebar.php'); 
     
     function pathUrl($dir = __DIR__){
-
       $root = "";
       $dir = str_replace('\\', '/', realpath($dir));
     
