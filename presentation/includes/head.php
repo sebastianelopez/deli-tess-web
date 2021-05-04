@@ -4,6 +4,7 @@
   require_once(__DIR__.'/../../Bussiness/ProductBusiness.php');
   require_once(__DIR__.'/../../Bussiness/CategoryBusiness.php');
   require_once(__DIR__.'/../../Bussiness/RestaurantBusiness.php');
+  require_once(__DIR__.'/../../Bussiness/CommentBusiness.php');
   require_once(__DIR__.'/../../Bussiness/UserBusiness.php');
   require_once(__DIR__.'/../../Helpers/conecction.php');
   

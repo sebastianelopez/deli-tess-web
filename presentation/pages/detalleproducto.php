@@ -86,21 +86,28 @@
 						<div class="modal-content px-5 py-3">							
 						      
 						
-							Comentarios:<?php 
+							<p class="h5">Comentarios:</p>
+							
+							<?php 
 											
 											$ProductB = new ProductBusiness($con);							
-											 
-											foreach($product->getComments() as $comment){
-												if($comment->getProduct() ==$_GET['detalle']){
+											$CommentB = new CommentBusiness($con);
+
+																						
+											foreach($CommentB->getComments() as $comment){
+												if($comment->getProduct() == $_GET['detalle']){											
+											
+												
 										?>
-										<p class="my-2"><?php echo $comment->getId()?>
-										 <?php echo $comment['nombre']?>: 
+										<p class="my-2">
+										 <?php echo $comment->getCreationDate()?><br />
+										 <b><?php echo $comment->getUser() ?></b>: 
 										 <?php echo $comment->getComment()?></p><br />
-										 <?php echo $comment->getCreationDate()?></p><br />											 
+										 </p><br />											 
 										 <?php 
 												}
-											}
-										?>
+											}										 
+										 ?>
 						<form action="" method="post" enctype="multipart/form-data">			
 							Nombre:<br><input class="my-2" type="text" name="nombre" value=""><br />							
 							Mensaje:<br><input class="my-2" type="text" name="mensaje" value=""><br />

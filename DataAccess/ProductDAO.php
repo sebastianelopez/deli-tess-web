@@ -50,7 +50,7 @@ class ProductDAO extends DAO{
             $result[$index]->setRestaurant($this->RestaurantDAO->getOne($res->getRestaurant()));
             $result[$index]->setCategory($this->CategoryDAO->getOne($res->getCategory()));
         }
-
+        
         return $result;
 
     }
