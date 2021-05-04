@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-05-2021 a las 00:03:33
--- Versión del servidor: 10.4.13-MariaDB
--- Versión de PHP: 7.4.8
+-- Tiempo de generación: 04-05-2021 a las 23:28:52
+-- Versión del servidor: 10.4.14-MariaDB
+-- Versión de PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,6 @@ CREATE TABLE `category` (
 --
 
 INSERT INTO `category` (`id`, `name`) VALUES
-(1, 'Todos'),
 (2, 'Pizza'),
 (3, 'Hamburguesas'),
 (4, 'Bebidas');
@@ -51,19 +50,23 @@ INSERT INTO `category` (`id`, `name`) VALUES
 CREATE TABLE `comment` (
   `id` int(11) NOT NULL,
   `creationDate` datetime NOT NULL,
-  `modificationDate` datetime NOT NULL,
   `comment` varchar(200) NOT NULL,
   `rank` int(11) DEFAULT NULL,
-  `Product_id` int(11) NOT NULL
+  `Product_id` int(11) NOT NULL,
+  `user` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `comment`
 --
 
-INSERT INTO `comment` (`id`, `creationDate`, `modificationDate`, `comment`, `rank`, `Product_id`) VALUES
-(1, '2021-05-02 15:32:21', '2021-05-02 15:32:21', 'Muy rica la pizza, lo recomiendo!', 5, 1),
-(2, '2021-05-02 15:32:21', '2021-05-02 15:32:21', 'Un espectaculo!', 5, 2);
+INSERT INTO `comment` (`id`, `creationDate`, `comment`, `rank`, `Product_id`, `user`) VALUES
+(1, '2021-05-02 15:32:21', 'Muy rica la pizza, lo recomiendo!', 5, 1, 'Pedro'),
+(2, '2021-05-02 15:32:21', 'Un espectaculo!', 5, 2, 'Carla'),
+(3, '2021-05-04 17:36:39', 'Muy buena gaseosa', 5, 3, 'Esteban'),
+(4, '2021-05-04 17:36:39', 'Excelente pizza, recomiendo', 5, 1, 'Antonio'),
+(5, '2021-05-04 17:48:07', 'La mejor hamburguesa que probe en mi vida', 4, 2, 'Jazmin'),
+(6, '2021-05-04 17:48:51', 'Mejor que la pepsi', 4, 3, 'Anabella');
 
 -- --------------------------------------------------------
 
@@ -73,8 +76,6 @@ INSERT INTO `comment` (`id`, `creationDate`, `modificationDate`, `comment`, `ran
 
 CREATE TABLE `product` (
   `id` int(11) NOT NULL,
-  `creationDate` datetime NOT NULL,
-  `modificationDate` datetime NOT NULL,
   `name` varchar(45) NOT NULL,
   `price` varchar(45) NOT NULL,
   `imageUrl` varchar(100) NOT NULL,
@@ -87,10 +88,10 @@ CREATE TABLE `product` (
 -- Volcado de datos para la tabla `product`
 --
 
-INSERT INTO `product` (`id`, `creationDate`, `modificationDate`, `name`, `price`, `imageUrl`, `description`, `idCategory`, `idRestaurant`) VALUES
-(1, '2021-05-02 15:10:11', '2021-05-02 15:10:11', 'Lincoln XXL', '$960', './dbimg/pizzamuzzarela.jpg', 'Mozzarella(con sasa de tomate hells)', 2, 1),
-(2, '2021-05-02 15:20:21', '2021-05-02 15:20:21', 'Burger doble', '$650', './dbimg/hamburguesa-clasica.jpg', '2 carnes 120g, queso cheddar, panceta y huevo, con papas fritas', 3, 2),
-(3, '2021-05-03 15:20:21', '2021-05-03 15:20:21', 'Coca Cola 500ml', '$60', './dbimg/cocacola.jpg', 'Bebida cola de 500ml', 4, 3);
+INSERT INTO `product` (`id`, `name`, `price`, `imageUrl`, `description`, `idCategory`, `idRestaurant`) VALUES
+(1, 'Lincoln XXL', '$960', 'https://res.cloudinary.com/ddkrzcc2w/image/upload/v1620085601/pizzamuzzarela_ogbk13.jpg', 'Mozzarella(con sasa de tomate hells)', 2, 1),
+(2, 'Burger doble', '$650', 'https://res.cloudinary.com/ddkrzcc2w/image/upload/v1620085608/hamburguesa-clasica_gvn6b1.jpg', '2 carnes 120g, queso cheddar, panceta y huevo, con papas fritas', 3, 2),
+(3, 'Coca Cola 500ml', '$60', 'https://res.cloudinary.com/ddkrzcc2w/image/upload/v1620085613/cocacola_ekm7ya.jpg', 'Bebida cola de 500ml', 4, 3);
 
 -- --------------------------------------------------------
 
@@ -108,9 +109,9 @@ CREATE TABLE `restaurant` (
 --
 
 INSERT INTO `restaurant` (`id`, `name`) VALUES
-(1, 'Hells Pizza'),
-(2, 'Birra Bar'),
-(3, 'Full Escabio');
+(1, 'HellsPizza'),
+(2, 'BirraBar'),
+(3, 'FullEscabio');
 
 -- --------------------------------------------------------
 
