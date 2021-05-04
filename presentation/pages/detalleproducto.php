@@ -9,7 +9,7 @@
 
 		<!-- END nav -->
 
-		<div class="hero-wrap hero-bread" style="background-image: url('images/bg_hamburguesa.jpg');">
+		<div class="hero-wrap hero-bread" style="background-image: url('../images/bg_hamburguesa.jpg');">
 			<div class="container">
 				<div class="row no-gutters slider-text align-items-center justify-content-center">
 					<div class="col-md-9 ftco-animate text-center">
@@ -26,7 +26,7 @@
 									 <?php
 									 	$ProductB = new ProductBusiness($con);
 
-										$product=$ProductB->getProduct($_GET['id']);										 									
+										$product=$ProductB->getProduct($_GET['detalle']);										 									
 										
 											
 										?>	
@@ -63,8 +63,8 @@
                             include_once('./funcs.php');
 							
 
-							$CommentB = new CommentBusiness($con);
-							$datos = file_get_contents('com.json');
+							//$CommentB = new CommentBusiness($con);
+							/*$datos = file_get_contents('com.json');
                             //lo convierto en array
                             $datosJson=json_decode($datos,true);                            
                                 if(isset($_POST['detalle'])){                        
@@ -80,26 +80,25 @@
                                     //guardo
                                     fwrite($fp,$datosString);
                                     fclose($fp);                                    
-                                }
+                                }*/
                          ?>	
 
 						<div class="modal-content px-5 py-3">							
 						      
 						
-							Comentarios:<?php
-											$datos = file_get_contents('com.json');
-											//lo convierto en array
-											$datosJson=json_decode($datos,true);
-											rsort($datosJson);
+							Comentarios:<?php 
+											
+											$ProductB = new ProductBusiness($con);							
 											 
-											foreach($datosJson as $com){
-														if($com['idproducto']==$_GET['detalle']){			
+											foreach($product->getComments() as $comment){
+												if($comment->getProduct() ==$_GET['detalle']){
 										?>
-										<p class="my-2"><?php echo $com['id']?>
-										 <?php echo $com['nombre']?>: 
-										 <?php echo $com['mensaje']?></p><br />										 
+										<p class="my-2"><?php echo $comment->getId()?>
+										 <?php echo $comment['nombre']?>: 
+										 <?php echo $comment->getComment()?></p><br />
+										 <?php echo $comment->getCreationDate()?></p><br />											 
 										 <?php 
-														}
+												}
 											}
 										?>
 						<form action="" method="post" enctype="multipart/form-data">			
@@ -115,7 +114,7 @@
 				 
 		
 
-		<?php include_once('includes/footer.php'); ?>
+		<?php include_once('../includes/footer.php'); ?>
 
 
 
@@ -125,22 +124,22 @@
 				<circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg></div>
 
 
-		<script src="js/jquery.min.js"></script>
-		<script src="js/jquery-migrate-3.0.1.min.js"></script>
-		<script src="js/popper.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/jquery.easing.1.3.js"></script>
-		<script src="js/jquery.waypoints.min.js"></script>
-		<script src="js/jquery.stellar.min.js"></script>
-		<script src="js/owl.carousel.min.js"></script>
-		<script src="js/jquery.magnific-popup.min.js"></script>
-		<script src="js/aos.js"></script>
-		<script src="js/jquery.animateNumber.min.js"></script>
-		<script src="js/bootstrap-datepicker.js"></script>
-		<script src="js/scrollax.min.js"></script>
+		<script src="../js/jquery.min.js"></script>
+		<script src="../js/jquery-migrate-3.0.1.min.js"></script>
+		<script src="../js/popper.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/jquery.easing.1.3.js"></script>
+		<script src="../js/jquery.waypoints.min.js"></script>
+		<script src="../js/jquery.stellar.min.js"></script>
+		<script src="../js/owl.carousel.min.js"></script>
+		<script src="../js/jquery.magnific-popup.min.js"></script>
+		<script src="../js/aos.js"></script>
+		<script src="../js/jquery.animateNumber.min.js"></script>
+		<script src="../js/bootstrap-datepicker.js"></script>
+		<script src="../js/scrollax.min.js"></script>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-		<script src="js/google-map.js"></script>
-		<script src="js/main.js"></script>
+		<script src="../js/google-map.js"></script>
+		<script src="../js/main.js"></script>
 
 	</body>
 </html>

@@ -33,11 +33,11 @@ class ProductDAO extends DAO{
     public function getAll($where = array()){
 
         $sqlWhereStr = ' WHERE 1=1 ';
-        if(!empty($where['idRestaurant'])){
-            $sqlWhereStr.= ' AND idRestaurant = '.$where['idRestaurant'];
+        if(!empty($where['restaurante'])){
+            $sqlWhereStr.= ' AND idRestaurant = '.$where['restaurante'];
         }
-        if(!empty($where['idCategory'])){
-            $sqlWhereStr .= ' AND idCategory = '.$where['idCategory'];
+        if(!empty($where['categoria'])){
+            $sqlWhereStr .= ' AND idCategory = '.$where['categoria'];
         }
 
         $sql = "SELECT  

@@ -34,29 +34,22 @@
 
 							$CategoryB = new CategoryBusiness($con);
 							$RestaurantB = new RestaurantBusiness($con);
+							$ProductB = new ProductBusiness($con);
 
-							//foreach($CategoryB as $Category){
-								
-							/*
+							
+							
 
-							$datos = file_get_contents('../../admin/productos.json');
-							$datosJson=json_decode($datos,true);
-							$categorias=[];
-							$restaurante=[];
-							foreach ($datosJson as $producto) {
+							
+							
+							foreach ($ProductB->getProducts($_GET) as $producto) {
 								
-								if(!in_array($producto['categoria'],$categorias)){
-									$categorias[]=$producto['categoria'];
-								}
-								if(!in_array($producto['restaurante'],$restaurante)){
-									$restaurante[]=$producto['restaurante'];
-								}
+								
 																
 							}
-							*/
+							
 							foreach ($CategoryB->getCategories() as $category) {
 							?>
-								<li><a href=""><?php echo $category->getName()?></a></li>
+								<li><a href="shop.php?categoria=<?php echo $category->getId() ?>&restaurante=<?php echo isset($_GET['restaurante'])?$_GET['restaurante']:''?>"><?php echo $category->getName()?></a></li>
 							<?php } ?>
 							
 						</ul>
@@ -70,7 +63,7 @@
 							
 							foreach ($RestaurantB->getRestaurants() as $restaurant) {
 							?>
-								<li><a href=""><?php echo $restaurant->getName() ?></a></li>
+								<li><a href="shop.php?restaurante=<?php echo $restaurant->getId() ?>&categoria=<?php echo isset($_GET['categoria'])?$_GET['categoria']:''?>"><?php echo $restaurant->getName() ?></a></li>
 								<?php } 
 								?>
 						</ul>
@@ -80,27 +73,11 @@
 				 
 				<?php 
 							
-				 /*$datos = file_get_contents('../../admin/productos.json');
-				 $datosJson=json_decode($datos,true);
+				 
 				error_reporting(E_ALL ^ E_NOTICE); 
-				foreach ($datosJson as $prod) {
-					if ($prod['activo'] == true) {
-						$imprimir = true;
-						
-						if (!empty($_GET['categoria'])) {
-							if ($prod['categoria'] != $_GET['categoria']) {
-								$imprimir = false;
-							}
-						}
-						if (!empty($_GET['restaurante'])) {
-							if ($prod['restaurante'] != $_GET['restaurante']) {
-								$imprimir = false;
-							}
-						}
-						if ($imprimir) { */
-							$ProductB = new ProductBusiness($con);
+				foreach ($ProductB->getProducts($_GET) as $product) {					
+																			
 							
-							foreach($ProductB->getProducts() as $product){
 				?>
 							<div class="col-md-6 col-lg-3 ftco-animate">
 								<div class="product">
@@ -133,9 +110,9 @@
 
 				<?php 
 							}
-				/*}
-					}
-				}*/ ?>
+				
+					
+				 ?>
 				</div>
 
 		</section>
