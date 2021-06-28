@@ -10,23 +10,11 @@ class ProductBusiness{
         $this->ProductDAO = new ProductDAO($con);
     }
 
-    function saveProduct($datos){ 
-        return $this->PostDao->save($datos);
-    }
-
-    function modifyProduct($id, $datos){
-        $this->PostDao->modify($id, $datos);
-    }
-
-    public function deleteProduct($id){
-        $this->PostDao->delete($id); 
-
-    }    
+     
 
     public function getProducts($data = array()){
         $products = $this->ProductDAO->getAll($data);       
         
-
         return $products;
     }
 
@@ -34,6 +22,22 @@ class ProductBusiness{
         $product = $this->ProductDAO->getOne($id); 
 
         return $product;
+    }
+
+    public function addNewProduct($data){
+       return $this->ProductDAO->save($data);
+    }
+
+    public function modifyProduct($id, $data){
+        $this -> ProductDAO -> modify($id, $data);
+    }
+
+    public function deleteProduct($id){
+        $this -> ProductDAO -> delete($id);
+    }
+
+    public function saveImage(){
+        //TODO Evaular implementacion del metodo
     }
 
 

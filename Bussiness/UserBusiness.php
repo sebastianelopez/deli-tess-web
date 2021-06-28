@@ -16,4 +16,17 @@ class UserBusiness{
         return $users;
     }
 
+    public function createNewUser($data){
+        $this -> UserDAO -> save($data);
+    }
+
+    public function modifyUser($data, $id){
+        $this -> UserDAO -> modify($id, $data);
+    }
+
+
+    public function deleteUser($id){
+        $this -> UserDAO -> delete($id);
+    }
+
 }

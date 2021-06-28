@@ -33,7 +33,6 @@ class ProductDAO extends DAO{
     
 
     public function getAll($where = array()){
-
         $sqlWhereStr = ' WHERE 1=1 ';
         if(!empty($where['restaurante'])){
             $sqlWhereStr.= ' AND idRestaurant = '.$where['restaurante'];
@@ -58,40 +57,21 @@ class ProductDAO extends DAO{
     }
 
     public function save($data = array()){
-        $products = $data['product'];
-        unset($data['product']);
-        $save = parent::save($data);
-        $productId = $this->con->lastInsertId();
-        $sql = '';
-        foreach($products as $product){
-            $sql .= 'INSERT INTO product VALUES ('.$productId.','.$product.');'; 
-        }
-        $this->con->exec($sql);
- 
-        return $productId;
+        $sql = "INSERT INTO product(description,imageUrl,name,price) VALUES ('".$data['name']."','".$data['imageUrl']."'), '".$data['description']."'), '".$data['price']."'), creationDate = NOW()";
+        return $this->con->exec($sql);
     }
+
 
     public function modify($id, $data = array()){
-        $products = $data['product'];
-        unset($data['product']);
-        $save = parent::modify($id, $data ); 
-        $sql = 'DELETE FROM product WHERE id = '.$id.';';
-        foreach($products as $product){
-            $sql .= 'INSERT INTO product VALUES ('.$id.','.$product.');'; 
-        }
-        $this->con->exec($sql);
-        return $id;
-        
+        $sql = "UPDATE product SET name = '".$data['name']."', description = '".$data['description']."', imageUrl = '".$data['imageUrl']."', price ='".$data['price']."', modificationDate = NOW() WHERE id = ".$id;
+        echo $sql;
+        return $this->con->exec($sql);
     }
 
-    
     public function delete($id){
-        
-        $sql = 'DELETE FROM product WHERE id = '.$id.';';
-        $this->con->exec($sql);
-        return parent::delete($id);
+        $sql = "DELETE FROM $this->table WHERE id = $id";
+        return $this->con->exec($sql);
     }
-    
 }
 
 ?>
