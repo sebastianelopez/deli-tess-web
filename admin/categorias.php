@@ -1,11 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<?php include_once('../presentation/includes/head.php');	?>
 <?php session_start();
 
 include('funcs.php');
 
+$UserB = new UserBusiness($con);
+
+foreach ($UserB->getUsers() as $user) {
 if (isset($_POST['login'])) {
-  if ($_POST['pass'] == 'davinci' && $_POST['user'] == 'admin') {
+  if ($_POST['pass'] == $user->getPassword() && $_POST['mail'] == $user->getEmail()) {
     $_SESSION['usuario_logueado'] = true;
   }
+}
 }
 
 if (isset($_GET['logout'])) {
@@ -18,9 +25,6 @@ if(!isset($_SESSION['usuario_logueado'])){
 
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
 
 <head>
 

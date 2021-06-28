@@ -7,20 +7,28 @@ include('funcs.php');
 
 $UserB = new UserBusiness($con);
 
-foreach ($UserB->getUsers() as $user) {
-if (isset($_POST['login'])) {
-  if ($_POST['pass'] == $user->getPassword() && $_POST['mail'] == $user->getEmail()) {
-    $_SESSION['usuario_logueado'] = true;
+  if (isset($_POST['login'])) {    
+    foreach ($UserB->getUsers() as $user) {
+      if ($_POST['pass'] ==  $user->getPassword() && $_POST['user'] === $user->getEmail()) {
+        if($user->getPermissionLevel() == 1){
+          $_SESSION['admin_logueado'] = true;
+        }else{
+          $_SESSION['usuario_logueado'] = true; 
+        }        
+      }
   }
-}
 }
 
 if (isset($_GET['logout'])) {
-  unset($_SESSION['usuario_logueado']);
+  unset($_SESSION['admin_logueado']);
 }
 
-if(!isset($_SESSION['usuario_logueado'])){
+if(!isset($_SESSION['admin_logueado'])){
   redirect('login.php');
+}
+
+if(isset($_SESSION['usuario_logueado'])){
+  redirect('../presentation/pages/index.php');
 }
 
 

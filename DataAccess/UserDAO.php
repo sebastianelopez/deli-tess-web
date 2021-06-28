@@ -12,14 +12,14 @@ class UserDAO extends DAO{
     }
 
     public function getOne($id){
-        $sql = "SELECT id, name,email,permissionLevel FROM $this->table WHERE id = $id";
+        $sql = "SELECT id, name,email,permissionLevel, password, isLogged FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'UserEntity')->fetch();
         return $result;
 
     }
 
     public function getAll($where = array()){
-        $sql = "SELECT id, name,email,permissionLevel FROM $this->table";
+        $sql = "SELECT id, name,email,permissionLevel, password, isLogged FROM $this->table";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'UserEntity')->fetchAll();
         return $result;
     }

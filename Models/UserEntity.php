@@ -9,6 +9,7 @@ class UserEntity extends BaseEntity
     private $email;
     private $permissionLevel; 
     private $password;
+    private $isLogged;
 
     public function __construct()
     { 
@@ -22,6 +23,10 @@ class UserEntity extends BaseEntity
     public function getEmail()
     {
         return $this->email;
+    }
+    public function getIsLogged()
+    {
+        return $this->isLogged;
     }
     public function getPermissionLevel()
     {
@@ -39,6 +44,10 @@ class UserEntity extends BaseEntity
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+    public function setIsLogged($isLogged)
+    {
+        $this->isLogged = $isLogged;
     }
     public function setPermissionLevel($permissionLevel)
     {
