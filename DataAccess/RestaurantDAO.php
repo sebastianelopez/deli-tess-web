@@ -17,7 +17,6 @@ class RestaurantDAO extends DAO{
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'RestaurantEntity')->fetch();
         
         return $result;
-
     }
 
     public function getAll($where = array()){
@@ -25,6 +24,25 @@ class RestaurantDAO extends DAO{
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'RestaurantEntity')->fetchAll();
         return $result;
     }
+
+
+    public function save($data = array()){
+        $sql = "INSERT INTO user(name) VALUES ('".$data['name']."')";
+        return $this->con->exec($sql);
+    }
+
+
+    public function modify($id, $data = array()){
+        $sql = "UPDATE user SET name = '".$data['name']."'";
+        echo $sql;
+        return $this->con->exec($sql);
+    }
+
+    public function delete($id){
+        $sql = "DELETE FROM $this->table WHERE id = $id";
+        return $this->con->exec($sql);
+    }
 }
+
 
 ?>
