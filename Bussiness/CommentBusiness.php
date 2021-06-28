@@ -13,7 +13,6 @@ class CommentBusiness{
     public function getComments($data = array()){
         $comments = $this->CommentDAO->getAll($data);       
         
-
         return $comments;
     }
 
@@ -21,6 +20,19 @@ class CommentBusiness{
         $comment = $this->CommentDAO->getOne($id); 
 
         return $comment;
+    }
+
+    public function createNewComment($data){
+        $this -> CommentDAO -> save($data);
+    }
+
+    public function modifyComment($data, $id){
+        $this -> CommentDAO -> modify($id, $data);
+    }
+
+
+    public function deleteComment($id){
+        $this -> CommentDAO -> delete($id);
     }
     
 

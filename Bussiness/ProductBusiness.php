@@ -13,7 +13,6 @@ class ProductBusiness{
     public function getProducts($data = array()){
         $products = $this->ProductDAO->getAll($data);       
         
-
         return $products;
     }
 
@@ -21,6 +20,22 @@ class ProductBusiness{
         $product = $this->ProductDAO->getOne($id); 
 
         return $product;
+    }
+
+    public function addNewProduct($data){
+       return $this->ProductDAO->save($data);
+    }
+
+    public function modifyProduct($id, $data){
+        $this -> ProductDAO -> modify($id, $data);
+    }
+
+    public function deleteProduct($id){
+        $this -> ProductDAO -> delete($id);
+    }
+
+    public function saveImage(){
+        //TODO Evaular implementacion del metodo
     }
 
 

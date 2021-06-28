@@ -70,7 +70,6 @@ class ProductDAO extends DAO{
         $sql = "DELETE FROM $this->table WHERE id = $id";
         return $this->con->exec($sql);
     }
-
 }
 
 ?>
