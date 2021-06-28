@@ -44,7 +44,7 @@
                   </div>
                   <form action="productos.php" method="post" class="user">
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" name="user" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
+                      <input type="text" class="form-control form-control-user" name="mail" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control form-control-user" name="pass" placeholder="Contraseña">

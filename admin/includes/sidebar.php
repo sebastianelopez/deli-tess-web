@@ -53,11 +53,17 @@
     <i class="fas fa-fw fa-table"></i>
     <span>Categorias</span></a>
 </li>
-<!-- Nav Item - Categorias -->
+<!-- Nav Item - Comentarios -->
 <li class="nav-item">
   <a class="nav-link" href="comentarios.php">
     <i class="fas fa-fw fa-table"></i>
     <span>Comentarios</span></a>
+</li>
+<!-- Nav Item - Categorias -->
+<li class="nav-item">
+  <a class="nav-link" href="users.php">
+    <i class="fas fa-fw fa-table"></i>
+    <span>Usuarios</span></a>
 </li>
 <!-- Nav Item - Salir -->
 <li class="nav-item">

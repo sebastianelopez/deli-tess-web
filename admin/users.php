@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include_once('../presentation/includes/head.php');	?>
 <?php session_start();
 
 include('funcs.php');
 
-$UserB = new UserBusiness($con);
-
-foreach ($UserB->getUsers() as $user) {
 if (isset($_POST['login'])) {
-  if ($_POST['pass'] == $user->getPassword() && $_POST['mail'] == $user->getEmail()) {
+  if ($_POST['pass'] == 'davinci' && $_POST['user'] == 'admin') {
     $_SESSION['usuario_logueado'] = true;
   }
-}
 }
 
 if (isset($_GET['logout'])) {
@@ -26,7 +19,13 @@ if(!isset($_SESSION['usuario_logueado'])){
 
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
 
+
+  <?php include_once('../presentation/includes/head.php');	?>
+
+ 
 
 <body id="page-top">
 
@@ -51,33 +50,20 @@ if(!isset($_SESSION['usuario_logueado'])){
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Productos</h1>
-          <p class="mb-4">Agregue, borre o modifique los productos publicados.</a>.</p>
+          <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
+          <p class="mb-4">Borre o modifique los usuarios.</a>.</p>
 
         <?php include_once('funcs.php'); ?>
           <!-- Productos -->
         <?php 
           if(isset($_GET['del'])){
-            //obtengo archivo
-            $datos = file_get_contents('productos.json');
-            //lo convierto en array
-            $datosJson=json_decode($datos,true);
-            //elimino
-            unset($datosJson[$_GET['del']]);
-            $fp= fopen('productos.json','w');
-            $datosString=json_encode($datosJson);
-            //guardo
-            fwrite($fp,$datosString);
-            fclose($fp);
-            redirect('productos.php');
+            
+            redirect('users.php');
           }
         ?>
 
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <a class="m-0 font-weight-bold text-primary" href="productos_add.php">+ Agregar</a>
-              
-            </div>
+            
             
             </div>
             <div class="card-body">
@@ -87,32 +73,24 @@ if(!isset($_SESSION['usuario_logueado'])){
                     <tr>
                       <th>ID</th>
                       <th>Nombre</th>
-                      <th>Descripcion</th>
-                      <th>Imagen</th>
-                      <th>Precio</th>
-                      <th>Categoria</th>
-                      <th>Restaurante</th>
-                      <th>Estado</th>
+                      <th>Email</th>
+                      <th>Rol</th>                      
                       <th>Modificar / Borrar</th>                      
                     </tr>
                   </thead>
                   <tbody> 
                       <?php                   
                         
-                        $ProductB = new ProductBusiness($con);
+                        $UserB = new UserBusiness($con);
 
-                        foreach ($ProductB->getProducts($_GET) as $product) { ?>
+                        foreach ($UserB->getUsers($_GET) as $user) { ?>
                             <tr>
-                              <td><?php echo $product->getId() ?></td>
-                              <td><?php echo $product-> getName() ?></td>
-                              <td><?php echo $product-> getDescription() ?>.</td>
-                              <td><img class="img-fluid" src="<?php echo $product->getImageUrl() ?>" alt=""></a></td>
-                              <td><?php echo $product-> getPrice() ?></td>
-                              <td><?php echo $product->getCategory()->getName() ?></td>
-                              <td><?php echo $product->getRestaurant()->getName() ?></td>
-                              <td><?php echo $product->getState() ?></td>
-                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="productos_add.php?edit=<?php echo $product->getId() ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="productos.php?del=<?php echo $product->getId() ?>">Borrar</a></td>                      
-                          <!-- productos_add.php?edit=<?php echo $product->getId() ?> -->
+                              <td><?php echo $user->getId() ?></td>
+                              <td><?php echo $user-> getName() ?></td>
+                              <td><?php echo $user-> getEmail() ?></td>
+                              <td><?php echo ($user-> getPermissionLevel() == 1) ?'ADMIN': 'USUARIO' ?></td>                              
+                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="productos_add.php?edit=<?php echo $user->getId() ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="productos.php?del=<?php echo $user->getId() ?>">Borrar</a></td>                      
+                          <!-- productos_add.php?edit=<?php echo $user->getId() ?> -->
                           </tr>   
                       <?php } ?>  
                   </tbody>
@@ -207,4 +185,3 @@ if(!isset($_SESSION['usuario_logueado'])){
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
 </html>
-

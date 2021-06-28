@@ -20,7 +20,7 @@ class ProductDAO extends DAO{
     }
 
     public function getOne($id){
-        $sql = "SELECT id, name, price, imageUrl,description, idCategory, idRestaurant FROM $this->table WHERE id = $id";
+        $sql = "SELECT id, name, price, imageUrl,description, idCategory, idRestaurant, State FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetch();
         
         $result->setRestaurant($this->RestaurantDAO->getOne($result->getRestaurant()));
@@ -29,6 +29,8 @@ class ProductDAO extends DAO{
         return $result;
 
     }
+
+    
 
     public function getAll($where = array()){
 
@@ -41,7 +43,7 @@ class ProductDAO extends DAO{
         }
 
         $sql = "SELECT  
-                id, name, price, imageUrl, description, idCategory, idRestaurant
+                id, name, price, imageUrl, description, idCategory, idRestaurant, State
                 FROM $this->table".$sqlWhereStr;
         
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetchAll();
@@ -55,6 +57,40 @@ class ProductDAO extends DAO{
 
     }
 
+    public function save($data = array()){
+        $products = $data['product'];
+        unset($data['product']);
+        $save = parent::save($data);
+        $productId = $this->con->lastInsertId();
+        $sql = '';
+        foreach($products as $product){
+            $sql .= 'INSERT INTO product VALUES ('.$productId.','.$product.');'; 
+        }
+        $this->con->exec($sql);
+ 
+        return $productId;
+    }
+
+    public function modify($id, $data = array()){
+        $products = $data['product'];
+        unset($data['product']);
+        $save = parent::modify($id, $data ); 
+        $sql = 'DELETE FROM product WHERE id = '.$id.';';
+        foreach($products as $product){
+            $sql .= 'INSERT INTO product VALUES ('.$id.','.$product.');'; 
+        }
+        $this->con->exec($sql);
+        return $id;
+        
+    }
+
+    
+    public function delete($id){
+        
+        $sql = 'DELETE FROM product WHERE id = '.$id.';';
+        $this->con->exec($sql);
+        return parent::delete($id);
+    }
     
 }
 

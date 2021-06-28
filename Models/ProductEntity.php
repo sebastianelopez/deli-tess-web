@@ -14,6 +14,7 @@ class ProductEntity extends BaseEntity
     private $description;
     private $idCategory;
     private $idRestaurant;
+    private $State;
     
 
     public function __construct()
@@ -52,6 +53,10 @@ class ProductEntity extends BaseEntity
     {
         return $this->description;
     }
+    public function getState()
+    {
+        return $this->State;
+    }
 
 
     
@@ -82,5 +87,9 @@ class ProductEntity extends BaseEntity
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+    public function setState($State)
+    {
+        $this->State = $State;
     }
 }
