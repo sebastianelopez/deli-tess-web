@@ -7,26 +7,32 @@ class CategoryBusiness{
     protected $CategoryDao;
 
     function __construct($con){
-        $this->CategoryDao = new CategoryDAO($con);
+        $this->CategoryDAO = new CategoryDAO($con);
     }
 
     public function getCategories(){
-        $categories = $this->CategoryDao->getAll(); 
+        $categories = $this->CategoryDAO->getAll(); 
 
         return $categories;
     }
 
-    public function createNewCategory($data){
-        $this -> CommentDAO -> save($data);
+    public function getCategory($id){
+        $category = $this->CategoryDAO->getOne($id); 
+
+        return $category;
     }
 
-    public function modifyCategory($data, $id){
-        $this -> CommentDAO -> modify($id, $data);
+    public function createNewCategory($data){
+        $this -> CategoryDAO -> save($data);
+    }
+
+    public function modifyCategory($id, $data){
+        $this -> CategoryDAO -> modify($id, $data);
     }
 
 
     public function deleteCategory($id){
-        $this -> CommentDAO -> delete($id);
+        $this -> CategoryDAO -> delete($id);
     }
 
 }

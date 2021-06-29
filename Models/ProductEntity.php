@@ -10,7 +10,7 @@ class ProductEntity extends BaseEntity
     private $name;
     private $price;
     private $comment;
-    private $imageUrl;
+    private $image;
     private $description;
     private $idCategory;
     private $idRestaurant;
@@ -33,9 +33,9 @@ class ProductEntity extends BaseEntity
     {
         return $this->price;
     }
-    public function getImageUrl()
+    public function getImage()
     {
-        return $this->imageUrl;
+        return $this->image;
     }
     public function getRestaurant()
     {
@@ -68,9 +68,9 @@ class ProductEntity extends BaseEntity
     {
         $this->price = $price;
     }
-    public function setImageUrl($imageUrl)
+    public function setImage($image)
     {
-        $this->imageUrl = $imageUrl;
+        $this->image = $image;
     }
     public function setRestaurant($idRestaurant)
     {

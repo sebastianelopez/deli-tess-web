@@ -6,6 +6,7 @@
 include('funcs.php');
 
 $UserB = new UserBusiness($con);
+$RestaurantB = new RestaurantBusiness($con);
 
 foreach ($UserB->getUsers() as $user) {
 if (isset($_POST['login'])) {
@@ -26,30 +27,7 @@ if(!isset($_SESSION['usuario_logueado'])){
 
 ?>
 
-<head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <?php include_once('includes/titulo.php') ?>
-
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-  <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-  <!-- Custom styles for this template -->
-  <link href="css/sb-admin-2.css" rel="stylesheet">
-
-  <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-</head>
 
 <body id="page-top">
 
@@ -75,25 +53,15 @@ if(!isset($_SESSION['usuario_logueado'])){
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Restaurantes</h1>
-          <p class="mb-4">Agregue, borre o modifique los restaurantes disponibles para los productos.</a>.</p>
+          <p class="mb-4">Agregue, borre o modifique los restaurantes disponibles para los productos.</a></p>
 
         <?php include_once('funcs.php'); ?>
           <!-- Productos -->
         <?php 
-          if(isset($_GET['del'])){
-            //obtengo archivo
-            $datos = file_get_contents('restaurantes.json');
-            //lo convierto en array
-            $datosJson=json_decode($datos,true);
-            //elimino
-            unset($datosJson[$_GET['del']]);
-            $fp= fopen('restaurantes.json','w');
-            $datosString=json_encode($datosJson);
-            //guardo
-            fwrite($fp,$datosString);
-            fclose($fp);
+          if(isset($_GET['del'])){            
+            $RestaurantB->deleteRestaurant($_GET['del']);
             redirect('restaurantes.php');
-          }
+         }
         ?>
 
           <div class="card shadow mb-4">
@@ -109,22 +77,20 @@ if(!isset($_SESSION['usuario_logueado'])){
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Nombre</th>                      
+                      <th>Nombre</th>    
+                      <th>Estado</th>              
                       <th>Modificar / Borrar</th>                      
                     </tr>
                   </thead>
                   <tbody> 
-                      <?php                   
-                        
-                        $datos = file_get_contents('restaurantes.json');
-                        $datosJson=json_decode($datos,true);
-
-                        foreach($datosJson as $rest){ ?>
+                      <?php 
+                        foreach($RestaurantB->getRestaurants() as $rest){ ?>
                             <tr>
-                              <td><?php echo $rest['id'] ?></td>
-                              <td><?php echo $rest['nombre'] ?></td>                              
-                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="restaurantes_add.php?edit=<?php echo $rest['id'] ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="restaurantes.php?del=<?php echo $rest['id'] ?>">Borrar</a></td>                      
-                          <!-- productos_add.php?edit=<?php echo $rest['id'] ?> -->
+                              <td><?php echo $rest->getId()?></td>
+                              <td><?php echo $rest->getName() ?></td>
+                              <td><?php echo $rest->getState() ?></td>                               
+                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="restaurantes_add.php?edit=<?php echo $rest->getId() ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="restaurantes.php?del=<?php echo $rest->getId() ?>">Borrar</a></td>                      
+                          <!-- productos_add.php?edit=<?php echo $rest->getId() ?> -->
                           </tr>   
                       <?php } ?>  
                   </tbody>
@@ -152,24 +118,8 @@ if(!isset($_SESSION['usuario_logueado'])){
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.php">Logout</a>
-        </div>
-      </div>
-    </div>
+  
+  
     <!-- Footer -->
     <footer class="sticky-footer bg-white">
         <div class="container my-auto">

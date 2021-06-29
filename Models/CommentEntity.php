@@ -5,18 +5,19 @@ require_once (__DIR__.'/BaseEntity.php');
 class CommentEntity extends BaseEntity
 {
  
-    private $user;    
+       
     private $email; 
     private $comment;
     private $creationDate;
     private $rank;
     private $Product_id;
+    private $user_name; 
+    private $user_id;
 
     public function __construct()
     {
         parent::__construct(); 
     }
-
      
     public function getComment()
     {
@@ -35,9 +36,13 @@ class CommentEntity extends BaseEntity
     {
         return $this->email;
     } 
-    public function getUser()
+    public function getUserName()
     {
-        return $this->user;
+        return $this->user_name;
+    } 
+    public function getUserId()
+    {
+        return $this->user_id;
     } 
     public function getCreationDate()
     {
@@ -62,9 +67,13 @@ class CommentEntity extends BaseEntity
     {
         $this->email = $email;
     }
-    public function setUser($user)
+    public function setUserName($user_name)
     {
-        $this->user = $user;
+        $this->user_name = $user_name;
+    }
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
     }
     public function setCreationDate($creationDate)
     {

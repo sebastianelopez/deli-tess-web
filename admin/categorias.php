@@ -26,30 +26,7 @@ if(!isset($_SESSION['usuario_logueado'])){
 
 ?>
 
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <?php include_once('includes/titulo.php') ?>
-
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-  <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-  <!-- Custom styles for this template -->
-  <link href="css/sb-admin-2.css" rel="stylesheet">
-
-  <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-</head>
+<?php include_once('../presentation/includes/head.php');	?>
 
 <body id="page-top">
 
@@ -80,18 +57,10 @@ if(!isset($_SESSION['usuario_logueado'])){
         <?php include_once('funcs.php'); ?>
           <!-- Productos -->
         <?php 
-          if(isset($_GET['del'])){
-            //obtengo archivo
-            $datos = file_get_contents('categorias.json');
-            //lo convierto en array
-            $datosJson=json_decode($datos,true);
-            //elimino
-            unset($datosJson[$_GET['del']]);
-            $fp= fopen('categorias.json','w');
-            $datosString=json_encode($datosJson);
-            //guardo
-            fwrite($fp,$datosString);
-            fclose($fp);
+          $CategoryB = new CategoryBusiness($con);
+
+          if(isset($_GET['del'])){            
+            $CategoryB->deleteCategory($_GET['del']);            
             redirect('categorias.php');
           }
         ?>
@@ -109,22 +78,21 @@ if(!isset($_SESSION['usuario_logueado'])){
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Nombre</th>                      
+                      <th>Nombre</th>  
+                      <th>Estado</th>                    
                       <th>Modificar / Borrar</th>                      
                     </tr>
                   </thead>
                   <tbody> 
-                      <?php                   
-                        
-                        $datos = file_get_contents('categorias.json');
-                        $datosJson=json_decode($datos,true);
+                      <?php 
 
-                        foreach($datosJson as $cat){ ?>
+                        foreach($CategoryB->getCategories() as $cat){ ?>
                             <tr>
-                              <td><?php echo $cat['id'] ?></td>
-                              <td><?php echo $cat['nombre'] ?></td>                              
-                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="categorias_add.php?edit=<?php echo $cat['id'] ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="categorias.php?del=<?php echo $cat['id'] ?>">Borrar</a></td>                      
-                          <!-- productos_add.php?edit=<?php echo $cat['id'] ?> -->
+                              <td><?php echo $cat->getId() ?></td>
+                              <td><?php echo $cat->getName() ?></td>
+                              <td><?php echo $cat->getState() ?></td>                                
+                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="categorias_add.php?edit=<?php echo $cat->getId() ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="categorias.php?del=<?php echo $cat->getId() ?>">Borrar</a></td>                      
+                          <!-- productos_add.php?edit=<?php echo $cat->getId() ?> -->
                           </tr>   
                       <?php } ?>  
                   </tbody>

@@ -16,18 +16,24 @@ class RestaurantBusiness{
         return $restaurants;
     }
 
+    public function getRestaurant($id){
+        $restaurant = $this->RestaurantDAO->getOne($id); 
+
+        return $restaurant;
+    }
+
     
     public function createNewRestaurant($data){
         $this -> RestaurantDAO -> save($data);
     }
 
-    public function modifyRestaurant($data, $id){
+    public function modifyRestaurant($id,$data){
         $this -> RestaurantDAO -> modify($id, $data);
     }
 
 
     public function deleteRestaurant($id){
-        $this -> CommentDAO -> delete($id);
+        $this -> RestaurantDAO -> delete($id);
     }
 
 }

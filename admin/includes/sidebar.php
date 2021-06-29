@@ -26,10 +26,10 @@
       <a class="collapse-item" href="forgot-password.php">Contraseña olvidada</a>
       <div class="collapse-divider"></div>
       <h6 class="collapse-header">Otras paginas</h6>
-      <a class="collapse-item" href="../index.php">Inicio</a>
-      <a class="collapse-item" href="../shop.php">Tienda</a>
-      <a class="collapse-item" href="../about.php">Sobre nosotros</a>
-      <a class="collapse-item" href="../contact.php">Contactenos</a>   
+      <a class="collapse-item" href="../presentation/pages/index.php">Inicio</a>
+      <a class="collapse-item" href="../presentation/pages/shop.php">Tienda</a>
+      <a class="collapse-item" href="../presentation/pages/about.php">Sobre nosotros</a>
+      <a class="collapse-item" href="../presentation/pages/contact.php">Contactenos</a>   
     </div>
   </div>
 </li>

@@ -10,6 +10,7 @@ class ProductDAO extends DAO{
 
     protected $CategoryDAO;
     protected $RestaurantDAO;
+    protected $imageUrl;
 
     function __construct($con)
     {
@@ -17,10 +18,11 @@ class ProductDAO extends DAO{
         $this->table = 'product';
         $this->RestaurantDAO= new RestaurantDAO($con);
         $this->CategoryDAO = new CategoryDAO($con);
+        $this->imageUrl;
     }
 
     public function getOne($id){
-        $sql = "SELECT id, name, price, imageUrl,description, idCategory, idRestaurant, State FROM $this->table WHERE id = $id";
+        $sql = "SELECT id, name, image, price, description, idCategory, idRestaurant, State FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetch();
         
         $result->setRestaurant($this->RestaurantDAO->getOne($result->getRestaurant()));
@@ -42,7 +44,7 @@ class ProductDAO extends DAO{
         }
 
         $sql = "SELECT  
-                id, name, price, imageUrl, description, idCategory, idRestaurant, State
+                id, name, image, price, description, idCategory, idRestaurant, State
                 FROM $this->table".$sqlWhereStr;
         
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetchAll();
@@ -57,21 +59,29 @@ class ProductDAO extends DAO{
     }
 
     public function save($data = array()){
-        $sql = "INSERT INTO product(description,imageUrl,name,price) VALUES ('".$data['name']."','".$data['imageUrl']."'), '".$data['description']."'), '".$data['price']."'), creationDate = NOW()";
+        $image=$this->imageUrl;
+        echo $image;
+        echo $this->imageUrl;
+        $sql = "INSERT INTO product(id,name, image,description,price, idCategory, idRestaurant, State) VALUES ('".$data['id']."', '".$data['name']."', '".$image."' ,'".$data['description']."', '".$data['price']."', '".$data['idCategory']."', '".$data['idRestaurant']."', '".$data['State']."')";
+        echo $sql;     
         return $this->con->exec($sql);
     }
 
 
     public function modify($id, $data = array()){
-        $sql = "UPDATE product SET name = '".$data['name']."', description = '".$data['description']."', imageUrl = '".$data['imageUrl']."', price ='".$data['price']."', modificationDate = NOW() WHERE id = ".$id;
-        echo $sql;
-        return $this->con->exec($sql);
+        $this->delete($id);
+        $this->save($data);        
     }
 
     public function delete($id){
         $sql = "DELETE FROM $this->table WHERE id = $id";
         return $this->con->exec($sql);
     }
+
+    public function getImageUrl($data){
+         $this->imageUrl=$data;
+    }
+    
 }
 
 ?>

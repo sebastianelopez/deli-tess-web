@@ -13,26 +13,25 @@ class CategoryDAO extends DAO{
     }
 
     public function getOne($id){
-        $sql = "SELECT id, name FROM $this->table WHERE id = $id";
+        $sql = "SELECT id, name, State FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'CategoryEntity')->fetch();
         return $result;
     }
 
     public function getAll($where = array()){
-        $sql = "SELECT id, name FROM $this->table";
+        $sql = "SELECT id, name, State FROM $this->table";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'CategoryEntity')->fetchAll();
         return $result;
     }
 
     public function save($data = array()){
-        $sql = "INSERT INTO user(id,name,email) VALUES ('".$data['name']."','".$data['email']."')";
+        $sql = "INSERT INTO category(id,name,State) VALUES ('".$data['id']."','".$data['name']."','".$data['State']."')";
         return $this->con->exec($sql);
     }
 
     public function modify($id, $data = array()){
-        $sql = "UPDATE user SET name = '".$data['name']."', email ='".$data['email']."', modificationDate = NOW() WHERE id = ".$id;
-        echo $sql;
-        return $this->con->exec($sql);
+        $this->delete($id);
+        $this->save($data);
     }
 
     public function delete($id){

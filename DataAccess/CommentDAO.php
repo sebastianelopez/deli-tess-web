@@ -13,20 +13,20 @@ class CommentDAO extends DAO{
     }
 
     public function getOne($id){
-        $sql = "SELECT id, creationDate, comment,rank, Product_id, user FROM $this->table WHERE id = $id";
+        $sql = "SELECT id, creationDate, comment,rank, Product_id, user_name, user_id FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'CommentEntity')->fetch();
         return $result;
     }
 
     public function getAll($where = array()){
-        $sql = "SELECT id, creationDate, comment,rank, Product_id, user  FROM $this->table";
+        $sql = "SELECT id, creationDate, comment,rank, Product_id, user_name, user_id  FROM $this->table";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'CommentEntity')->fetchAll();
         return $result;
     }
 
 
     public function save($data = array()){
-        $sql = "INSERT INTO user(comment,rank,creationDate) VALUES ('".$data['comment']."','".$data['rank']."'), creationDate = NOW()";
+        $sql = "INSERT INTO user(comment,rank,creationDate, Product_id, user_name, user_id) VALUES ('".$data['comment']."','".$data['rank']."'), creationDate = NOW()";
         return $this->con->exec($sql);
     }
 

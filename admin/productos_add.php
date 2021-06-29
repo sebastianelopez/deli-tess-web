@@ -11,29 +11,6 @@
     <!-- Sidebar -->
     <?php include_once('includes/sidebar.php');
 
-    function pathUrl($dir = __DIR__)
-    {
-      $root = "";
-      $dir = str_replace('\\', '/', realpath($dir));
-
-      //HTTPS or HTTP
-      $root .= !empty($_SERVER['HTTPS']) ? 'https' : 'http';
-
-      //HOST
-      $root .= '://' . $_SERVER['HTTP_HOST'];
-
-      //ALIAS
-      if (!empty($_SERVER['CONTEXT_PREFIX'])) {
-        $root .= $_SERVER['CONTEXT_PREFIX'];
-        $root .= substr($dir, strlen($_SERVER['CONTEXT_DOCUMENT_ROOT']));
-      } else {
-        $root .= substr($dir, strlen($_SERVER['DOCUMENT_ROOT']));
-      }
-
-      $root .= '/';
-
-      return $root;
-    }
 
     ?>
     <!-- End of Sidebar -->
@@ -57,112 +34,145 @@
           <?php
           include_once('funcs.php');
 
+
+          function pathUrl($dir = __DIR__){
+
+            $root = "";
+            $dir = str_replace('\\', '/', realpath($dir));
+          
+            //HTTPS or HTTP
+            $root .= !empty($_SERVER['HTTPS']) ? 'https' : 'http';
+          
+            //HOST
+            $root .= '://' . $_SERVER['HTTP_HOST'];
+          
+            //ALIAS
+            if(!empty($_SERVER['CONTEXT_PREFIX'])) {
+                $root .= $_SERVER['CONTEXT_PREFIX'];
+                $root .= substr($dir, strlen($_SERVER[ 'CONTEXT_DOCUMENT_ROOT' ]));
+            } else {
+                $root .= substr($dir, strlen($_SERVER[ 'DOCUMENT_ROOT' ]));
+            }
+          
+            $root .= '/';
+          
+            return $root;
+          }
+
+
           //obtengo archivo
           $CategoryB = new CategoryBusiness($con);
           $RestaurantB = new RestaurantBusiness($con);
           $ProductB = new ProductBusiness($con);
 
+          if(isset($_POST['productSubmit'])){
+            unset($_POST['productSubmit']);
+            
+            if(!empty($_GET['edit'])){
+              $id = $_GET['edit'];
+              $ProductB->modifyProduct($id,$_POST);
+            }else{              
+              $id = $ProductB->addNewProduct($_POST);
+            }
+            
 
-          if (isset($_POST['add'])) {
+            //////////////////////////////////////////////
+            
 
-            $target_dir = __DIR__ . "/../uploads/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            $uploadOk = 1;
-            $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-            // Check if image file is a actual image or fake image
-
-            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-            if ($check !== false) {
-              // die ("File is an image - " . $check["mime"] . "");
+              $target_dir = __DIR__ . "/../uploads/";
+              $target_file = $target_dir . basename($_FILES["image"]["name"]);
+              
               $uploadOk = 1;
-            } else {
-              die("El archivo no es una imagen.");
-            }
-
-
-            // Check if file already exists
-            if (file_exists($target_file)) {
-              die("Lo siento, es archivo ya fue cargado.");
-            }
-
-            // Check file size
-            if ($_FILES["fileToUpload"]["size"] > 500000) {
-              die("Lo siento, tu archivo es muy grande.");
-            }
-
-            // Allow certain file formats
-            if (
-              $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-              && $imageFileType != "gif"
-            ) {
-              die("Lo siento, solo se permiten archivos JPG, JPEG, PNG & GIF.");
-            }
-
-            // Check if $uploadOk is set to 0 by an error
-            if ($uploadOk == 0) {
-              die("Lo siento, tu archivo no fue cargado.");
+              $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+              
+              // Check if image file is a actual image or fake image
+              
+                $check = getimagesize($_FILES["image"]["tmp_name"]);
+                if($check !== false) {
+                 // die ("File is an image - " . $check["mime"] . "");
+                  $uploadOk = 1;
+                } else {
+                  die ("El archivo no es una imagen.");
+                }
+              
+              
+              // Check if file already exists
+              if (file_exists($target_file)) {
+                die ("Lo siento, es archivo ya fue cargado.");
+              }
+              
+              // Check file size
+              if ($_FILES["image"]["size"] > 500000) {
+                die ("Lo siento, tu archivo es muy grande.");
+              }
+              
+              // Allow certain file formats
+              if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+              && $imageFileType != "gif" ) {
+                die ("Lo siento, solo se permiten archivos JPG, JPEG, PNG & GIF.");
+              }
+              
+              // Check if $uploadOk is set to 0 by an error
+              if ($uploadOk == 0) {
+                die ("Lo siento, tu archivo no fue cargado.");
               // if everything is ok, try to upload file
-            } else {
-              if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-                //die ("The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.");
               } else {
-                die("Lo siento, hubo un error cargando tu archivo.");
-              }
-            }
-
-
-            //PARA LLAMR LA RUTA DE LA IMG
-            if (isset($_PROD['productSubmit'])) {
-              unset($_PROD['productSubmit']);
-              if(!empty($_GET['edit'])){
-                $id = $_GET['edit'];
-                $ProductB->modifyProduct($id,$_PROD);
-              }else{ 
-                $id = date('Ymdhis');               
-                $id = $ProductB->saveProduct($_PROD);
-              }
-              if (isset($_GET['edit'])) {
-                $id = $_GET['edit'];
-              } else {
-                //agrego
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                  //die ("The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.");
+                } else {
+                  die ("Lo siento, hubo un error cargando tu archivo.");
+                }             
                 
               }
 
-              redirect('productos.php');
-            }
+              if(!empty($_FILES['image'])){
+                $ProductB->getImageUrl($target_file);
+              }
+            
+             //redirect('productos.php');
+          }
+          
+          $id = 0;
+          if(!empty($_GET['edit'])){
+            $id = $_GET['edit'];
+            $product = $ProductB->getProduct($id);
           }
 
-          if (isset($_GET['edit'])) {
-            $dato = $ProductB->getProduct($_GET['edit']);
-          }
-
+          
           ?>
 
 
           <form action="" method="post" enctype="multipart/form-data">
-            Nombre:<br><input class="my-2" type="text" name="nombre" value="<?php echo isset($dato) ? $dato->getName() : '' ?>"><br />
-            Descripcion:<br><input class="my-2" type="text" name="descripcion" value="<?php echo isset($dato) ? $dato->getDescription() : '' ?>"><br />
-            Imagen:<br><input class="my-2" type="file" name="fileToUpload" id="fileToUpload"><br />
-            Precio:<br><input class="my-2" type="text" name="precio" value="<?php echo isset($dato) ? $dato->getPrice() : '' ?>"><br />
-            Categoria:<select name="categoria">
+            ID:<br><input class="my-2" type="text" name="id" value="<?php echo isset($product) ? $product->getId() : '' ?>"><br />
+            Nombre:<br><input class="my-2" type="text" name="name" value="<?php echo isset($product) ? $product->getName() : '' ?>"><br />
+            Descripcion:<br><input class="my-2" type="text" name="description" value="<?php echo isset($product) ? $product->getDescription() : '' ?>"><br />
+            Imagen:<br><input class="my-2" type="file" name="image" id="image" >
+                   
+            Precio:<br><input class="my-2" type="text" name="price" value="<?php echo isset($product) ? $product->getPrice() : '' ?>"><br />
+            Categoria:<select name="idCategory">
               <?php
-              foreach ($CategoryB->getCategories() as $cat) {
+                foreach ($CategoryB->getCategories() as $cat) {
+                ?>
+                  <option value="<?php echo $cat->getId() ?>"><?php echo $cat->getName() ?></option>
+                <?php
+                }
               ?>
-                <option value="<?php echo $cat->getName() ?>"><?php echo $cat->getName() ?></option>
+            </select>
+
+            Restaurante:<select name="idRestaurant">
+              <?php
+              foreach ($RestaurantB->getRestaurants() as $rest) {
+              ?>
+                <option value="<?php echo $rest->getId() ?>"><?php echo $rest->getName() ?></option>
               <?php
               }
               ?>
             </select>
-
-            Restaurante:<select name="restaurante">
-              <?php
-              foreach ($RestaurantB->getRestaurants() as $rest) {
-              ?>
-                <option value="<?php echo $rest->getName() ?>"><?php echo $rest->getName() ?></option>
-              <?php
-              }
-              ?>
+            Estado:<select name="State">
+              
+                <option value="activo">activo</option>
+                <option value="inactivo">inactivo</option>
+              
             </select>
             <br><input class="my-2 d-none" type="text" name="activo" value="true"><br />
             <button type="submit" name="productSubmit" class="btn btn-primary">Enviar</button>
@@ -182,27 +192,7 @@
       <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
       </a>
-
-      <!--
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.php">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  -->
+      
 
 
 </body>

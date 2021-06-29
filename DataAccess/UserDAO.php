@@ -12,27 +12,26 @@ class UserDAO extends DAO{
     }
 
     public function getOne($id){
-        $sql = "SELECT id, name,email,permissionLevel, password, isLogged FROM $this->table WHERE id = $id";
+        $sql = "SELECT id, name,email,permissionLevel, password FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'UserEntity')->fetch();
         return $result;
     }
 
     public function getAll($where = array()){
-        $sql = "SELECT id, name,email,permissionLevel, password, isLogged FROM $this->table";
+        $sql = "SELECT id, name,email,permissionLevel, password FROM $this->table";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'UserEntity')->fetchAll();
         return $result;
     }
 
     public function save($data = array()){
-        $sql = "INSERT INTO user(name,email) VALUES ('".$data['name']."','".$data['email']."')";
+        $sql = "INSERT INTO user(id,name,email,permissionLevel, password) VALUES ('".$data['id']."','".$data['name']."','".$data['email']."','".$data['permissionLevel']."','".$data['password']."',)";
         return $this->con->exec($sql);
     }
 
 
     public function modify($id, $data = array()){
-        $sql = "UPDATE user SET name = '".$data['name']."', email ='".$data['email']."', modificationDate = NOW() WHERE id = ".$id;
-        echo $sql;
-        return $this->con->exec($sql);
+        $this->delete($id);
+        $this->save($data);
     }
 
     public function delete($id){

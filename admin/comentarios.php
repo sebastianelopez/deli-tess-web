@@ -22,30 +22,7 @@ if(!isset($_SESSION['usuario_logueado'])){
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <?php include_once('includes/titulo.php') ?>
-
-  <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/bootstrap-datepicker.css">
-  <link rel="stylesheet" href="css/jquery.timepicker.css">
-
-  <!-- Custom styles for this template -->
-  <link href="css/sb-admin-2.css" rel="stylesheet">
-
-  <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-</head>
+<?php include_once('../presentation/includes/head.php');	?>
 
 <body id="page-top">
 
@@ -76,18 +53,11 @@ if(!isset($_SESSION['usuario_logueado'])){
         <?php include_once('funcs.php'); ?>
           <!-- Productos -->
         <?php 
-          if(isset($_GET['del'])){
-            //obtengo archivo
-            $datos = file_get_contents('../com.json');
-            //lo convierto en array
-            $datosJson=json_decode($datos,true);
-            //elimino
-            unset($datosJson[$_GET['del']]);
-            $fp= fopen('../com.json','w');
-            $datosString=json_encode($datosJson);
-            //guardo
-            fwrite($fp,$datosString);
-            fclose($fp);
+        $CommentB = new CommentBusiness($con);
+        $ProductB = new ProductBusiness($con);
+
+          if(isset($_GET['del'])){            
+            $CommentB->deleteComment($_GET['del']);
             redirect('comentarios.php');
           }
         ?>
@@ -97,14 +67,11 @@ if(!isset($_SESSION['usuario_logueado'])){
               <select id="producto" class="m-0 font-weight-bold text-primary" href="restaurantes_add.php" name="Producto">
                       <option value="">Seleccione Producto</option>
                       <option value="0">Todos</option>
-                      <?php
-                          $datos = file_get_contents('../com.json');
-                          $datosJson=json_decode($datos,true);
-                          $productos = file_get_contents('productos.json');
-                          $productosJson=json_decode($productos,true);  
-                          foreach($productosJson as $com){
+                      <?php                 
+
+                          foreach($ProductB->getProducts() as $prod){
                         ?>                        
-                            <option value="<?php echo $com['id'] ?>"><?php echo $com['nombre']; ?></option>
+                            <option value="<?php echo $prod->getId() ?>"><?php echo $prod->getName(); ?></option>
                          <?php 
                           }
                          ?> 
@@ -120,35 +87,43 @@ if(!isset($_SESSION['usuario_logueado'])){
                     <tr>
                       <th>ID Comentario</th>
                       <th>Nombre</th>
-                      <th>Comentario</th>                      
+                      <th>User ID</th>
+                      <th>Comentario</th>
+                      <th>Fecha de Creacion</th>  
+                      <th>Rank</th>
+                      <th>ID Producto</th>                    
                       <th>Borrar</th>                      
                     </tr>
                   </thead>
                   <tbody> 
-                      <?php                   
-                        
-                        $datos = file_get_contents('../com.json');
-                        $datosJson=json_decode($datos,true);
-
-                        foreach($datosJson as $com){ ?>
+                      <?php       
+                        foreach($CommentB->getComments() as $com){ ?>
                         <?php
-                        if(isset($_GET['idproducto']) && $_GET['idproducto']==$com['idproducto']){
+                        if(isset($_GET['idproducto']) && $_GET['idproducto']==$com->getProduct()){
 
                          ?>
                             <tr>
-                              <td><?php echo $com['id'] ?></td>
-                              <td><?php echo $com['nombre'] ?></td>
-                              <td><?php echo $com['mensaje'] ?></td>                                 
-                              <td><a class="m-0 font-weight-bold text-primary" href="comentarios.php?del=<?php echo $com['id'] ?>">Borrar</a></td> 
+                              <td><?php echo $com->getId() ?></td>
+                              <td><?php echo $com->getUserName() ?></td> 
+                              <td><?php echo $com->getUserId() ?></td>                                 
+                              <td><?php echo $com->getComment() ?></td> 
+                              <td><?php echo $com->getCreationDate() ?></td> 
+                              <td><?php echo $com->getScorage() ?></td>   
+                              <td><?php echo $com->getProduct() ?></td>                               
+                              <td><a class="m-0 font-weight-bold text-primary" href="comentarios.php?del=<?php echo $com->getId() ?>">Borrar</a></td> 
                           </tr>   
                       <?php
                        }elseif(!isset($_GET['idproducto'])){
                       ?>   
                         <tr>
-                          <td><?php echo $com['id'] ?></td>
-                          <td><?php echo $com['nombre'] ?></td>
-                          <td><?php echo $com['mensaje'] ?></td>                                 
-                          <td><a class="m-0 font-weight-bold text-primary" href="comentarios.php?del=<?php echo $com['id'] ?>">Borrar</a></td> 
+                              <td><?php echo $com->getId() ?></td>
+                              <td><?php echo $com->getUserName() ?></td> 
+                              <td><?php echo $com->getUserId() ?></td>                                 
+                              <td><?php echo $com->getComment() ?></td> 
+                              <td><?php echo $com->getCreationDate() ?></td> 
+                              <td><?php echo $com->getScorage() ?></td>   
+                              <td><?php echo $com->getProduct() ?></td>                                
+                              <td><a class="m-0 font-weight-bold text-primary" href="comentarios.php?del=<?php echo $com->getId() ?>">Borrar</a></td>
                         </tr>
                      <?php   
                       }

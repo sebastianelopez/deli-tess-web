@@ -6,6 +6,7 @@ class RestaurantEntity extends BaseEntity
 {
  
     private $name;    
+    private $State;
 
     public function __construct()
     {
@@ -18,12 +19,22 @@ class RestaurantEntity extends BaseEntity
     {
         return $this->name;
     }
+
+    public function getState()
+    {
+        return $this->State;
+    }
     
    
     
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function setState($State)
+    {
+        $this->State = $State;
     }
     
 }

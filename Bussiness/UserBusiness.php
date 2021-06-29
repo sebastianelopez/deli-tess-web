@@ -16,11 +16,17 @@ class UserBusiness{
         return $users;
     }
 
+    public function getUser($id){
+        $user = $this->UserDAO->getOne($id); 
+
+        return $user;
+    }
+
     public function createNewUser($data){
         $this -> UserDAO -> save($data);
     }
 
-    public function modifyUser($data, $id){
+    public function modifyUser($id, $data){
         $this -> UserDAO -> modify($id, $data);
     }
 

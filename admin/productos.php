@@ -6,6 +6,7 @@
 include('funcs.php');
 
 $UserB = new UserBusiness($con);
+$ProductB = new ProductBusiness($con);
 
   if (isset($_POST['login'])) {    
     foreach ($UserB->getUsers() as $user) {
@@ -19,6 +20,10 @@ $UserB = new UserBusiness($con);
   }
 }
 
+if(isset($_SESSION['usuario_logueado'])){
+ // redirect('../presentation/pages/index.php');
+}
+
 if (isset($_GET['logout'])) {
   unset($_SESSION['admin_logueado']);
 }
@@ -27,9 +32,7 @@ if(!isset($_SESSION['admin_logueado'])){
   redirect('login.php');
 }
 
-if(isset($_SESSION['usuario_logueado'])){
-  redirect('../presentation/pages/index.php');
-}
+
 
 
 ?>
@@ -65,20 +68,10 @@ if(isset($_SESSION['usuario_logueado'])){
         <?php include_once('funcs.php'); ?>
           <!-- Productos -->
         <?php 
-          if(isset($_GET['del'])){
-            //obtengo archivo
-            $datos = file_get_contents('productos.json');
-            //lo convierto en array
-            $datosJson=json_decode($datos,true);
-            //elimino
-            unset($datosJson[$_GET['del']]);
-            $fp= fopen('productos.json','w');
-            $datosString=json_encode($datosJson);
-            //guardo
-            fwrite($fp,$datosString);
-            fclose($fp);
-            redirect('productos.php');
-          }
+          if(isset($_GET['del'])){            
+              $ProductB->deleteProduct($_GET['del']);
+              redirect('productos.php');
+           }
         ?>
 
           <div class="card shadow mb-4">
@@ -109,12 +102,12 @@ if(isset($_SESSION['usuario_logueado'])){
                         
                         $ProductB = new ProductBusiness($con);
 
-                        foreach ($ProductB->getProducts($_GET) as $product) { ?>
+                        foreach ($ProductB->getProducts() as $product) { ?>
                             <tr>
                               <td><?php echo $product->getId() ?></td>
                               <td><?php echo $product-> getName() ?></td>
                               <td><?php echo $product-> getDescription() ?>.</td>
-                              <td><img class="img-fluid" src="<?php echo $product->getImageUrl() ?>" alt=""></a></td>
+                              <td><img class="img-fluid" src="<?php echo $product->getImage() ?>" alt=""></a></td>
                               <td><?php echo $product-> getPrice() ?></td>
                               <td><?php echo $product->getCategory()->getName() ?></td>
                               <td><?php echo $product->getRestaurant()->getName() ?></td>

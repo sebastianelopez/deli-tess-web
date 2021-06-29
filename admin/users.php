@@ -59,8 +59,10 @@ if(!isset($_SESSION['usuario_logueado'])){
         <?php include_once('funcs.php'); ?>
           <!-- Productos -->
         <?php 
-          if(isset($_GET['del'])){
-            
+          $UserB = new UserBusiness($con);
+
+          if(isset($_GET['del'])){            
+            $UserB->deleteUser($_GET['del']);            
             redirect('users.php');
           }
         ?>
@@ -92,7 +94,7 @@ if(!isset($_SESSION['usuario_logueado'])){
                               <td><?php echo $user-> getName() ?></td>
                               <td><?php echo $user-> getEmail() ?></td>
                               <td><?php echo ($user-> getPermissionLevel() == 1) ?'ADMIN': 'USUARIO' ?></td>                              
-                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="productos_add.php?edit=<?php echo $user->getId() ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="productos.php?del=<?php echo $user->getId() ?>">Borrar</a></td>                      
+                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="user_add.php?edit=<?php echo $user->getId() ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="users.php?del=<?php echo $user->getId() ?>">Borrar</a></td>                      
                           <!-- productos_add.php?edit=<?php echo $user->getId() ?> -->
                           </tr>   
                       <?php } ?>  

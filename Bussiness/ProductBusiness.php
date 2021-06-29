@@ -34,11 +34,12 @@ class ProductBusiness{
 
     public function deleteProduct($id){
         $this -> ProductDAO -> delete($id);
-    }
+    }   
 
-    public function saveImage(){
-        //TODO Evaular implementacion del metodo
+    public function getImageUrl($url){
+        $this->ProductDAO->getImageUrl($url);        
     }
+    
 
 
 }

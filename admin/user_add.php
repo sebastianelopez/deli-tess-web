@@ -35,33 +35,40 @@
 <?php 
 include_once('funcs.php');
 
-$RestaurantB = new RestaurantBusiness($con);
+$UserB = new UserBusiness($con);
 
-if(isset($_POST['restaurantSubmit'])){
-  unset($_POST['restaurantSubmit']);
+if(isset($_POST['userSubmit'])){
+  unset($_POST['userSubmit']);
   
   if(!empty($_GET['edit'])){
     $id = $_GET['edit'];
-    $RestaurantB->modifyRestaurant($id,$_POST);
+    $UserB->modifyUser($id,$_POST);
   }else{              
-    $id = $RestaurantB->createNewRestaurant($_POST);
+    $id = $UserB->createNewUser($_POST);
   }
   
-  redirect('restaurantes.php');
+  redirect('users.php');
 }
 
 $id = 0;
 if(!empty($_GET['edit'])){
   $id = $_GET['edit'];
-  $restaurant = $RestaurantB->getRestaurant($id);
+  $user = $UserB->getUser($id);
 }
      
 ?>
 
    
     <form action="" method="post" enctype="multipart/form-data">
-        ID:<br><input class="my-2" type="text" name="id" value="<?php echo isset($restaurant)?$restaurant->getId():'' ?>"><br />
-        Nombre:<br><input class="my-2" type="text" name="name" value="<?php echo isset($restaurant)?$restaurant->getName():'' ?>"><br />   
+        ID:<br><input class="my-2" type="text" name="id" value="<?php echo isset($user)?$user->getId():'' ?>"><br />
+        Nombre:<br><input class="my-2" type="text" name="name" value="<?php echo isset($user)?$user->getName():'' ?>"><br /> 
+        Mail:<br><input class="my-2" type="text" name="mail" value="<?php echo isset($user)?$user->getEmail():'' ?>"><br /> 
+        Rol:<br><select name="permissionLevel">
+              
+              <option value="1" > >ADMIN</option>
+              <option value="2">USUARIO</option>
+            
+          </select><br />     
         Estado:<br><select name="State">
               
               <option value="activo" >activo</option>
@@ -69,7 +76,7 @@ if(!empty($_GET['edit'])){
             
           </select><br />   
           <br><input class="my-2 d-none" type="text" name="activo" value="true"><br />         
-          <button type="submit" name="restaurantSubmit" class="btn btn-primary">Enviar</button>     
+          <button type="submit" name="userSubmit" class="btn btn-primary">Enviar</button>     
 
     </form>
 
