@@ -5,24 +5,9 @@
 
 include('funcs.php');
 
-$UserB = new UserBusiness($con);
+
 $RestaurantB = new RestaurantBusiness($con);
 
-foreach ($UserB->getUsers() as $user) {
-if (isset($_POST['login'])) {
-  if ($_POST['pass'] == $user->getPassword() && $_POST['mail'] == $user->getEmail()) {
-    $_SESSION['usuario_logueado'] = true;
-  }
-}
-}
-
-if (isset($_GET['logout'])) {
-  unset($_SESSION['usuario_logueado']);
-}
-
-if(!isset($_SESSION['usuario_logueado'])){
-  redirect('login.php');
-}
 
 
 ?>

@@ -1,3 +1,24 @@
+  <?php
+
+    $loginB = new LoginBusiness($con);
+    
+    /*if(isset($_POST['login'])){
+      if(!$loginB->login($_POST)){
+        redirect('login.php?errAth');
+        die();
+      }
+    }
+    
+    if(isset($_GET['logout'])){
+        $loginB->logout();
+    }
+    
+    if (!$loginB->isLoged()){
+       // redirect('login.php');        
+        die();
+    }*/
+  ?>
+  
   <!-- Sidebar -->
   <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 

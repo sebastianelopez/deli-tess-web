@@ -30,19 +30,19 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Restaurantes</h1>
+          <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
           
 <?php 
 include_once('funcs.php');
 
 $UserB = new UserBusiness($con);
+$bProfile = new ProfileBusiness($con);
 
 if(isset($_POST['userSubmit'])){
   unset($_POST['userSubmit']);
   
   if(!empty($_GET['edit'])){
-    $id = $_GET['edit'];
-    $UserB->modifyUser($id,$_POST);
+    $UserB->modifyUser($_GET['edit'],$_POST);
   }else{              
     $id = $UserB->createNewUser($_POST);
   }
@@ -52,30 +52,30 @@ if(isset($_POST['userSubmit'])){
 
 $id = 0;
 if(!empty($_GET['edit'])){
-  $id = $_GET['edit'];
-  $user = $UserB->getUser($id);
+  $id = $_GET['edit'];  
 }
+$user = $UserB->getUser($id);
      
 ?>
 
    
-    <form action="" method="post" enctype="multipart/form-data">
-        ID:<br><input class="my-2" type="text" name="id" value="<?php echo isset($user)?$user->getId():'' ?>"><br />
+    <form action="" method="post" enctype="multipart/form-data">        
         Nombre:<br><input class="my-2" type="text" name="name" value="<?php echo isset($user)?$user->getName():'' ?>"><br /> 
-        Mail:<br><input class="my-2" type="text" name="mail" value="<?php echo isset($user)?$user->getEmail():'' ?>"><br /> 
-        Rol:<br><select name="permissionLevel">
-              
-              <option value="1" > >ADMIN</option>
-              <option value="2">USUARIO</option>
-            
-          </select><br />     
+        Mail:<br><input class="my-2" type="text" name="email" value="<?php echo isset($user)?$user->getEmail():'' ?>"><br /> 
+        User:<br><input  class="my-2" type="text" name="user" value="<?php echo isset($user)?$user->getUSer():'' ?>" id="exampleInputEmail1"><br />     
         Estado:<br><select name="State">
               
               <option value="activo" >activo</option>
               <option value="inactivo">inactivo</option>
             
-          </select><br />   
-          <br><input class="my-2 d-none" type="text" name="activo" value="true"><br />         
+          </select><br />  
+        Password:<br><input class="my-2" type="text" name="pass" value="<?php echo isset($user)?$user->getPassword():'' ?>"><br />
+        Perfiles:<br><select name="profiles[]" class="" id="exampleSelectBorder">
+                      <?php foreach($bProfile->getProfiles() as $profile){ ?>
+                         <option value="<?php echo $profile->getId()?>" <?php echo $user->gotProfile($profile->getId())?'selected':'' ?>><?php echo $profile->getName() ?></option>
+                      <?php }?>
+                    </select>
+          <br><br />         
           <button type="submit" name="userSubmit" class="btn btn-primary">Enviar</button>     
 
     </form>

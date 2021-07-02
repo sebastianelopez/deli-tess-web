@@ -59,8 +59,7 @@ if(!empty($_GET['edit'])){
 ?>
 
    
-    <form action="" method="post" enctype="multipart/form-data">
-        ID:<br><input class="my-2" type="text" name="id" value="<?php echo isset($restaurant)?$restaurant->getId():'' ?>"><br />
+    <form action="" method="post" enctype="multipart/form-data">        
         Nombre:<br><input class="my-2" type="text" name="name" value="<?php echo isset($restaurant)?$restaurant->getName():'' ?>"><br />   
         Estado:<br><select name="State">
               

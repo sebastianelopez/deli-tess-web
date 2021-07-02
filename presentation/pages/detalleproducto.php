@@ -1,7 +1,13 @@
 <!DOCTYPE php>
 <html lang="en">
 
-<?php include_once('../includes/head.php'); ?> 
+<?php include_once('../includes/head.php'); 
+
+	$URL_FORIMAGE= "http://localhost/Final/uploads/";
+
+								
+	
+?> 
 
 	<body class="goto-here">
 		<?php include_once('../includes/barritadearriba.php'); ?>
@@ -32,7 +38,7 @@
 										?>	
 											<div class="col-md-6 col-lg-3 ftco-animate">
 												<div class="product">									
-													<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $product->getImageUrl() ?>" alt="imagen">
+													<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $URL_FORIMAGE.$product->getImage() ?>" alt="imagen">
 														<div class="overlay"></div>
 													</a>
 													<div class="text py-3 pb-4 px-3 text-center">																	
@@ -63,24 +69,18 @@
                             include_once('./funcs.php');
 							
 
-							//$CommentB = new CommentBusiness($con);
-							/*$datos = file_get_contents('com.json');
-                            //lo convierto en array
-                            $datosJson=json_decode($datos,true);                            
-                                if(isset($_POST['detalle'])){                        
-                                         //agrego
-										 $id= $_GET['detalle'];
-										 $id2=date('Ymdhis');				                                  
-																		
-									$datosJson[count($datosJson)]= array('idproducto'=>$id,'id'=>$id2,'nombre'=>$_POST['nombre'],'mensaje'=>$_POST['mensaje']);
-									
-                                    $fp= fopen('com.json','w');
-                                    $datosString=json_encode($datosJson);     
-                                    
-                                    //guardo
-                                    fwrite($fp,$datosString);
-                                    fclose($fp);                                    
-                                }*/
+							$CommentB = new CommentBusiness($con);
+
+							$idprod=$_GET['detalle'];
+
+							if(isset($_POST['commentSubmit'])){
+								unset($_POST['commentSubmit']);		
+								
+								$CommentB->createNewComment($_POST);
+								
+							
+								redirect(`detalleproducto.php?detalle=$idprod`);
+							}
                          ?>	
 
 						<div class="modal-content px-5 py-3">							
@@ -90,29 +90,58 @@
 							
 							<?php 
 											
-											$ProductB = new ProductBusiness($con);							
-											$CommentB = new CommentBusiness($con);
+										
 
 																						
-											foreach($CommentB->getComments() as $comment){
+										foreach($CommentB->getComments() as $comment){
 												if($comment->getProduct() == $_GET['detalle']){											
-											
 												
 										?>
 										<p class="my-2">
-										 <?php echo $comment->getCreationDate()?><br />
+										 <?php echo $comment->getCreationDate()?> -
+										 <?php 
+										  $in=$comment->getScorage();
+										  for($i = 0; $i <= $in-1; $i++) {
+											echo "★";
+											};
+										 ?> 
+										 <?php 
+										 	if($in==1){
+												 echo "Malo";
+											 }elseif($in==2){
+												echo "Regular";
+											 }elseif($in==3){
+												echo "Bueno";
+											 }elseif($in==4){
+												echo "Muy bueno";
+											 }elseif($in==5){
+												echo "Excelente";
+											 }
+											 
+										 ?> <br />
 										 <b><?php echo $comment->getUser() ?></b>: 
-										 <?php echo $comment->getComment()?></p><br />
+										 <?php echo $comment->getComment()?></p><br />										 
 										 </p><br />											 
 										 <?php 
 												}
 											}										 
 										 ?>
-						<form action="" method="post" enctype="multipart/form-data">			
-							Nombre:<br><input class="my-2" type="text" name="nombre" value=""><br />							
-							Mensaje:<br><input class="my-2" type="text" name="mensaje" value=""><br />
+						<form action="" method="post" enctype="multipart/form-data">	
+							<br><input class="my-2 d-none" type="text" name="product" value="<?php echo $product->getName() ?>" ><br /> 
+							<br><input class="my-2 d-none" type="text" name="productId" value="<?php echo $product->getId() ?>" ><br />		
+							Nombre:<br><input class="my-2" type="text" name="user" value="">
+							<br><br />
+						    Rank: <select name="rank" id="cars">
+												<option value="1">Malo</option>
+												<option value="2">Regular</option>
+												<option value="3">Bueno</option>
+												<option value="4">Muy bueno</option>
+												<option value="5">Excelente</option>
+											</select>	
+											<br><br />					
+							Mensaje:<br><input class="my-2" type="text" name="comment" value=""><br />
 							<br>            
-									<input class="my-2"type="submit" name="detalle">        
+									<input class="my-2" type="submit" name="commentSubmit">        
 						</form>
 					</div>
 					</div>

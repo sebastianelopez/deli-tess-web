@@ -3,6 +3,8 @@
 
 <?php include_once('../includes/head.php');	  
 
+	$URL_FORIMAGE= "http://localhost/Final/uploads/";
+
  ?> 
 
 	<body class="goto-here">
@@ -37,12 +39,7 @@
 							$ProductB = new ProductBusiness($con);
 
 							
-							
-
-							
-							
 							foreach ($ProductB->getProducts($_GET) as $producto) {
-								
 								
 																
 							}
@@ -77,12 +74,13 @@
 				error_reporting(E_ALL ^ E_NOTICE); 
 				foreach ($ProductB->getProducts($_GET) as $product) {					
 																			
-							
+							if($product->getState() == "activo"){
 				?>
 							<div class="col-md-6 col-lg-3 ftco-animate">
+							
 								<div class="product">
 									
-									<a href="#" class="img-prod"><img class="img-fluid" src="<?php echo $product->getImageUrl() ?>" alt="imagen">
+									<a href="detalleproducto.php?detalle=<?php echo $product->getId() ?>" class="img-prod"><img class="img-fluid" src="<?php echo $URL_FORIMAGE.$product->getImage() ?>" alt="imagen">
 										<div class="overlay"></div>
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">
@@ -110,7 +108,7 @@
 
 				<?php 
 							}
-				
+						}
 					
 				 ?>
 				</div>

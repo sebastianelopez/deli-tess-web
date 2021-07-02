@@ -11,8 +11,8 @@ class UserBusiness{
     }
 
     public function getUsers(){
-        $users = $this->UserDAO->getAll(); 
-
+        $users = $this->UserDAO->getAll();
+        
         return $users;
     }
 
@@ -29,7 +29,6 @@ class UserBusiness{
     public function modifyUser($id, $data){
         $this -> UserDAO -> modify($id, $data);
     }
-
 
     public function deleteUser($id){
         $this -> UserDAO -> delete($id);

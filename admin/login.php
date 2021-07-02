@@ -10,15 +10,7 @@
 
 
 
-<?php
-  $LoginB= new LoginBusiness($con);
 
-  /* if(isset($_POST['user']) && isset($_POST['pass'])){
-    if($LoginB->login($_POST['user'],$_POST['pass'])){
-      redirect('productos.php');
-    }
-  } */
-?>
 
   <div class="container">
 
@@ -38,6 +30,11 @@
                     <h1 class="h4 text-gray-900 mb-4">Bienvenido otra vez !</h1>
                   </div>
                   <form action="productos.php" method="post" class="user">
+                  <?php
+                    if(isset($_GET['errAth'])){
+                        echo 'Error de Autenticación.';
+                    }
+                  ?>
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" name="user" aria-describedby="emailHelp" placeholder="Ingrese su correo electronico">
                     </div>
@@ -53,13 +50,7 @@
                     <input type="submit" name="login" class="btn bg-primary btn-user btn-block">
 
                   </form>
-                  <hr>
-                  <div class="text-center">
-                    <a class="small" href="forgot-password.php">¿Olvidaste tu contraseña?</a>
-                  </div>
-                  <div class="text-center">
-                    <a class="small" href="register.php">¡Registrate!</a>
-                  </div>
+                  <hr>                  
                 </div>
               </div>
             </div>

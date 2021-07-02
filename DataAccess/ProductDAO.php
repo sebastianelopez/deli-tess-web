@@ -25,8 +25,14 @@ class ProductDAO extends DAO{
         $sql = "SELECT id, name, image, price, description, idCategory, idRestaurant, State FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'ProductEntity')->fetch();
         
-        $result->setRestaurant($this->RestaurantDAO->getOne($result->getRestaurant()));
-        $result->setCategory($this->CategoryDAO->getOne($result->getCategory()));
+        if($result){
+            $result->setRestaurant($this->RestaurantDAO->getOne($result->getRestaurant()));
+             $result->setCategory($this->CategoryDAO->getOne($result->getCategory()));
+            
+        }else{
+            $result = new ProductEntity();
+        }
+        
         
         return $result;
 
@@ -55,22 +61,32 @@ class ProductDAO extends DAO{
         }
         
         return $result;
-
     }
 
     public function save($data = array()){
         $image=$this->imageUrl;
-        echo $image;
-        echo $this->imageUrl;
-        $sql = "INSERT INTO product(id,name, image,description,price, idCategory, idRestaurant, State) VALUES ('".$data['id']."', '".$data['name']."', '".$image."' ,'".$data['description']."', '".$data['price']."', '".$data['idCategory']."', '".$data['idRestaurant']."', '".$data['State']."')";
-        echo $sql;     
+        if($image){
+            $sql = "INSERT INTO product(name, image,description,price, idCategory, idRestaurant, State) VALUES ('".$data['name']."', '".$image."' ,'".$data['description']."', '".$data['price']."', '".$data['idCategory']."', '".$data['idRestaurant']."', '".$data['State']."')";
+        }else{
+            $sql = "INSERT INTO product(name, description,price, idCategory, idRestaurant, State) VALUES ('".$data['name']."', '".$data['description']."', '".$data['price']."', '".$data['idCategory']."', '".$data['idRestaurant']."', '".$data['State']."')";
+        }
+        
+            
         return $this->con->exec($sql);
     }
 
 
     public function modify($id, $data = array()){
-        $this->delete($id);
-        $this->save($data);        
+      $image=$this->imageUrl;               
+
+      
+            if($image){
+                $sql="UPDATE product SET name='".$data['name']."', image='".$image."', description ='".$data['description']."',price= '".$data['price']."', idCategory= '".$data['idCategory']."', idRestaurant= '".$data['idRestaurant']."', State= '".$data['State']."' WHERE id = 3";                
+            }else{
+                $sql="UPDATE product SET name='".$data['name']."', description ='".$data['description']."',price= '".$data['price']."', idCategory= '".$data['idCategory']."', idRestaurant= '".$data['idRestaurant']."', State= '".$data['State']."' WHERE id = 3";                
+            }      
+                       
+        return $this->con->exec($sql);
     }
 
     public function delete($id){

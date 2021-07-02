@@ -8,10 +8,9 @@ class ProductBusiness{
     
     function __construct($con){
         $this->ProductDAO = new ProductDAO($con);
+        $this->CommentB = new CommentBusiness($con);
     }
-
-     
-
+    
     public function getProducts($data = array()){
         $products = $this->ProductDAO->getAll($data);       
         
@@ -22,6 +21,22 @@ class ProductBusiness{
         $product = $this->ProductDAO->getOne($id); 
 
         return $product;
+    }
+
+    public function getFeaturedProducts(){
+        $existingProducts=[];
+
+        foreach ($this->CommentB->getComments() as $comment) {
+            if($comment->getScorage() == 5){
+
+                $product = $this->ProductDAO->getOne($comment->getProduct()); 
+
+                if(!in_array($product, $existingProducts)){
+                    array_push($existingProducts,$product);
+                }
+            }        
+        }
+        return $existingProducts;
     }
 
     public function addNewProduct($data){

@@ -13,28 +13,26 @@ class CommentDAO extends DAO{
     }
 
     public function getOne($id){
-        $sql = "SELECT id, creationDate, comment,rank, Product_id, user_name, user_id FROM $this->table WHERE id = $id";
+        $sql = "SELECT id, comment, rank, creationDate, product_id, user, product FROM $this->table WHERE id = $id";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'CommentEntity')->fetch();
         return $result;
     }
 
     public function getAll($where = array()){
-        $sql = "SELECT id, creationDate, comment,rank, Product_id, user_name, user_id  FROM $this->table";
+        $sql = "SELECT id, comment, rank, creationDate, product_id, user, product FROM $this->table";
         $result = $this->con->query($sql,PDO::FETCH_CLASS,'CommentEntity')->fetchAll();
         return $result;
     }
 
 
     public function save($data = array()){
-        $sql = "INSERT INTO user(comment,rank,creationDate, Product_id, user_name, user_id) VALUES ('".$data['comment']."','".$data['rank']."'), creationDate = NOW()";
+        $sql = "INSERT INTO comment(comment,rank, product_id, user, creationDate, product) VALUES ('".$data['comment']."','".$data['rank']."', '".$data['productId']."', '".$data['user']."', NOW(), '".$data['product']."')";
+        
         return $this->con->exec($sql);
     }
 
 
-    public function modify($id, $data = array()){
-        $sql = "UPDATE user SET name = '".$data['name']."', email ='".$data['email']."', modificationDate = NOW() WHERE id = ".$id;
-        echo $sql;
-        return $this->con->exec($sql);
+    public function modify($id, $data = array()){   
     }
 
     public function delete($id){

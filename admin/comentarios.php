@@ -2,20 +2,6 @@
 
 include('funcs.php');
 
-if (isset($_POST['login'])) {
-  if ($_POST['pass'] == 'davinci' && $_POST['user'] == 'admin') {
-    $_SESSION['usuario_logueado'] = true;
-  }
-}
-
-if (isset($_GET['logout'])) {
-  unset($_SESSION['usuario_logueado']);
-}
-
-if(!isset($_SESSION['usuario_logueado'])){
-  redirect('login.php');
-}
-
 
 ?>
 
@@ -86,12 +72,11 @@ if(!isset($_SESSION['usuario_logueado'])){
                   <thead>
                     <tr>
                       <th>ID Comentario</th>
-                      <th>Nombre</th>
-                      <th>User ID</th>
+                      <th>Usuario</th>                      
                       <th>Comentario</th>
                       <th>Fecha de Creacion</th>  
                       <th>Rank</th>
-                      <th>ID Producto</th>                    
+                      <th>Producto</th>                    
                       <th>Borrar</th>                      
                     </tr>
                   </thead>
@@ -104,8 +89,7 @@ if(!isset($_SESSION['usuario_logueado'])){
                          ?>
                             <tr>
                               <td><?php echo $com->getId() ?></td>
-                              <td><?php echo $com->getUserName() ?></td> 
-                              <td><?php echo $com->getUserId() ?></td>                                 
+                              <td><?php echo $com->getUser() ?></td>                                                                
                               <td><?php echo $com->getComment() ?></td> 
                               <td><?php echo $com->getCreationDate() ?></td> 
                               <td><?php echo $com->getScorage() ?></td>   
@@ -117,12 +101,11 @@ if(!isset($_SESSION['usuario_logueado'])){
                       ?>   
                         <tr>
                               <td><?php echo $com->getId() ?></td>
-                              <td><?php echo $com->getUserName() ?></td> 
-                              <td><?php echo $com->getUserId() ?></td>                                 
+                              <td><?php echo $com->getUser() ?></td>                                                               
                               <td><?php echo $com->getComment() ?></td> 
                               <td><?php echo $com->getCreationDate() ?></td> 
                               <td><?php echo $com->getScorage() ?></td>   
-                              <td><?php echo $com->getProduct() ?></td>                                
+                              <td><?php echo $com->getProductName() ?></td>                                
                               <td><a class="m-0 font-weight-bold text-primary" href="comentarios.php?del=<?php echo $com->getId() ?>">Borrar</a></td>
                         </tr>
                      <?php   

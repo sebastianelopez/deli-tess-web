@@ -1,34 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once('../presentation/includes/head.php');	?>
-<?php session_start();
+<?php 
 
 include('funcs.php');
 
-$UserB = new UserBusiness($con);
-
-foreach ($UserB->getUsers() as $user) {
-    if (isset($_POST['login'])) {
-        if ($_POST['pass'] == $user->getPassword() && $_POST['user'] == $user->getEmail()) {
-            $_SESSION['usuario_logueado'] = true;
-        }
-    }
-}
-
-if (isset($_GET['logout'])) {
-  unset($_SESSION['usuario_logueado']);
-}
-
-if(!isset($_SESSION['usuario_logueado'])){
-  redirect('login.php');
-}
-
-
 ?>
 
-
-
- 
 
 <body id="page-top">
 
@@ -54,7 +32,15 @@ if(!isset($_SESSION['usuario_logueado'])){
 
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
-          <p class="mb-4">Borre o modifique los usuarios.</a>.</p>
+          <p class="mb-4">Agregue, borre o modifique los usuarios.</a>.</p>
+
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <a class="m-0 font-weight-bold text-primary" href="user_add.php">+ Agregar</a>
+              
+            </div>
+            
+            </div>
 
         <?php include_once('funcs.php'); ?>
           <!-- Productos -->
@@ -78,22 +64,20 @@ if(!isset($_SESSION['usuario_logueado'])){
                     <tr>
                       <th>ID</th>
                       <th>Nombre</th>
-                      <th>Email</th>
-                      <th>Rol</th>                      
-                      <th>Modificar / Borrar</th>                      
+                      <th>User</th>
+                      <th>Perfil</th> 
+                      <th>Modificar / Borrar</th>                     
                     </tr>
                   </thead>
                   <tbody> 
                       <?php                   
                         
-                        $UserB = new UserBusiness($con);
-
-                        foreach ($UserB->getUsers($_GET) as $user) { ?>
+                        foreach ($UserB->getUsers() as $user) { ?>
                             <tr>
                               <td><?php echo $user->getId() ?></td>
                               <td><?php echo $user-> getName() ?></td>
-                              <td><?php echo $user-> getEmail() ?></td>
-                              <td><?php echo ($user-> getPermissionLevel() == 1) ?'ADMIN': 'USUARIO' ?></td>                              
+                              <td><?php echo $user-> getUser() ?></td>
+                              <td><?php echo implode(', ',array_map(function ($p){return $p->getName();},$user->getProfiles()) )  ?></td>                             
                               <td><a class="m-0 font-weight-bold text-primary px-2"  href="user_add.php?edit=<?php echo $user->getId() ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="users.php?del=<?php echo $user->getId() ?>">Borrar</a></td>                      
                           <!-- productos_add.php?edit=<?php echo $user->getId() ?> -->
                           </tr>   

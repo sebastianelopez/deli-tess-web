@@ -27,7 +27,7 @@ class RestaurantDAO extends DAO{
 
 
     public function save($data = array()){
-        $sql = "INSERT INTO restaurant(id,name,State) VALUES ('".$data['id']."','".$data['name']."','".$data['State']."')";
+        $sql = "INSERT INTO restaurant(name,State) VALUES ('".$data['name']."','".$data['State']."')";
         return $this->con->exec($sql);
     }
 

@@ -68,68 +68,58 @@
           if(isset($_POST['productSubmit'])){
             unset($_POST['productSubmit']);
             
-            if(!empty($_GET['edit'])){
-              $id = $_GET['edit'];
-              $ProductB->modifyProduct($id,$_POST);
-            }else{              
-              $id = $ProductB->addNewProduct($_POST);
-            }
             
+            if ($_FILES['image']['name'] != null) {       
 
-            //////////////////////////////////////////////
-            
-
-              $target_dir = __DIR__ . "/../uploads/";
-              $target_file = $target_dir . basename($_FILES["image"]["name"]);
-              
-              $uploadOk = 1;
-              $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-              
-              // Check if image file is a actual image or fake image
-              
-                $check = getimagesize($_FILES["image"]["tmp_name"]);
-                if($check !== false) {
-                 // die ("File is an image - " . $check["mime"] . "");
+                  $target_dir = __DIR__ . "/../uploads/";
+                  $target_file = $target_dir . basename($_FILES["image"]["name"]);
+                  
                   $uploadOk = 1;
-                } else {
-                  die ("El archivo no es una imagen.");
-                }
+                  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                  
+                                    
+                  
+                  // Check if file already exists
+                  if (file_exists($target_file)) {
+                    die ("Lo siento, es archivo ya fue cargado.");
+                  }
+                  
+                  // Check file size
+                  if ($_FILES["image"]["size"] > 500000) {
+                    die ("Lo siento, tu archivo es muy grande.");
+                  }
+                  
+                  // Allow certain file formats
+                  if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                  && $imageFileType != "gif" ) {
+                    die ("Lo siento, solo se permiten archivos JPG, JPEG, PNG & GIF.");
+                  }
+                  
+                  // Check if $uploadOk is set to 0 by an error
+                  if ($uploadOk == 0) {
+                    die ("Lo siento, tu archivo no fue cargado.");
+                  // if everything is ok, try to upload file
+                  } else {
+                    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                      //die ("The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.");
+                    } else {
+                      die ("Lo siento, hubo un error cargando tu archivo.");
+                    }             
+                    
+                  }
+              $image=$_FILES["image"]["name"];
+              $ProductB->getImageUrl($image);
+            }
               
-              
-              // Check if file already exists
-              if (file_exists($target_file)) {
-                die ("Lo siento, es archivo ya fue cargado.");
-              }
-              
-              // Check file size
-              if ($_FILES["image"]["size"] > 500000) {
-                die ("Lo siento, tu archivo es muy grande.");
-              }
-              
-              // Allow certain file formats
-              if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-              && $imageFileType != "gif" ) {
-                die ("Lo siento, solo se permiten archivos JPG, JPEG, PNG & GIF.");
-              }
-              
-              // Check if $uploadOk is set to 0 by an error
-              if ($uploadOk == 0) {
-                die ("Lo siento, tu archivo no fue cargado.");
-              // if everything is ok, try to upload file
-              } else {
-                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-                  //die ("The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.");
-                } else {
-                  die ("Lo siento, hubo un error cargando tu archivo.");
-                }             
-                
-              }
 
-              if(!empty($_FILES['image'])){
-                $ProductB->getImageUrl($target_file);
+              if(!empty($_GET['edit'])){
+                $id = $_GET['edit'];
+                $ProductB->modifyProduct($id,$_POST);
+              }else{              
+                $id = $ProductB->addNewProduct($_POST);
               }
             
-             //redirect('productos.php');
+             redirect('productos.php');
           }
           
           $id = 0;
@@ -142,21 +132,20 @@
           ?>
 
 
-          <form action="" method="post" enctype="multipart/form-data">
-            ID:<br><input class="my-2" type="text" name="id" value="<?php echo isset($product) ? $product->getId() : '' ?>"><br />
+          <form action="" method="post" enctype="multipart/form-data">            
             Nombre:<br><input class="my-2" type="text" name="name" value="<?php echo isset($product) ? $product->getName() : '' ?>"><br />
             Descripcion:<br><input class="my-2" type="text" name="description" value="<?php echo isset($product) ? $product->getDescription() : '' ?>"><br />
             Imagen:<br><input class="my-2" type="file" name="image" id="image" >
-                   
+                   <br />  
             Precio:<br><input class="my-2" type="text" name="price" value="<?php echo isset($product) ? $product->getPrice() : '' ?>"><br />
             Categoria:<select name="idCategory">
-              <?php
-                foreach ($CategoryB->getCategories() as $cat) {
-                ?>
-                  <option value="<?php echo $cat->getId() ?>"><?php echo $cat->getName() ?></option>
-                <?php
-                }
-              ?>
+                    <?php
+                      foreach ($CategoryB->getCategories() as $cat) {
+                      ?>
+                        <option value="<?php echo $cat->getId() ?>"><?php echo $cat->getName() ?></option>
+                      <?php
+                      }
+                    ?>
             </select>
 
             Restaurante:<select name="idRestaurant">

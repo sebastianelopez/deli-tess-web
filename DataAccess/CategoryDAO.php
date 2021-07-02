@@ -25,7 +25,7 @@ class CategoryDAO extends DAO{
     }
 
     public function save($data = array()){
-        $sql = "INSERT INTO category(id,name,State) VALUES ('".$data['id']."','".$data['name']."','".$data['State']."')";
+        $sql = "INSERT INTO category(name,State) VALUES ('".$data['name']."','".$data['State']."')";
         return $this->con->exec($sql);
     }
 

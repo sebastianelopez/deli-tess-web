@@ -10,9 +10,10 @@ class CommentEntity extends BaseEntity
     private $comment;
     private $creationDate;
     private $rank;
-    private $Product_id;
-    private $user_name; 
-    private $user_id;
+    private $product_id;
+    private $product;
+    private $user; 
+    
 
     public function __construct()
     {
@@ -29,21 +30,23 @@ class CommentEntity extends BaseEntity
     }
     public function getProduct()
     {
-        return $this->Product_id;
+        return $this->product_id;
+    }
+
+    public function getProductName()
+    {
+        return $this->product;
     }
     
     public function getEmail()
     {
         return $this->email;
     } 
-    public function getUserName()
+    public function getUser()
     {
-        return $this->user_name;
+        return $this->user;
     } 
-    public function getUserId()
-    {
-        return $this->user_id;
-    } 
+     
     public function getCreationDate()
     {
         return $this->creationDate;
@@ -58,23 +61,25 @@ class CommentEntity extends BaseEntity
     {
         $this->rank = $rank;
     }
-    public function setPost($Product_id)
+    public function setProduct($product_id)
     {
-        $this->Product_id = $Product_id;
+        $this->product_id = $product_id;
+    }
+
+    public function setProductName($product)
+    {
+        $this->product = $product;
     }
     
     public function setEmail($email)
     {
         $this->email = $email;
     }
-    public function setUserName($user_name)
+    public function setUser($user)
     {
-        $this->user_name = $user_name;
+        $this->user = $user;
     }
-    public function setUserId($user_id)
-    {
-        $this->user_id = $user_id;
-    }
+    
     public function setCreationDate($creationDate)
     {
         $this->creationDate = $creationDate;

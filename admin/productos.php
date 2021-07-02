@@ -1,36 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once('../presentation/includes/head.php');	?>
-<?php session_start();
+<?php 
+
+
 
 include('funcs.php');
 
-$UserB = new UserBusiness($con);
+$URL_FORIMAGE= "http://localhost/Final/uploads/";
+
 $ProductB = new ProductBusiness($con);
 
-  if (isset($_POST['login'])) {    
-    foreach ($UserB->getUsers() as $user) {
-      if ($_POST['pass'] ==  $user->getPassword() && $_POST['user'] === $user->getEmail()) {
-        if($user->getPermissionLevel() == 1){
-          $_SESSION['admin_logueado'] = true;
-        }else{
-          $_SESSION['usuario_logueado'] = true; 
-        }        
-      }
-  }
-}
-
-if(isset($_SESSION['usuario_logueado'])){
- // redirect('../presentation/pages/index.php');
-}
-
-if (isset($_GET['logout'])) {
-  unset($_SESSION['admin_logueado']);
-}
-
-if(!isset($_SESSION['admin_logueado'])){
-  redirect('login.php');
-}
+  
 
 
 
@@ -103,12 +84,13 @@ if(!isset($_SESSION['admin_logueado'])){
                         $ProductB = new ProductBusiness($con);
 
                         foreach ($ProductB->getProducts() as $product) { ?>
+                          
                             <tr>
                               <td><?php echo $product->getId() ?></td>
                               <td><?php echo $product-> getName() ?></td>
-                              <td><?php echo $product-> getDescription() ?>.</td>
-                              <td><img class="img-fluid" src="<?php echo $product->getImage() ?>" alt=""></a></td>
-                              <td><?php echo $product-> getPrice() ?></td>
+                              <td><?php echo $product-> getDescription() ?></td>
+                              <td><img class="img-fluid" src="<?php echo $URL_FORIMAGE.$product->getImage() ?>" alt=""></a></td>
+                              <td><?php echo $product->getPrice() ?></td>
                               <td><?php echo $product->getCategory()->getName() ?></td>
                               <td><?php echo $product->getRestaurant()->getName() ?></td>
                               <td><?php echo $product->getState() ?></td>
