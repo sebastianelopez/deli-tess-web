@@ -81,16 +81,16 @@ class ProductDAO extends DAO{
 
       
             if($image){
-                $sql="UPDATE product SET name='".$data['name']."', image='".$image."', description ='".$data['description']."',price= '".$data['price']."', idCategory= '".$data['idCategory']."', idRestaurant= '".$data['idRestaurant']."', State= '".$data['State']."' WHERE id = 3";                
+                $sql="UPDATE product SET name='".$data['name']."', image='".$image."', description ='".$data['description']."',price= '".$data['price']."', idCategory= '".$data['idCategory']."', idRestaurant= '".$data['idRestaurant']."', State= '".$data['State']."' WHERE id = $id";                
             }else{
-                $sql="UPDATE product SET name='".$data['name']."', description ='".$data['description']."',price= '".$data['price']."', idCategory= '".$data['idCategory']."', idRestaurant= '".$data['idRestaurant']."', State= '".$data['State']."' WHERE id = 3";                
+                $sql="UPDATE product SET name='".$data['name']."', description ='".$data['description']."',price= '".$data['price']."', idCategory= '".$data['idCategory']."', idRestaurant= '".$data['idRestaurant']."', State= '".$data['State']."' WHERE id = $id";                
             }      
                        
         return $this->con->exec($sql);
     }
 
     public function delete($id){
-        $sql = "DELETE FROM $this->table WHERE id = $id";
+        $sql = "DELETE FROM $this->table WHERE id = $id";        
         return $this->con->exec($sql);
     }
 

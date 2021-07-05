@@ -2,6 +2,7 @@
 <html lang="en">
 
 <?php include_once('../presentation/includes/head.php');  ?>
+<?php include_once('../Config/path.php');	?>
 
 <body id="page-top">
 
@@ -65,11 +66,17 @@
           $RestaurantB = new RestaurantBusiness($con);
           $ProductB = new ProductBusiness($con);
 
+          $urlimage= PUBPATH.'..\uploads/';
+
           if(isset($_POST['productSubmit'])){
             unset($_POST['productSubmit']);
             
             
-            if ($_FILES['image']['name'] != null) {       
+            if ($_FILES['image']['name'] != null) {   
+                  
+                  if(!empty($_GET['edit'])){
+                    unlink($urlimage.$ProductB->getProduct($_GET['edit'])->getImage());
+                  }
 
                   $target_dir = __DIR__ . "/../uploads/";
                   $target_file = $target_dir . basename($_FILES["image"]["name"]);
@@ -119,10 +126,11 @@
                 $id = $ProductB->addNewProduct($_POST);
               }
             
-             redirect('productos.php');
+            redirect('productos.php');
           }
           
           $id = 0;
+
           if(!empty($_GET['edit'])){
             $id = $_GET['edit'];
             $product = $ProductB->getProduct($id);

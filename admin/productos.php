@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once('../presentation/includes/head.php');	?>
+<?php include_once('../Config/path.php');	?>
 <?php 
 
 
 
 include('funcs.php');
 
-$URL_FORIMAGE= "http://localhost/Final/uploads/";
+
 
 $ProductB = new ProductBusiness($con);
+$CommentB = new CommentBusiness($con);
 
-  
 
 
+$urlimage= PUBPATH.'..\uploads/';
 
 
 ?>
@@ -49,10 +51,24 @@ $ProductB = new ProductBusiness($con);
         <?php include_once('funcs.php'); ?>
           <!-- Productos -->
         <?php 
-          if(isset($_GET['del'])){            
+          if(isset($_GET['delimg'])){
+            if(!empty($ProductB->getProduct($_GET['del'])->getImage())){
+              unlink($urlimage.$_GET['delimg']);
+            }
+            
+         }
+         
+         if(isset($_GET['del'])){                      
               $ProductB->deleteProduct($_GET['del']);
+              foreach($CommentB->getComments() as $comment){
+                if($comment->getProduct()==$_GET['del']){
+                  $CommentB->deleteComment($comment->getId());
+                }
+              }               
               redirect('productos.php');
-           }
+         }
+
+           
         ?>
 
           <div class="card shadow mb-4">
@@ -89,12 +105,12 @@ $ProductB = new ProductBusiness($con);
                               <td><?php echo $product->getId() ?></td>
                               <td><?php echo $product-> getName() ?></td>
                               <td><?php echo $product-> getDescription() ?></td>
-                              <td><img class="img-fluid" src="<?php echo $URL_FORIMAGE.$product->getImage() ?>" alt=""></a></td>
+                              <td><img class="img-fluid " src="<?php echo URL_BASE.$product->getImage() ?>" alt="<?php (!empty($product->getImage()))?"imagen de producto":"Sin imagen" ?>" width="150" height="150"></a></td>
                               <td><?php echo $product->getPrice() ?></td>
                               <td><?php echo $product->getCategory()->getName() ?></td>
                               <td><?php echo $product->getRestaurant()->getName() ?></td>
                               <td><?php echo $product->getState() ?></td>
-                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="productos_add.php?edit=<?php echo $product->getId() ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="productos.php?del=<?php echo $product->getId() ?>">Borrar</a></td>                      
+                              <td><a class="m-0 font-weight-bold text-primary px-2"  href="productos_add.php?edit=<?php echo $product->getId() ?>">Modificar</a><a class="m-0 font-weight-bold text-primary" href="productos.php?del=<?php echo $product->getId() ?>&delimg=<?php echo $product->getImage() ?>">Borrar</a></td>                      
                           <!-- productos_add.php?edit=<?php echo $product->getId() ?> -->
                           </tr>   
                       <?php } ?>  

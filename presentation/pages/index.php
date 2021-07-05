@@ -3,7 +3,10 @@
 <?php include_once('../includes/head.php'); ?> 
   <body class="goto-here">
     <?php include_once('../includes/barritadearriba.php');?>
-	<?php include_once('../includes/menu.php');?>	
+	<?php include_once('../includes/menu.php');
+		  include_once('../../Config/path.php');
+	?>	
+	
     <!-- END nav -->
 
     <section id="home-section" class="hero">
@@ -110,7 +113,7 @@
     			
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="detalleproducto.php?detalle=<?php echo $product->getId() ?>" class="img-prod"><img class="img-fluid" src="<?php echo $URL_FORIMAGE.$product->getImage() ?>" alt="cerveza-quilmes">
+    					<a href="detalleproducto.php?detalle=<?php echo $product->getId() ?>" class="img-prod"><img class="img-fluid" src="<?php echo URL_BASE.$product->getImage() ?>" alt="cerveza-quilmes">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">
