@@ -80,7 +80,7 @@
 							
 								<div class="product">
 									
-									<a href="detalleproducto.php?detalle=<?php echo $product->getId() ?>" class="img-prod"><img class="img-fluid" src="<?php echo URL_BASE.$product->getImage() ?>" alt="imagen">
+									<a href="detalleproducto.php?detalle=<?php echo $product->getId() ?>" class="img-prod"><img class="img-fluid" src="<?php echo DIR_BASE.$product->getImage() ?>" alt="imagen">
 										<div class="overlay"></div>
 									</a>
 									<div class="text py-3 pb-4 px-3 text-center">

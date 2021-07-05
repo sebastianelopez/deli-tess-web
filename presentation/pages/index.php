@@ -101,7 +101,7 @@
         </div>   		
     	</div>
 		<?php 
-			$URL_FORIMAGE= "http://localhost/Final/uploads/";
+			
 
 			$ProductB= new ProductBusiness($con);
 
@@ -113,7 +113,7 @@
     			
     			<div class="col-md-6 col-lg-3 ftco-animate">
     				<div class="product">
-    					<a href="detalleproducto.php?detalle=<?php echo $product->getId() ?>" class="img-prod"><img class="img-fluid" src="<?php echo URL_BASE.$product->getImage() ?>" alt="cerveza-quilmes">
+    					<a href="detalleproducto.php?detalle=<?php echo $product->getId() ?>" class="img-prod"><img class="img-fluid" src="<?php echo DIR_BASE.$product->getImage() ?>" alt="imagen de producto">
     						<div class="overlay"></div>
     					</a>
     					<div class="text py-3 pb-4 px-3 text-center">

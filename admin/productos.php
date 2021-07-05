@@ -105,7 +105,7 @@ $urlimage= PUBPATH.'..\uploads/';
                               <td><?php echo $product->getId() ?></td>
                               <td><?php echo $product-> getName() ?></td>
                               <td><?php echo $product-> getDescription() ?></td>
-                              <td><img class="img-fluid " src="<?php echo URL_BASE.$product->getImage() ?>" alt="<?php (!empty($product->getImage()))?"imagen de producto":"Sin imagen" ?>" width="150" height="150"></a></td>
+                              <td><img class="img-fluid " src="<?php echo DIR_BASE.$product->getImage() ?>" alt="<?php (!empty($product->getImage()))?"imagen de producto":"Sin imagen" ?>" width="150" height="150"></a></td>
                               <td><?php echo $product->getPrice() ?></td>
                               <td><?php echo $product->getCategory()->getName() ?></td>
                               <td><?php echo $product->getRestaurant()->getName() ?></td>
